@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style type="text/css">
+		/* Prevent User Selection */
+		@import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
+		@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+		@import url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2940219/PerpetualJ.css');
+		@import url('https://codepen.io/PerpetualJ/pen/ExxvbPQ.css');
+* { user-select: none; }
+
+/* Background */
+.sf-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2940219/Landscape.jpg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.sf-background-fog-bottom {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2940219/Fog Bottom.png');
+	background-size: 1000%;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}
+
+/* Progress Bar */
+.sf-progress {
+	position: relative;
+	width: 100%;
+	height: 5px;
+	background-color: #fff8;
+}
+.sf-progress > .sf-progress-bar {
+	height: 5px;
+	background-color: #4f9;
+}
+
+/* User Data (Upper Right) */
+.sf-user-data {
+	font-size: 30px;
+}
+.sf-user-data .sf-clock {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+@media only screen and (max-width: 992px) {
+	.sf-user-data .sf-clock {
+			margin-top: 15px;
+	}
+}
+.sf-user-data .sf-clock .fa-clock {
+	padding-right: 15px;
+	font-size: 35px;
+	border-right: 2px solid #fffa;
+}
+.sf-user-data .sf-clock .sf-time-and-day {
+	padding-left: 15px;
+	padding-right: 25px;
+}
+.sf-user-data .sf-clock .sf-time-and-day h4,
+.sf-user-data .sf-clock .sf-time-and-day h6 {
+	margin: 0;
+}
+.sf-user-data .sf-clock .sf-time-and-day h4 {
+	font-size: 18px;
+}
+.sf-user-data .sf-clock .sf-time-and-day h6 {
+	font-size: 13px;
+	text-transform: uppercase;
+}
+.sf-user-profile-image {
+	height: 45px;
+	border-radius: 50%;
+	margin-right: 15px;
+}
+.sf-username {
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-left: 2px solid #fffa;
+	margin: 0;
+}
+.sf-users.left img { animation: from-left 1s linear forwards; }
+.sf-users.right img { animation: from-right 1s linear forwards; }
+
+/* Clan Logo */
+.sf-clan-area {
+	margin-top: 25px;
+	margin-bottom: 100px;
+	text-align: center;
+	animation: fade-in 2s linear forwards;
+}
+.sf-clan-logo {
+	height: 250px;
+	padding: 15px;
+}
+.sf-clan-area h4,
+.sf-clan-area h6 {
+	text-align: center;
+}
+.sf-logo-area {
+	position: relative;
+	width: 250px;
+	margin: 0 auto;
+}
+.sf-clan-logo-loading {
+	position: absolute;
+	top: 0;
+	left: 8px;
+	height: 250px;
+	padding: 15px;
+	clip-path: inset(100% 0 0 0);
+	transition: 0.2s linear all;
+}
+@media only screen and (max-width: 992px) {
+	.sf-clan-area {
+		margin-top: 15px;
+		margin-bottom: 25px;
+	}
+	.sf-clan-logo {
+		height: 200px;
+		padding: 5px;
+	}
+	.sf-logo-area {
+		width: 200px;
+	}
+	.sf-clan-logo-loading {
+		height: 200px;
+		padding: 5px;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.sf-clan-logo {
+		height: 125px;
+		padding: 0;
+	}
+	.sf-logo-area {
+		width: 125px;
+	}
+	.sf-clan-logo-loading {
+		left: 5px;
+		height: 125px;
+		padding: 0;
+	}
+}
+@media only screen and (max-width: 576px) {
+	.sf-clan-logo {
+		height: 75px;
+		padding: 0;
+	}
+	.sf-logo-area {
+		width: 75px;
+	}
+	.sf-clan-area h6 {
+		font-size: 0.8rem;
+	}
+	.sf-clan-area h4 {
+		font-size: 1rem;
+	}
+	.sf-clan-logo-loading {
+		left: 3px;
+		height: 75px;
+		padding: 0;
+	}
+}
+
+/* Menu System */
+.sf-menu-system {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.sf-menu-system .sf-menu {
+	padding: 0;
+	list-style-type: none;
+	width: 50%;
+}
+.sf-menu-system .sf-menu > li {
+	padding: 10px 0;
+	margin: 15px 0;
+	border-bottom: 1px solid #fff5;
+	cursor: pointer;
+	transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) all;
+	transform: translateY(1000%);
+	animation: from-bottom 1s linear forwards;
+}
+.sf-menu-system .sf-menu > li:nth-child(1) { animation-delay: 1s; }
+.sf-menu-system .sf-menu > li:nth-child(2) { animation-delay: 1.3s; }
+.sf-menu-system .sf-menu > li:nth-child(3) { animation-delay: 1.6s; }
+.sf-menu-system .sf-menu > li:nth-child(4) { animation-delay: 1.9s; }
+.sf-menu-system .sf-menu > li:nth-child(5) { animation-delay: 2.2s; }
+.sf-menu-system .sf-menu > li:hover {
+	background-color: #fff3;
+	border-left: 5px solid #4f9;
+	cursor: pointer;
+}
+@media only screen and (max-width: 992px) {
+	.sf-menu-system .sf-menu {
+		width: 60%;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.sf-menu-system .sf-menu {
+		width: 80%;
+	}
+}
+
+/* Center Row */
+.sf-focal-point { align-items: center; }
+
+/* User Images */
+.sf-users img {
+	position: relative;
+	height: 75px;
+	width: 75px;
+	margin: 5px;
+	border-radius: 50%;
+	border: 2px solid transparent;
+	cursor: pointer;
+	transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) all;
+}
+.sf-users img:hover {
+	border: 2px solid #4f9;
+	border-radius: 0;
+}
+@media only screen and (max-width: 992px) {
+	.sf-users img {
+		height: 50px;
+		width: 50px;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.sf-users img {
+		height: 35px;
+		width: 35px;
+	}
+}
+@media only screen and (max-width: 576px) {
+	.sf-users img {
+		height: 25px;
+		width: 25px;
+	}
+}
+
+/* Modal Styles */
+.sf-modal-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	z-index: -3;
+	background-color: #333c;
+}
+.sf-modal-container.active {
+	z-index: 2;
+}
+.sf-modal {
+	display: none;
+	color: #fff;
+	max-height: 75%;
+	overflow-y: auto;
+	flex-direction: column;
+	max-width: 80%;
+	padding: 25px;
+	background-color: #555c;
+	border-radius: 3px;
+	border-top-left-radius: 35px;
+	border-bottom-left-radius: 35px;
+	border: 5px solid #4f9;
+	margin-bottom: 15px;
+}
+.sf-modal::-webkit-scrollbar-track {
+	background-color: transparent;
+}
+.sf-modal::-webkit-scrollbar {
+	width: 5px;
+	background-color: transparent;
+}
+.sf-modal::-webkit-scrollbar-thumb {
+	background-color: #4f9;
+}
+.sf-modal.active {
+	display: flex;
+}
+.sf-modal img { width: 100%; }
+.sf-modal-close-button {
+	width: 50%;
+	text-align: center;
+	padding: 10px;
+	border-bottom: 1px solid #fffa;
+	border-left: 5px solid transparent;
+	color: #fff;
+	cursor: pointer;
+}
+.sf-modal-close-button:hover {
+	background-color: #fff5;
+	border-bottom: 1px solid transparent;
+	border-left: 5px solid #4f9;
+}
+.sf-user-modal img {
+	margin-top: 25px;
+	height: 250px;
+	width: 250px;
+}
+.user-stats {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.user-statistic {
+	margin: 0 25px;
+	text-align: center;
+}
+.user-data {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+/* Sliders */
+.sf-slider {
+	width: 300px;
+	-webkit-appearance: none;
+  	height: 5px;
+ 	border-radius: 5px;
+   background: #fffa;
+   outline: none;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.sf-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-transition: background .15s ease-in-out;
+  transition: background .15s ease-in-out;
+}
+.sf-slider::-webkit-slider-thumb { background: #4f9a; }
+.sf-slider::-webkit-slider-thumb:hover { background: #4f9; }
+
+/* Animations */
+@keyframes fade-in {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+@keyframes from-left {
+	0% { transform: translateX(-1000%); }
+	100% { transform: translateX(0); }
+}
+@keyframes from-right {
+	0% { transform: translateX(1000%); }
+	100% { transform: translateX(0); }
+}
+@keyframes from-bottom {
+	0% { transform: translateY(1000%); }
+	100% { transform: translateY(0); }
+}
+
+/* Template Overrides */
+html, body {
+	background: #0F2027;
+	background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+	background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+}
+	</style>
+</head>
+<body>
+<div id="primary-content" class="primary-content">
+	<div class="sf-background">
+		<div id="sf-background-fog" class="sf-background-fog-bottom"></div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="row">
+				<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12"></div>
+				<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+					<div class="row sf-user-data">
+						<div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12"></div>
+						<div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12 sf-clock">
+							<i class="far fa-clock"></i>
+							<div class="sf-time-and-day">
+								<h4 id="time-display">11:01</h4>
+								<h6 id="day-display">WEDNESDAY</h6>
+							</div>
+							<img class="sf-user-profile-image" src="https://sugamkaistha1.carrd.co/assets/images/image03.jpg?v=3cb4663c" />
+							<h5 class="sf-username">SugamKaistha</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="row sf-focal-point">
+				<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+					<h3>HUNTERS</h3>
+					<div class="row sf-users left">
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="0" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="1" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="2" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="3" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="4" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="5" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="6" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="7" />
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4" style="padding: 0;">
+					<div class="col-12 sf-clan-area">
+						<div class="sf-logo-area">
+							<img class="sf-clan-logo" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2940219/Wolf.png" />
+							<img id="loading-image" data-progress="0" class="sf-clan-logo-loading" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2940219/Wolf%20(GREEN).png" />
+						</div>
+						<h6>Proving Grounds</h6>
+						<h4>HEADHUNTER</h4>
+					</div>
+				</div>
+				<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+					<h3>HUNTED</h3>
+					<div class="row sf-users right">
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="8" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="9" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="10" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="11" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="12" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="13" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="14" />
+						</div>
+						<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+							<img data-userid="15" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12 sf-menu-system">
+			<ul class="sf-menu">
+				<li onclick="openSFModal('map-modal');">VIEW MAP</li>
+				<li onclick="openSFModal('match-info-modal');">MATCH INFO</li>
+				<li onclick="openSFModal('settings-modal');">SETTINGS</li>
+				<li onclick="restart();">RESTART LOADING PROCESS</li>
+				<li onclick="openSFModal('quit-modal');">THANKS</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="main-modal" class="sf-modal-container">
+	<div id="map-modal" class="sf-modal">
+		<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2940219/Map.jpg" />
+	</div>
+	<div id="match-info-modal" class="sf-modal">
+		<h3>HEADHUNTER</h3>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis porta dignissim. Suspendisse eleifend, ex sit amet euismod condimentum, augue lacus consequat nibh, eu interdum tortor risus ut ligula. Sed fringilla lectus quam, nec tincidunt erat condimentum iaculis. Vivamus eu ligula at dui commodo iaculis. Aliquam consectetur sit amet mauris ac tincidunt. Praesent ut tellus lacinia, elementum lorem vitae, malesuada tellus. Sed aliquam pellentesque ligula a condimentum. Vestibulum ut lorem bibendum, tincidunt sem sit amet, feugiat lectus. Mauris vitae eros sed tortor volutpat tincidunt. Morbi ut tincidunt arcu, sed gravida risus. Aliquam erat volutpat. Curabitur id condimentum nulla. Ut vitae est ac purus sagittis consequat iaculis ac mauris. Suspendisse posuere, augue at eleifend bibendum, odio enim aliquet purus, sed fermentum sapien nulla eu dolor. Proin viverra sapien sed eros egestas lobortis dictum efficitur eros.
+
+Nulla ultricies ac augue eu varius. Vivamus at vestibulum justo, et elementum leo. Donec ultrices tempor purus in tempor. Curabitur ut mattis purus, quis sodales leo. Sed mattis tempus augue venenatis aliquet. Sed laoreet varius justo, sed elementum enim fermentum sed. Curabitur vestibulum neque sed ligula pharetra dapibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas ullamcorper hendrerit lectus, vel consectetur nunc ullamcorper vitae. Etiam nec ex justo. Donec vestibulum, erat eu venenatis elementum, dui nisi eleifend mauris, a aliquam metus justo porttitor dolor.
+
+Cras at tellus sed leo cursus semper nec eget arcu. Nam vel dui eros. In hac habitasse platea dictumst. Cras ultricies imperdiet rutrum. Phasellus sed venenatis felis, et dapibus libero. Vestibulum sollicitudin ex in dictum luctus. Proin tempus metus quis augue imperdiet blandit.
+
+Fusce vel ultricies enim. Etiam iaculis magna eget ligula egestas, sed malesuada leo commodo. Curabitur ut ipsum hendrerit, auctor mauris quis, luctus nisl. Aenean pharetra porttitor porta. Ut massa tortor, dictum nec gravida non, lacinia ut metus. Sed blandit porta velit eu commodo. Donec eu aliquet est. Curabitur pellentesque est id metus dictum, et facilisis diam mollis. Vivamus malesuada malesuada turpis eu blandit.
+
+Donec pellentesque ullamcorper sapien ut pharetra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc eu convallis risus. Proin at erat risus. Pellentesque hendrerit semper tellus sit amet gravida. Pellentesque eget ante est. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean tincidunt venenatis massa, vitae porta massa sagittis et. Phasellus neque urna, placerat non accumsan non, elementum sed dolor. Nam efficitur tristique tortor, quis lobortis lacus efficitur in. Curabitur cursus eleifend dolor. Mauris fermentum turpis in sapien elementum, eu tincidunt quam eleifend. Vivamus ornare, massa a suscipit auctor, nunc risus semper lectus, vel fringilla augue mi a dui. Donec molestie at magna at fermentum. Nullam nec nisi eros. Pellentesque lectus ipsum, aliquet egestas molestie nec, vulputate a ex.</p>
+	</div>
+	<div id="settings-modal" class="sf-modal">
+		<h3>SETTINGS</h3>
+		<span>AI:</span>
+		<input class="sf-slider" type="range" id="left-red" value="100" max="100" />
+		<span>Screen Effects:</span>
+		<input class="sf-slider" type="range" id="left-red" value="100" max="100" />
+	</div>
+	<div id="quit-modal" class="sf-modal">
+		<h3>Thanks for checking out the X-0S24!</h3>
+	</div>
+	<div id="user-modal" class="sf-modal sf-user-modal">
+		<div class="row">
+			<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 user-data">
+				<h3 id="user-username" style="text-align: center;"></h3>
+				<img id="user-usericon" />
+			</div>
+			<!--<div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12">
+				<div class="user-modal-data">
+					<div class="user-stats">
+						<div class="user-statistic">
+							<h6 id="user-kills"></h6>
+							<h5>Kills</h5>
+						</div>
+						<div class="user-statistic">
+							<h6 id="user-deaths"></h6>
+							<h5>Deaths</h5>
+						</div>
+						<div class="user-statistic">
+							<h6 id="user-kdr"></h6>
+							<h5>K/D Ratio</h5>
+						</div>
+						<div class="user-statistic">
+							<h6 id="user-time"></h6>
+							<h5>Playtime</h5>
+						</div>
+					</div>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum iaculis porta dignissim. Suspendisse eleifend, ex sit amet euismod condimentum, augue lacus consequat nibh, eu interdum tortor risus ut ligula. Sed fringilla lectus quam, nec tincidunt erat condimentum iaculis. Vivamus eu ligula at dui commodo iaculis. Aliquam consectetur sit amet mauris ac tincidunt. Praesent ut tellus lacinia, elementum lorem vitae, malesuada tellus. Sed aliquam pellentesque ligula a condimentum. Vestibulum ut lorem bibendum, tincidunt sem sit amet, feugiat lectus. Mauris vitae eros sed tortor volutpat tincidunt. Morbi ut tincidunt arcu, sed gravida risus. Aliquam erat volutpat. Curabitur id condimentum nulla. Ut vitae est ac purus sagittis consequat iaculis ac mauris. Suspendisse posuere, augue at eleifend bibendum, odio enim aliquet purus, sed fermentum sapien nulla eu dolor. Proin viverra sapien sed eros egestas lobortis dictum efficitur eros.</p>
+				</div>
+			</div>
+		</div>
+	</div>-->
+	<div class="sf-modal-close-button" onclick="closeSFModal();">BACK</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script type="text/javascript">
+	var progressImage = document.getElementById("loading-image");
+loadMatch();
+function loadMatch() {
+	progressImage.dataset.progress = 0;
+	progressImage.style.clipPath = 'inset(100% 0 0 0)';
+	progressImage.style.webkitClipPath = 'inset(100% 0 0 0)';
+	var progressInterval = setInterval(function() {
+		let oldProgress = parseInt(progressImage.dataset.progress);
+		let newProgress = Math.floor((Math.random() * 5) + 1) / 5;
+		let progress = oldProgress + newProgress;
+		progressImage.dataset.progress = progress;
+		progressImage.style.clipPath = 'inset(' + (100 - progress) + '% 0 0 0)';
+		progressImage.style.webkitClipPath = 'inset(' + (100 - progress) + '% 0 0 0)';
+		if (progress >= 100) {
+			progressImage.style.clipPath = 'inset(0 0 0 0)';
+			progressImage.style.webkitClipPath = 'inset(0 0 0 0)';
+			clearInterval(progressInterval);
+		}
+	}, 50);
+}
+
+// Update the clock.
+setInterval(updateClock, 5000);
+updateClock();
+function updateClock() {
+	let date = new Date();
+	document.getElementById("time-display").innerHTML = date.getHours() + ':' + date.getMinutes();
+
+	let dayOfWeek = '';
+	switch (date.getDay()) {
+		case 0: dayOfWeek = 'Sunday'; break;
+		case 1: dayOfWeek = 'Monday'; break;
+		case 2: dayOfWeek = 'Tuesday'; break;
+		case 3: dayOfWeek = 'Wednesday'; break;
+		case 4: dayOfWeek = 'Thursday'; break;
+		case 5: dayOfWeek = 'Friday'; break;
+		case 6: dayOfWeek = 'Saturday'; break;
+	}
+	document.getElementById("day-display").innerHTML = dayOfWeek;
+}
+
+// Used for visual effects on mouse movement.
+document.body.addEventListener("mousemove", updateMouseCoordinates);
+var mouseX = 0;
+var mouseY = 0;
+function updateMouseCoordinates(event) {
+	var x = event.clientX;
+	var y = event.clientY;
+	updateBackgroundPosition(mouseX - x, mouseY - y);
+	mouseX = x;
+	mouseY = y;
+}
+function updateBackgroundPosition(offsetX, offsetY) {
+	var newX = 50 - offsetX;
+	var newY = 50 - offsetY;
+	if (newX > 52)
+		newX = 52;
+	else if (newX < 48)
+		newX = 48;
+	
+	if (newY > 54)
+		newY = 54;
+	else if (newY < 46)
+		newY = 46;
+	var position = newX + '% ' + newY + '%';
+	document.getElementById("sf-background-fog").style.backgroundPosition = position;
+}
+var driftX = 0;
+var driftY = 0;
+var driftDirection = 'right';
+setInterval(function() {
+	if (driftDirection == 'right') {
+		driftX += 0.1;
+		driftY += 0.13;
+		
+		if (driftX >= 2 || driftY >= 2)
+			driftDirection = 'left';
+	} else if (driftDirection == 'left') {
+		driftX -= 0.1;
+		driftY -= 0.13;
+		
+		if (driftX <= -2 || driftY <= -2)
+			driftDirection = 'right';
+	}
+	updateBackgroundPosition(driftX, driftY);
+}, 150);
+function restart() {
+	loadMatch();
+}
+
+var activeModal = '';
+function openSFModal(id) {
+	activeModal = id;
+	document.getElementById('main-modal').classList.add('active');
+	document.getElementById(activeModal).classList.add('active');
+}
+function closeSFModal() {
+	document.getElementById('main-modal').classList.remove('active');
+	document.getElementById(activeModal).classList.remove('active');
+}
+
+var playerData = [
+	{ username: 'NIOMEEEE', kills: 1590, deaths: 518, playHours: 23, playMinutes: 52, image: 'U3.jpg' },
+	{ username: 'TACOSONTITAN', kills: 19308, deaths: 8159, playHours: 182, playMinutes: 11, image: 'image-4.png' },
+	{ username: 'TICOTACO', kills: 23091, deaths: 8331, playHours: 189, playMinutes: 43, image: 'U4.jpg' },
+	{ username: 'NICE_GUNS', kills: 431, deaths: 295, playHours: 6, playMinutes: 59, image: 'DefaultUser.jpg' },
+	{ username: 'LIMANOT', kills: 145, deaths: 140, playHours: 3, playMinutes: 19, image: 'DefaultUser.jpg' },
+	{ username: 'RAGEQUITTER', kills: 1892, deaths: 831, playHours: 5, playMinutes: 31, image: 'U6.jpg' },
+	{ username: 'MONSTER_SANDWICH', kills: 9839, deaths: 958, playHours: 8, playMinutes: 22, image: 'U5.jpg' },
+	{ username: 'ALI_NUMNUMS', kills: 12, deaths: 72, playHours: 1, playMinutes: 28, image: 'DefaultUser.jpg' },
+	{ username: 'RAVENHATER', kills: 15301, deaths: 9851, playHours: 201, playMinutes: 45, image: 'U1.jpg' },
+	{ username: 'MARSMALLOS', kills: 14998, deaths: 7590, playHours: 150, playMinutes: 34, image: 'U2.png' },
+	{ username: 'CURBSTOMP', kills: 15, deaths: 5, playHours: 3, playMinutes: 51, image: 'DefaultUser.jpg' },
+	{ username: 'FANSONFANS', kills: 108, deaths: 98, playHours: 5, playMinutes: 17, image: 'DefaultUser.jpg' },
+	{ username: 'SWIPE_RIGHT', kills: 905, deaths: 309, playHours: 12, playMinutes: 35, image: 'U9.jpg' },
+	{ username: 'SK1TTL3S', kills: 99, deaths: 56, playHours: 13, playMinutes: 32, image: 'U7.jpg' },
+	{ username: 'HURLEY_GIRL', kills: 3, deaths: 32, playHours: 0, playMinutes: 25, image: 'DefaultUser.jpg' },
+	{ username: 'R4MP4G3', kills: 52938, deaths: 14921, playHours: 205, playMinutes: 13, image: 'U8.png' }
+];
+var userImages = document.querySelectorAll('[data-userid]');
+var imageUrl = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/2940219/';
+for (let i = 0; i < userImages.length; i++) {
+	userImages[i].src = imageUrl + playerData[i].image;
+	userImages[i].addEventListener("click", function() {
+		document.getElementById('user-username').innerHTML = playerData[i].username;
+		document.getElementById('user-kills').innerHTML = playerData[i].kills;
+		document.getElementById('user-deaths').innerHTML = playerData[i].deaths;
+		document.getElementById('user-kdr').innerHTML = (playerData[i].kills / playerData[i].deaths).toFixed(2);
+		document.getElementById('user-time').innerHTML = playerData[i].playHours + 'h ' +
+																	    playerData[i].playMinutes + 'm';
+		document.getElementById('user-usericon').src = imageUrl + playerData[i].image;
+		openSFModal('user-modal');
+	});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,2325 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            Operating System Concepts
+        </title>
+       <style type="text/css">
+         body {
+  background-color: hsl(240, 100%, 99%);
+  overflow-x: visible;
+}
+#title {
+  font-weight: bold;
+  font-size: 40px;
+  font-family: monospace;
+  text-align: center;
+  color: #041424;
+  background-color: hsl(240, 100%, 99%);
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+  justify-content: center;
+  background-color: #041424;
+}
+#navbar {
+  background-color: #041424;
+  position: fixed;
+  min-width: 290px;
+  top: 0px;
+  left: 0px;
+  width: 300px;
+  height: 100%;
+  border-right: solid;
+  border-color: rgba(0, 22, 22, 0.4);
+}
+code {
+  display: block;
+  text-align: left;
+  white-space: pre-line;
+  position: relative;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 2;
+  background-color: #f7f7f7;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 5px;
+}
+#navbar li {
+  list-style: none;
+  border-bottom: 2px solid grey;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #041424;
+}
+#navbar ul {
+  height: 88%;
+  padding: 0;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #041424;
+}
+#main-doc {
+  position: absolute;
+  margin-left: 300px;
+  padding: 20px;
+  margin-bottom: 110px;
+  color: #041424;
+  font-family: sans-serif;
+}
+header {
+  font-size: 3vw;
+  text-decoration: underline;
+  margin-left: 0;
+}
+h2 {
+  text-decoration: underline;
+  margin-left: 0;
+}
+b {
+  color: red;
+}
+em {
+  color: green;
+}
+h5 {
+  color: royalblue;
+}
+@media only screen and (max-width: 800px) {
+  #navbar {
+    width: 100%;
+    max-height: 275px;
+    position: absolute;
+  }
+  #main-doc {
+    position: relative;
+    margin-top: 300px;
+    margin-left: -10px;
+  }
+  header {
+    font-size: 7vw;
+  }
+}
+img {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100vw;
+}
+
+@media only screen and (max-width: 400px) {
+  code {
+    margin-left: -20px;
+    width: 100%;
+    padding: 15px;
+    padding-left: 10px;
+    padding-right: 45px;
+    min-width: 233px;
+  }
+  #navbar {
+    position: absolute;
+  }
+  #main-doc {
+    position: relative;
+    top: 30px;
+    margin-left: -10px;
+  }
+  title {
+    justify-content: center;
+  }
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100vw;
+}
+
+       </style>
+    </head>
+    <body>
+        <nav id="navbar">
+            <header id="title">Operating System</header>
+            <ul>
+              <li><a class="nav-link" href="#overview">Overview</a></li>
+              <li>
+                <a class="nav-link" href="#processconcept"
+                  >Process Concept</a
+                >
+              </li>
+              <li>
+                <a class="nav-link" href="#processscheduling">Process Scheduling</a>
+              </li>
+              <li><a class="nav-link" href="#threadconcept">Process Vs Thread</a></li>
+              <li><a class="nav-link" href="#synchronisation">Synchronisation</a></li>
+              <li>
+                <a class="nav-link" href="#Deadlock">Deadlock</a>
+              </li>
+              <li><a class="nav-link" href="#memorymaanagementstrategy">Memory Management Strategy</a></li>
+              <li><a class="nav-link" href="#virtualmemorymanagement">Virtual Memory Management</a></li>
+              <li><a class="nav-link" href="#redux">Redux</a></li>
+              <li>
+                <a class="nav-link" href="#raction">Redux Action</a>
+              </li>
+              <li><a class="nav-link" href="#reducer">Redux Reducer</a></li>
+              <li><a class="nav-link" href="#thunk">Redux Thunk</a></li>
+              <li><a class="nav-link" href="#counter">Counter Using Redux</a></li>
+              <li><a class="nav-link" href="#simmut">State Immutability</a></li>
+              <li><a class="nav-link" href="#rr">React Redux</a></li>
+              <li><a class="nav-link" href="#dep">Redux Dependencies</a></li>
+              <li><a class="nav-link" href="#gatsby">Gatsby</a></li>
+              <li><a class="nav-link" href="#while_statement">while statement</a></li>
+              <li>
+                <a class="nav-link" href="#Function_declarations"
+                  >Function declarations</a
+                >
+              </li>
+              <li><a class="nav-link" href="#Reference">Powered By</a></li>
+            </ul>
+          </nav>
+          <main id="main-doc">
+            <section class="main-section" id="overview">
+              <header>Overview</header>
+              <article>
+                <p>
+                 <b>Operating System</b>, is a program that manages computer hardware. It provides a basis for application programs
+                 and acts as an interface between computer user and the computer hardware.
+                </p>
+          
+                <p>
+                 There are different operating system which accomplish these tasks in different way.For eg 
+                 <b>Mainframe</b> operating system are designed for the optimal utilisation of hardware , <b>PC</b> operating system
+                 are designed for supporting complex games, applications and to increase efficiency and <b>mobile </b>operating system
+                 provide an environment where user can easily interface with the computer to execute programs.
+
+                </p>
+                <h2>Services Provided By An Operating System</h2>
+                <ul>
+                  <li>
+                    <h3>Interface between user and hardware</h3>
+                    <p>For eg : In a C program we write printf if there would be no OS we need to specify the code 
+                      to interact with the hardware also, but with os when we will write printf OS will issue a <a href="#">system call</a>
+                      write for it.
+                    </p>
+                    <li>
+                      <h3>Resource Allocator</h3>
+                      <p>It assignes processes to particular resources(device,memory,I/O,files).
+                        If the resource is <b>unsharable</b> it will allocate resource to 1 process at a time but if the resource is <b>sharable</b> it will allocate resources to different processes 
+                        simultaneously.
+                    </li>
+                    <li>
+                      <h3>Manager</h3>
+                      <p>It manages memory , processes , files, security etc. It keeps track of which resources are allocated
+                        to which process and which are free.
+                      </p>
+                    </li>
+                    </p>
+                  </li>
+                </ul>
+                <h2>Types of Operating System</h2>
+                <ul>
+                  <li>
+                    <h3>Batch Operating System</h3>
+                    <p>As the name suggests here the computer operator sorts the similar kind of jobs together in a batch and will allocate them. 
+                      It does not directly interact with the computer. This type of OS was generally used when we use a single mainframe computer and everyone assign their 
+                      job to that computer only.
+                    </p>
+                    <table>
+                      <tr>
+                        <th>Advantages</th>
+                        <th>Disadvantages</th>
+                      </tr>
+                      <tr>
+                        <td>Multiple users can share the batch systems.</td>
+                        <td>Costly</td>
+                      </tr>
+                      <tr>
+                        <td>Easy to manage large work</td>
+                        <td>Hard to debug</td>
+                      </tr>
+                      <tr>
+                        <td>Eg : Bank System , Payroll Statements etc.</td>
+                        <td>The other jobs will have to wait for unknown time if any job fails.</td>
+                      </tr>
+                    </table>
+                  </li>
+                  <li>
+                    <h3>Multiprogramming OS</h3>
+                    <p>In the multi-programming system, one or multiple programs can be loaded into its main memory for getting to execute. Main objective of multiprogramming is to manage entire resources of the system. Multiprogramming operating system has ability to execute multiple programs with using of only one processor machine . One example is User can use MS-Excel , download apps, transfer data from one point to another point, Firefox or Google Chrome browser, and more at a same time.
+                      When the process has gone to I/O CPU can take and execute other jobs and processes.
+                    </p>
+                    <table>
+                      <tr>
+                        <th>
+                          Advantages
+                        </th>
+                        <th>
+                          Disadvantages
+                        </th>
+                      </tr>
+                      <tr>
+                        <td>
+                          Cpu is not idle so more efficient as resources are used nicely.
+                        </td>
+                         <td>
+                           Difficult to handle because of complex schedule handling.
+                         </td>
+                      </tr>
+                      <tr>
+                        <td>Supports multiple users simultaneously</td>
+                        <td>
+                          Tracking all tasks/processes is difficult to handle.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Short time jobs are completed faster than long time jobs</td>
+                        <td>Due to high load of tasks, long time jobs have to wait long</td>
+                      </tr>
+                    </table>
+                  </li>
+                  <li>
+                    <h3>Multitasking/TimeSharing OS</h3>
+                  <p>Each task is given some time to execute so that all the tasks work smoothly. Each user gets the time of CPU as they use a single system. These systems are also known as Multitasking Systems. The task can be from a single user or different users also. The time that each task gets to execute is called quantum. 
+                    After this time interval is over OS switches over to the next task. 
+                    For eg if we have three jobs J1,J2,J3. CPU for time quantum of J1 will take J1 after J1's 
+                    time quantum is over CPU will start executing J2/J3 even if J1 is complete or not.It is multiprogramming + context switching
+                  </p>
+                  <table>
+                    <tr>
+                      <th>
+                        Advantages
+                      </th>
+                      <th>
+                        Disadvantages
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        Each task gets an equal opportunity
+                      </td>
+                       <td>
+                        Reliability problem
+                       </td>
+                    </tr>
+                    <tr>
+                      <td>Fewer chances of duplication of software</td>
+                      <td>
+                        One must have to take care of the security and integrity of user programs and data
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>CPU idle time can be reduced Eg : Unix</td>
+                      <td>Data communication problem</td>
+                    </tr>
+                  </table>
+                  </li>
+                  <li>
+                    <h3>Distributed OS</h3>
+                  <p><b>Loosely coupled system</b>Various autonomous interconnected computers communicate with each other using a shared communication network. Independent systems possess their own memory unit and CPU. These are referred to as loosely coupled systems or distributed systems. These system’s processors differ in size and function. The major benefit of working with these types of the operating system is that it is always possible that one user can access the files or software which are not actually present on his system but some other system connected within this network i.e., remote access is enabled within the devices connected in that network. 
+                  </p>
+                  <table>
+                    <tr>
+                      <th>
+                        Advantages
+                      </th>
+                      <th>
+                        Disadvantages
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>
+                       Failure of one will not affect other as all are independent.
+                      </td>
+                       <td>
+                        Failure of main will stop the entire communication.
+                       </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Since resources are being shared, computation is highly fast and durable
+and load on host computer reduces , scalable
+                      </td>
+                      <td>
+                      Language not well defined.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Delay can be reduced Eg : LOCUS</td>
+                      <td>Underlying software is complex and costly.</td>
+                    </tr>
+                  </table>
+                  </li>
+                  <li>
+                    <h3>Network OS</h3>
+                  <p><b>Tighly coupled system</b>These systems run on a server and provide the capability to manage data, users, groups, security, applications, and other networking functions. These types of operating systems allow shared access of files, printers, security, applications, and other networking functions over a small private network. One more important aspect of Network Operating Systems is that all the users are well aware of the underlying configuration, of all other users within the network, their individual connections, etc
+                  </p>
+                  <table>
+                    <tr>
+                      <th>
+                        Advantages
+                      </th>
+                      <th>
+                        Disadvantages
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        Highly stable centralized servers and security concerns are handled through servers
+                      </td>
+                       <td>
+                        Servers are costly
+                       </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        New technologies and hardware up-gradation are easily integrated into the system
+                      </td>
+                      <td>
+                        User has to depend on a central location for most operations
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Server access is possible remotely from different locations and types of systems Eg : MAC, Windows, LINUX</td>
+                      <td>Maintenance and updates are required regularly</td>
+                    </tr>
+                  </table>
+                  </li>
+                  <li>
+                    <h3>Realtime OS</h3>
+                  <p>Here each and every job has its deadlock completing it after will result in loss.
+                    <b>Hard Real time</b> time constraint very strict eg:automatic parachutes
+                    <b>Soft Real time</b> time constraints not that strict.
+                  </p>
+                  <table>
+                    <tr>
+                      <th>
+                        Advantages
+                      </th>
+                      <th>
+                        Disadvantages
+                      </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        maximum consumption , context switching time very less
+                      </td>
+                       <td>
+                         The algorithms are very complex and difficult for the designer to write on
+                       </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Focus on running applications and less importance to applications which are in the queue.
+                      </td>
+                      <td>
+                        Very few tasks run at the same time and their concentration is very less on few applications to avoid errors.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Error Free and best memory management For eg : weapon systems</td>
+                      <td>device driver and interrupt signals.</td>
+                    </tr>
+                  </table>
+                  </li>
+                </ul>
+                <ol>
+                  <h2>Differences</h2>
+                  <li>
+                    <h3>RAM VS ROM</h3>
+                    <table>
+                      <tr>
+                        <th>
+                          Random Access Memory
+                        </th>
+                        <th>
+                          Read Only Memory
+                        </th>
+                      </tr>
+                      <tr>
+                        <td>
+                         Data stored in RAM stays there until the computer is running
+                        </td>
+                         <td>
+                          ROM is used mainly in the start-up process of a modern computer
+                         </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          RAM types are 1) DRAM 2)SRAM. SDRAM, and DDR
+                        </td>
+                        <td>
+                          ROM types are 1) EPROM 2) EEPROM, 3) PROM, and 4) Mask ROM
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>RAM is volatile </td>
+                        <td>ROM is non-volatile Memory</td>
+                      </tr>
+                      <tr>
+                        <td>The biggest advantage of RAM is that it does not have any moving parts</td>
+                        <td> the biggest advantage of Rom is that it is not lost when power is switched off.</td>
+                      </tr>
+                    </table>
+                    <li>
+                      <h3>SRAM VS DRAM</h3>
+                      <table>
+                        <tr>
+                          <th>
+                            Static Random Access Memory
+                          </th>
+                          <th>
+                            Dynamic Random Access Memory
+                          </th>
+                        </tr>
+                        <tr>
+                          <td>
+                            SRAM is a type of semiconductor memory that uses Bistable latching circuitry to store each bit
+                          </td>
+                           <td>
+                            It is a type of RAM which allows you to stores each bit of data in a separate capacitor within a particular integrated circuit.
+                           </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Static RAM is mostly used as a cache memory for the processor (CPU).
+                          </td>
+                          <td>
+                            It is a standard computer memory of any modern desktop computer.
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>SRAM is faster</td>
+                          <td>DRAM is comparitively slower</td>
+                        </tr>
+                        <tr>
+                          <td>It consumes less power</td>
+                          <td> Here every bit is stored in a capacitor if bit is 1 means capacitor is charged else discharged</td>
+                        </tr>
+                      </table>
+                  </li>
+                  <li>
+                    <h3>PROM VS EPROM VS EEPROM</h3>
+                    <table>
+                      <tr>
+                        <th>
+                          Programmable ROM
+                        </th>
+                        <th>
+                          Erasable Programmable ROM
+                        </th>
+                        <th>
+                          Electrically Erasable Programmable ROM
+                        </th>
+                      </tr>
+                      <tr>
+                        <td>
+                         After its creation it can be programmed only once by the users
+                        </td>
+                         <td>
+                         It can be reprogrammed using ultraviolet light
+                         </td>
+                         <td>
+                          It can be reprogrammed by using normal electric voltage.
+                          </td>
+                      </tr>
+                    </table>
+                </li>
+                <li>
+                <h3>Virtualization VS Containerization</h3>
+                <table>
+                  <tr>
+                    <th>
+                      Virtualization
+                    </th>
+                    <th>
+                      Containerization
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>
+                      Virtualization is the technology which can simulate your physical hardware (such as CPU cores, memory, disk)  and represent it as seperate machine
+                    </td>
+                     <td>
+                      Containerization is os-level virtualization. It doesn't simulate the entire physical machine
+                     </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      It used  Hypervisor to detach the physical machine
+                    </td>
+                    <td>
+                      It used docker engine in case Docker
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>It has hardware level isolation so fit is fully secured </td>
+                    <td>It has process level isolation</td>
+                  </tr>
+                  <tr>
+                    <td>Heavy weight and not portable</td>
+                    <td> Light weight and portable</td>
+                  </tr>
+                </table>
+              </li>
+              <li>
+                <h3>UEFI VS BIOS</h3>
+                Unified Extended Firmware Interface Forum VS Basic Input-Output system
+              <p>Both UEFI and BIOS are low-level software that starts when you boot your PC before booting your operating system</p>
+              <em>UEFI is a more modern solution, supporting larger hard drives, faster boot times, more security features, and—conveniently—graphics and mouse cursors.</em>
+            </li>
+            <li>
+              <h3>GPT(GUID Partition Table) VS MBR(Master Boot Record)</h3>
+              <p>UEFI is able to boot drives of very large size because  UEFI uses the GPT partitioning scheme instead of MBR.</p>
+              <p>These are two different ways of storing the partitioning information on a drive</p>
+              <em>GPT is replacing MBR because</em>
+                <ol>
+                  <li>
+                    MBR only works with disks up to 2 TB in size. MBR also only supports up to four primary partitions—if you want more, you have to make one of your primary partitions an “extended partition” and create logical partitions inside it.GPT is better as 
+                    every partition on your drive has a “globally unique identifier,”.GPT doesn’t suffer from MBR’s limits. GPT-based drives can be much larger and can have unlimited partitions , with size limits and number of partitions dependent on the operating system
+                  </li>
+                  <li>
+                    On an MBR disk, the partitioning and boot data is stored in one place. If this data is overwritten or corrupted, you’re in trouble. In contrast, GPT stores multiple copies of this data across the disk, so it’s much more robust and can recover if the data is corrupted.
+                  </li>
+                  <li>
+                    GPT also stores cyclic redundancy check (CRC) values to check that its data is intact. If the data is corrupted, GPT can notice the problem and attempt to recover the damaged data from another location on the disk. MBR had no way of knowing if its data was corrupted—you’d only see there was a problem when the boot process failed or your drive’s partitions vanished. 
+                  </li>
+                  <li>
+                    <h3>MicroKernel VS Monolithickernel </h3>
+                    <table>
+                      <tr>
+                        <th>
+                          MicroKernel(MacOS)
+                        </th>
+                        <th>
+                          Monolithickernel(Linux,Unix)
+                        </th>
+                      </tr>
+                      <tr>
+                        <td>
+                          In microkernels, the kernel is broken down into separate processes, known as servers. Some of the servers run in kernel space and some run in user-space. All servers are kept separate and run in different address spaces. Servers invoke "services" from each other by sending messages via IPC (Interprocess Communication). This separation has the advantage that if one server fails, other servers can still work efficiently. 
+                        </td>
+                         <td>
+                          Monolithic kernel is a single large process running entirely in a single address space. It is a single static binary file. All kernel services exist and execute in the kernel address space. The kernel can invoke functions directly. Examples of monolithic kernel based OSs: Unix, Linux.
+                         </td>
+                      </tr>
+                    </table>
+                </li>
+                </ol>
+                <em>Why windows kernel is more monolithic and not micro kernel?</em>
+                <p> Because the kernel mode protected memory space is shared by the operating system and device driver code.All kernel components live in a common shared address space.It uses hybrid kernel</p>
+            </li>
+                </ol>
+                <h2>Some Important Terms</h2>
+                <ul>
+                  <li>
+                    <h3>
+                      Compiler
+                    </h3>
+                    <p>A compiler is a special program that processes statements written in a particular programming language and turns them into machine language or "code" that a computer's processor uses.</p>
+                  </li>
+                  <li>
+                    <h3>
+                      Loader
+                    </h3>
+                    <p>In a computer operating system , a loader is a component that locates a given program (which can be an application or, in some cases, part of the operating system itself) in offline storage (such as a hard disk ), loads it into main storage (in a personal computer, it's called random access memory ), and gives that program control of the computer (allows it to execute its instruction s).</p>
+                  </li>
+                  <li>
+                    <h3>
+                      Assembler
+                    </h3>
+                    <p>Just like compiler converts high level language into machine level language an assembler converts assembly level language into machine levewl language</p>
+                  </li>
+                  <li>
+                    <h3>
+                      Interpreter
+                    </h3>
+                    <p>An Interpreter directly executes instructions written in a programming or scripting language without previously converting them to an object code or machine code. Examples of interpreted languages are Perl, Python and Matlab</p>
+                  </li>
+                  <li>
+                    <h3>
+                      System Calls
+                    </h3>
+                    <p>a system call is the programmatic way in which a computer program requests a service from the kernel of the operating system it is executed on. A system call is a way for programs to interact with the operating system. A computer program makes a system call when it makes a request to the operating system’s kernel. System call provides the services of the operating system to the user programs via <b>Application Program Interface(API)</b></p>
+                  </li>
+                  <li>
+                    <h3>
+                      Application Programming Interface(API)
+                    </h3>
+                    <p>API delivers a user response to a system and sends the system's response back to a user.</p>
+                  </li>
+                  <li>
+                    <h3>
+                      Kernel
+                    </h3>
+                    <p>A kernel is the central part of an operating system. It manages the operations of the computer and the hardware, most notably memory and CPU time.[1]
+
+                      There are five types of kernels:
+                      A micro kernel, which only contains basic functionality;
+                      A monolithic kernel, which contains many device drivers.
+                      Hybrid Kernel
+                      Exokernel
+                      Nanokernel</p>
+                  </li>
+                  <li>
+                    <h3>
+                      Shell
+                    </h3>
+                    <p>The shell is the outermost layer of the operating system. Shells incorporate a programming language to control processes and files, as well as to start and control other programs.
+                      A shell is an environment in which we can run our commands, programs, and shell scripts.
+                    </p>
+                  </li>
+                  <li>
+                    <h3>
+                      Booting
+                    </h3>
+                    <p>Booting is the process of starting a computer. It can be initiated by hardware such as a button press, or by a software command. After it is switched on, a computer's central processing unit (CPU) has no software in its main memory, so some process must load software into memory before it can be executed.</p>
+                  </li>
+                  <li>
+                    <h3>
+                      JVM
+                    </h3>
+                    <p>Java Virtual Machine (JVM) is a engine that provides runtime environment to drive the Java Code or applications. It converts Java bytecode into machines language. JVM is a part of Java Run Environment (JRE).
+                      Due to JVM java is machine independent.
+                    </p>
+                  </li>
+                  <li>
+                    <h3>Multiprocessing</h3>
+                    <p>
+                      In a uni-processor system, only one process executes at a time.
+Multiprocessing is the use of two or more CPUs (processors) within a single Computer system. The term also refers to the ability of a system to support more than one processor within a single computer system. Now since there are multiple processors available, multiple processes can be executed at a time. These multi processors share the computer bus, sometimes the clock, memory and peripheral devices also.
+                    </p>
+                  </li>
+                  <li>
+                    <h3>Multithreading</h3>
+                    <p>
+                      Its an extension of multitasking. 
+                      Multi threading is an execution model that allows a single process to have multiple code segments (i.e., threads) running concurrently within the “context” of that process.
+e.g. VLC media player, where one thread is used for opening the VLC media player, one thread for playing a particular song and another thread for adding new songs to the playlist.
+Multi threading is the ability of a process to manage its use by more than one user at a time and to manage multiple requests by the same user without having to have multiple copies of the program.
+                    </p>
+                  </li>
+                </ul>
+                <h2>Steps which happen when we turn on our computer system</h2>
+                <p><b>Step1:</b>The CPU Loads the UEFI or BIOS</p>
+                <p><b>Step2:</b>The UEFI or BIOS Tests(POST - Power on self test) and Initializes Hardware</p>
+                <p><b>Step3:</b>The UEFI or BIOS Hands Off to a Boot Device(Operating system's boot loader</p>
+                <p><b>Step4:</b>The Bootloader Loads the Full OS</p>
+              </article>
+            </section>
+             <section class="main-section" id="synchronisation">
+              <header>Synchronization</header>
+              <h3>Defination-</h3>
+              <p>Processes Synchronization or Synchronization is the way by which processes that share the same memory space are managed in an operating system. It helps maintain the consistency of data by using variables or hardware so that only one process can make changes to the shared memory at a time.</p>
+             </section>
+             <section class="main-section" id="deadlock">
+              <header>Deadlock in Operating System</header>
+              <h3>Defination-</h3>
+              <p>A deadlock in OS is a situation in which more than one process is blocked because it is holding a resource and also requires some resource that is acquired by some other process. The four necessary conditions for a deadlock situation to occur are mutual exclusion, hold and wait, no preemption and circular set. We can prevent a deadlock by preventing any one of these conditions. There are different ways to detect and recover a system from deadlock.
+<br>
+What is Deadlock in OS?
+All the processes in a system require some resources such as central processing unit(CPU), file storage, input/output devices, etc to execute it. Once the execution is finished, the process releases the resource it was holding. However, when many processes run on a system they also compete for these resources they require for execution. This may arise a deadlock situation.
+<br>
+A deadlock is a situation in which more than one process is blocked because it is holding a resource and also requires some resource that is acquired by some other process. Therefore, none of the processes gets executed.</p>
+             </section>
+              <section class="main-section" id="memorymaanagementstrategy">
+              <header>Memory Manangement In OS</header>
+              <h3>Defination-</h3>
+              <p>The term memory can be defined as a collection of data in a specific format. It is used to store instructions and process data. The memory comprises a large array or group of words or bytes, each with its own location. The primary purpose of a computer system is to execute programs. These programs, along with the information they access, should be in the main memory during execution. The CPU fetches instructions from memory according to the value of the program counter.
+<br>
+To achieve a degree of multiprogramming and proper utilization of memory, memory management is important. Many memory management methods exist, reflecting various approaches, and the effectiveness of each algorithm depends on the situation.
+<br>
+</p>
+             </section>
+              <section class="main-section" id="virtualmemorymanagement">
+              <header>Virtual memory</header>
+              <h3>Defination-</h3>
+              <p>What is virtual memory?
+Virtual memory is a memory management technique where secondary memory can be used as if it were a part of the main memory. Virtual memory is a common technique used in a computer's operating system (OS).
+<br>
+Virtual memory uses both hardware and software to enable a computer to compensate for physical memory shortages, temporarily transferring data from random access memory (RAM) to disk storage. Mapping chunks of memory to disk files enables a computer to treat secondary memory as though it were main memory.
+<br>
+Today, most personal computers (PCs) come with at least 8 GB (gigabytes) of RAM. But, sometimes, this is not enough to run several programs at one time. This is where virtual memory comes in. Virtual memory frees up RAM by swapping data that has not been used recently over to a storage device, such as a hard drive or solid-state drive (SSD).</p>
+             </section>
+              <section class="main-section" id="while_statement">
+              <header>WHILE statement</header>
+              <h3>Defination-</h3>
+              <p>The WHILE statement repeats the steps specified in DO provided that condition is TRUE. It is your responsibility to ensure that the logic of the program is such that the loop terminates. If condition evaluates to UNKNOWN, the loop terminates immediately.
+<br>
+If present, Label gives the statement a name. This has no effect on the behavior of the WHILE statement itself, but allows statements to include ITERATE and LEAVE statements or other labelled statements, which in turn include them. The second Label can be present only if the first Label is present and if it is, the labels must be identical. It is not an error for two or more labelled statements at the same level to have the same Label, but this partly negates the advantage of the second Label. The advantage is that it unambiguously and accurately matches each END with its WHILE. However, it is an error for a labelled statement within statements to have the same label, because this makes the behavior of the ITERATE and LEAVE statements</p>
+ <section class="main-section" id="Function_declarations">
+              <header>
+                Functions of an Operating System
+              </header>
+              <h3>Defination-</h3>
+              <p>
+                Memory Management
+The operating system manages the Primary Memory or Main Memory. Main memory is made up of a large array of bytes or words where each byte or word is assigned a certain address. Main memory is fast storage and it can be accessed directly by the CPU. For a program to be executed, it should be first loaded in the main memory. An operating system manages the allocation and deallocation of the memory to various processes and ensures that the other process does not consume the memory allocated to one process.An Operating System performs the following activities for Memory Management:
+<br>
+It keeps track of primary memory, i.e., which bytes of memory are used by which user program. The memory addresses that have already been allocated and the memory addresses of the memory that has not yet been used. <br>
+In multiprogramming, the OS decides the order in which processes are granted memory access, and for how long. 
+It Allocates the memory to a process when the process requests it and deallocates the memory when the process has terminated or is performing an I/O operation. <br>
+<img alt="state" src="https://media.geeksforgeeks.org/wp-content/uploads/20230518091047/1white-660x453.webp"><br><header>
+Processor Management</header>
+In a multi-programming environment, the OS decides the order in which processes have access to the processor, and how much processing time each process has. This function of OS is called Process Scheduling. An Operating System performs the following activities for Processor Management. 
+<br>
+An operating system manages the processors work by allocating various jobs to it and ensuring that each process receives enough time from the processor to function properly.
+Keeps track of the status of processes. The program which performs this task is known as a traffic controller. Allocates the CPU that is a processor to a process. De-allocates processor when a process is no more required.<br><header>Device Management</header><p>An OS manages device communication via its respective drivers. It performs the following activities for device management. Keeps track of all devices connected to the system. designates a program responsible for every device known as the Input/Output controller. Decides which process gets access to a certain device and for how long. Allocates devices effectively and efficiently. Deallocates devices when they are no longer required. There are various input and output devices. an OS controls the working of these input-output devices .It receives the requests from these devices, performs a specific task, and communicates back to the requesting process.</p>
+<img alt="state" src="https://media.geeksforgeeks.org/wp-content/uploads/20230518091140/download-(1).webp">
+              </p></section>
+             </section>
+             <section class="main-section" id="processscheduling">
+              <header>
+                Process Scheduling
+              </header>
+              <h3>Defination</h3>
+              <p>
+                The process scheduling is the activity of the process manager that handles the removal of the running process from the CPU and the selection of another process on the basis of a particular strategy.
+<br>
+Process scheduling is an essential part of a Multiprogramming operating systems. Such operating systems allow more than one process to be loaded into the executable memory at a time and the loaded process shares the CPU using time multiplexing.
+<br>
+<h3>
+  Categories of Scheduling
+</h3>
+There are two categories of scheduling:
+<br>
+Non-preemptive: Here the resource can’t be taken from a process until the process completes execution. The switching of resources occurs when the running process terminates and moves to a waiting state.
+Preemptive: Here the OS allocates the resources to a process for a fixed amount of time. During resource allocation, the process switches from running state to ready state or from waiting state to ready state. This switching occurs as the CPU may give priority to other processes and replace the process with higher priority with the running process.
+              </p>
+             </section>
+            <section class="main-section" id="processconcept">
+              <article>
+                <header>
+                  Process Concepts
+                </header>
+                <h3>Process VS Program</h3>
+                <p>
+                  Step1. When we write a program compiler converts it from High level lang to Machine level language and store in secondary memory.
+                </p>
+                <p>
+                  Step2 . When we do some mouse click or commands to execute the program the OS(loader) will locate that program in secondary memory
+                  or the instance to run and load it in the main memory. 
+                </p>
+                <p>Step3. In the main memory the OS will store it using some data structure to execute the program i.e. process</p>
+                <table>
+                  <tr>
+                    <th>
+                     Program
+                    </th>
+                    <th>
+                      Process
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>
+                    	Program contains a set of instructions designed to complete a specific task.
+                    </td>
+                     <td>
+                      Process is an instance of an executing program.
+                     </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Program is a passive and static entity as it resides in the secondary memory.
+                    </td>
+                    <td>
+                      Process is a active and dynamic entity as it is created during execution and loaded into the main memory.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Program exists at a single place and continues to exist until it is deleted.</td>
+                    <td>Process exists for a limited span of time as it gets terminated after the completion of task.</td>
+                  </tr>
+                  <tr>
+                    <td>Program does not have any control block.</td>
+                    <td>Process has its own control block called Process Control Block</td>
+                  </tr>
+                </table>
+                <h2>States Of A Process</h2>
+                <img alt="state" src="https://raw.githubusercontent.com/Devanshi-123/TechieNotes/main/OperatingSystem_Documentation/state.PNG"/>
+                <ul>
+                  <li>New
+                  <p>The program is in secondary mem and the process is about to be created but not yet created</p>
+                </li>
+                <li>Ready
+                  <p>Process is created and is waiting to get CPU for execution</p>
+                </li>
+                <li>Running
+                  <p>Process is being executed by the different cores of the CPU</p>
+                </li>
+                <li>Exit
+                  <p>Process is completed and PCB is deleted</p>
+                </li>
+                <li>Blocked
+                  <p>Process is doing I/O or trying to access some critical region so CPU idle so process is sent from running to blocked</p>
+                </li>
+                <li>Suspend Ready
+                  <p>Due to incoming of a higher priority process and lack of space in ready queue lower priority process is sent to suspend ready state</p>
+                </li>
+                <li>Suspend Block
+                  <p>Just as process is sent from ready to suspend ready if that process is in blocked it is sent to suspend block. Once it complete its i/O it can go to suspend ready</p>
+                </li>
+                </ul>
+                <h3>Types Of Process</h3>
+                <table>
+                  <tr>
+                    <th>
+                      CPU Bound
+                    </th>
+                    <th>
+                      I/O Bound
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>
+                      If process has lot of work in which CPU is required.
+                    </td>
+                     <td>
+                      If process has lot of work in which I/O is required.
+                     </td>
+                  </tr>
+                </table>
+                <p>Best performance system is which have coimbination of CPU bound and I/O bound process.</p>
+                <h2>Process Table</h2>
+                <img src="https://raw.githubusercontent.com/Devanshi-123/TechieNotes/main/OperatingSystem_Documentation/table.PNG">
+                <p>The process table is an array of PCB’s, that means logically contains a PCB for all of the current processes in the system.</p>
+                <h2>Process Control Block</h2>
+                <img src="https://raw.githubusercontent.com/Devanshi-123/TechieNotes/main/OperatingSystem_Documentation/pcb.PNG">
+                <p> As the operating system supports multi-programming, it needs to keep track of all the processes. For this task, the process control block (PCB) is used to track the process’s execution status.</p>
+                <ul>
+                  <li>
+                    <h3>
+                      Pointer
+                    </h3>
+                    <p>
+                      It is a stack pointer which is required to be saved when the process is switched from one state to another to retain the current position of the process.
+                    </p>
+                  </li>
+                  <li>
+                    <h3>
+                      Process state
+                    </h3>
+                    <p>
+                      Current state of process
+                    </p>
+                  </li>
+                  <li>
+                    <h3>
+                      Process number 
+                    </h3>
+                    <p>
+                      Every process is assigned with a unique id known as process ID or PID which stores the process identifier.
+                    </p>
+                  </li>
+                  <li>
+                    <h3>
+                      Program Counter
+                    </h3>
+                    <p>
+                      It contain a counter which stores the address of the next instruction to be executed.                      
+                    </p>
+                  </li>
+                  <li>
+                    <h3>
+                     List of open files
+                    </h3>
+                    <p>
+                     It contain list of all the files it has opened so that it can close it and not reopen it.   
+                    </p>
+                  </li>
+                  <li>
+                    <h3>
+                      Register
+                    </h3>
+                    <p>
+                      These are the CPU registers which includes: accumulator, base, registers and general purpose registers.
+                      For eg : First P1 was executing and after its instruction I3 it stopped and P2 started executing then 
+                      the values which were stored in CPU registers were also changed so P1 needs to store
+                      the value of CPU registers as well. 
+                    </p>
+                  </li>
+                  <li>
+                    <h3>
+                      Priority & Memory Limits
+                    </h3>
+                    <p>
+                      Whenever any process is created it is assigned a priority by the CPU.
+                      Processes with higher priority are executed first.OS process have higher priority than user process.
+                      Memory limits tell about the memory management used by the OS.
+                    </p>
+                  </li>
+                </ul>
+                <h2>Process Structure</h2>
+                <img src="https://raw.githubusercontent.com/Devanshi-123/TechieNotes/main/OperatingSystem_Documentation/PR.PNG">
+                <ul>
+                  <li>
+                    <h3>
+                      Stack
+                    </h3>
+                    <p>
+                      For recursion call.
+                    </p>
+                  </li>
+                  <li>
+                    <h3>
+                      Heap
+                    </h3>
+                    <p>
+                      This space is used when in future there is a calloc or malloc call.
+                    </p>
+                  </li>
+                   <li>
+                     <h3>
+                       data
+                     </h3>
+                     <p>
+                       Shared and global variables are stored - once created they remain in memory till the life of process.
+                     </p>
+                   </li>
+                   <li>
+                     <h3>
+                       text
+                     </h3>
+                     <p>
+                       It consist of executable code i.e. a.out
+                     </p>
+                   </li>
+                </ul>
+                 <section class="main-section" id="threadconcept">
+                <h2>Process VS Threads</h2>
+                <img src="https://raw.githubusercontent.com/Devanshi-123/TechieNotes/main/OperatingSystem_Documentation/thread.PNG"/>
+                <table>
+                  <tr>
+                    <th>
+                      Process
+                    </th>
+                    <th>
+                      Threads
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>
+                      Process means any program is in execution.
+                    </td>
+                     <td>
+                      Thread means segment of a process.
+                     </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Process takes more time for termination, creation,context switching.
+                      and also is less efficient and consume more resources so process are known as heavy weight process.
+                    </td>
+                    <td>
+                      Threads takes less time for termination, creation,context switching.
+                      and also is more efficient and consume less resources so threads are known as light weight process.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Process is isolated so 	If one process is blocked then it will not effect the execution of other process 
+                    </td>
+                    <td>
+                      Threads share memory so Second thread in the same task couldnot run, while one server thread is blocked.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Process has its own Process Control Block, Stack and Address Space.
+                    </td>
+                    <td>
+                      Thread has Parents’ PCB, its own Thread Control Block and Stack and common Address space.
+                    </td>
+                  </tr>
+                </table>
+                <h2>
+                  Context Switching
+                </h2>
+                <p>Context Switching involves storing the context or state of a process so that it can be reloaded when required and execution can be resumed from the same point as earlier. This is a feature of a multitasking operating system and allows a single CPU to be shared by multiple processes.</p>
+                For eg <em>initially Process 1 is running. Process 1 is switched out and Process 2 is switched in because of an interrupt or a system call. Context switching involves saving the state of Process 1 into PCB1 and loading the state of process 2 from PCB2. After some time again a context switch occurs and Process 2 is switched out and Process 1 is switched in again. This involves saving the state of Process 2 into PCB2 and loading the state of process 1 from PCB1.</em>
+                <h3>Context switching triggers</h3>
+                <ul>
+                  <li>Multitasking</li>
+                  <li>Interrupt Handling</li>
+                  <li>User and Kernel Mode Switching.</li>
+                </ul>
+                <b>Why context switching between threads of same process is faster than between two process?</b>
+                <p> As threads have the same virtual memory maps. Because of this TLB flushing is not required.</p>
+                <h2>Inter Process Communication</h2>
+                <p> Inter-process communication (IPC) is a mechanism that allows processes to communicate with each other and synchronize their actions. The communication between these processes can be seen as a method of co-operation between them</p>
+                <p>Processes can communicate with each other through both:</p>
+                <img src="https://raw.githubusercontent.com/Devanshi-123/TechieNotes/main/OperatingSystem_Documentation/ipc.PNG"/>
+                <ul>
+                  <li><h3>Shared Memory</h3>
+                  <p>Communication between processes using shared memory requires processes to share some variable, and it completely depends on how the programmer will implement it. 
+                    <em>Suppose process1 and process2 are executing simultaneously, and they share some resources or use some information from another process. Process1 generates information about certain computations or resources being used and keeps it as a record in shared memory. When process2 needs to use the shared information, it will check in the record stored in shared memory and take note of the information generated by process1 and act accordingly.</em>
+                    <p><b>Producer Consumer Problem</b></p>
+                    <p>There are two processes: Producer and Consumer. The producer produces some items and the Consumer consumes that item. The two processes share a common space or memory location known as a buffer where the item produced by the Producer is stored and from which the Consumer consumes the item if needed</p>
+                    <p>It is if two types</p>
+                    <ul>
+                      <li><b>Bounded buffer problem</b>
+                      <p>Size of buffer is fixed so If the total produced item is equal to the size of the buffer, the producer will wait to get it consumed by the Consumer. Similarly, the consumer will first check for the availability of the item. If no item is available, the Consumer will wait for the Producer to produce it</p>
+                      <em>Producer Process code</em>
+                      <code>
+                        item nextProduced;
+     
+    while(1){
+         
+        // check if there is no space
+        // for production.
+        // if so keep waiting.
+        while((free_index+1) mod buff_max == full_index);
+         
+        shared_buff[free_index] = nextProduced;
+        free_index = (free_index + 1) mod buff_max;
+    }
+                      </code>
+                     <em>Consumer Process Code</em>
+                     <code>
+                         
+    while(1){
+         
+      // check if there is an available
+      // item  for consumption.
+      // if not keep on waiting for
+      // get them produced.
+      while((free_index == full_index);
+       
+      nextConsumed = shared_buff[full_index];
+      full_index = (full_index + 1) mod buff_max;
+  }
+                     </code>
+                      </li>
+                      <li><b>Unbounded buffer problem</b>
+                        <p>Producer can keep on producing items and there is no limit on the size of the buffer</p>
+                        </li>
+                    </ul>
+                  </p>
+                </li>
+                <li><h3>Message Passing</h3>
+                  <p>
+                    In this method, processes communicate with each other without using any kind of shared memory. If two processes p1 and p2 want to communicate with each other, they 
+                  </p>
+                  <ol>
+                    <li>
+                      Establish a communication link (if a link already exists, no need to establish it again.)
+                    </li>
+                    <li>
+                      Start exchanging messages using basic primitives.
+We need at least two primitives: 
+– send(message, destination) or send(message) 
+– receive(message, host) or receive(message).<br/>
+A standard message can have two parts: header and body. 
+The header part is used for storing message type, destination id, source id, message length, and control information.
+                    </li>
+                  </ol>
+                  <p>It is of two types</p>
+                  <ul>
+                    <li>
+                      <b>Direct Message Passing</b>
+                      <p>When the processes use a specific process identifier for the communication, but it is hard to identify the sender ahead of time. </p>
+                      <em>Print server</em>
+                      <p>e.g. send(p1, message) means send the message to p1. 
+                        Similarly, receive(p2, message) means to receive the message from p2. </p>
+                        <b>Symmetric</b>
+                        <p> both processes will name each other for sending and receiving the messages</p>
+                        <b>Asymmetric</b>
+                        <p>only the sender will name the receiver for sending the message and there is no need for the receiver for naming the sender for receiving the message.</p>
+                        <em>The problem with this method of communication is that if the name of one process changes, this method will not work.</em>
+                    </li>
+                    <li>
+                      <b>
+                        Indirect Message Passing
+                      </b>
+                      <p>It is done via a shared mailbox (port), which consists of a queue of messages. The sender keeps the message in mailbox and the receiver picks them up.</p>
+                    </li>
+                  </ul>
+                </li>
+                </ul>
+
+              </article>
+            </section>
+            <section class="main-section" id="rcomp">
+              <article>
+                <header>React Component</header>
+                <h3>There are two ways of creating react component</h3>
+                <ol><li>
+                <h2>Stateless Functional Component</h2>
+                <p>A stateless functional component is any function you write which accepts props and returns JSX</p>
+                <p>A stateless component is one that can receive data and render it, 
+                  but does not manage or track changes to that data</p>
+                  <p>We can make these type of components using javascript functions</p>
+                  <p>To create a component with a function, you simply write a JavaScript
+                     function that returns either JSX or null. One important thing to 
+                     note is that React requires your function name to begin with a
+                     <b> capital letter</b>. Here's an example of 
+                     stateless functional component that assigns an HTML class in JSX:</p>
+                     <code>
+                      // After being transpiled, the <div> will have a CSS class of 'customClass'
+                        const DemoComponent = function() {
+                          return (
+                             div className='customClass' />
+                          );
+                        };
+                     </code>
+             <em>Because a JSX component represents HTML, you could put several components together to create a more complex HTML page. This is one of the key advantages of the component architecture React provides. It allows you to compose your UI from many separate, isolated components. 
+               This makes it easier to build and maintain complex user interfaces.</em>         
+              </li>
+              <li>
+                <h2>Stateless Component</h2>
+                <p> A stateless component, on the other hand, is a class that extends React.Component, but does not use internal state </p>
+                <code>
+                  class <b>Kitten extends React.Component </b>{
+                   <b> constructor(props)</b> {
+                      <b>super(props)</b>;
+                    }
+                  
+                    render() {
+                      return (
+                        h1> Hi /h1>
+                      );
+                    }
+                  }
+                </code>
+                <ul>
+                  <li><strong>Kitten</strong> : Name of the class which extends React.Component Class.
+                    the Kitten class now has access to many useful React features, such as local state and lifecycle hooks. </li>
+                  <li><strong>super()</strong> :It uses super() to call the constructor of the parent class, in this case React.Component</li>
+                  <li><strong>constructor()</strong> : The constructor is a special method used during the initialization of objects that are created with the class keyword.</li>
+                </ul>
+                <br/>
+                <em>It is best practice to call a component's constructor with super, and pass props to both. This makes sure the component is initialized properly. </em>
+              </li>
+              <li>
+                <h2>Stateful Component</h2>
+                <p>Finally, a stateful component is a class component that does maintain its own internal state. You may see stateful components referred to simply as components or React components.</p>
+                <p>A common pattern is to try to minimize statefulness and to create stateless functional components wherever possible. This helps contain your state management to a specific area of your application. In turn, this improves development and maintenance of your app by making it easier to follow how changes to state affect its behavior.</p>
+                <p>For further refer <a href="#rstate">State In react</a></p>
+              </li>
+              <li>
+                <h2>Create a Component with Composition</h2>
+                <p>Imagine you are building an App and have created three components, a Navbar, Dashboard, and Footer.
+
+                  To compose these components together, you could create an App parent component which renders each of these three components as children. To render a component as a child in a React component, you include the component name written as a custom HTML tag in the JSX. For example, in the render method you could write:</p>
+                  <code>
+                    return (
+                      App>
+                          Navbar />
+                             Dashboard />
+                                Footer />
+                        /App>
+                          )
+                  </code>
+              </li>
+              </ol>
+              </article>
+            </section>
+            <section class="main-section" id="rprop">
+              <article>
+                <header>
+                  Props
+                </header>
+                <h2>To pass info from parent to child</h2>
+                <p>. In React, you can pass props, or properties, 
+                  to child components. Say you have an App component 
+                  which renders a child component called Welcome which
+                   is a stateless functional component. 
+                  You can pass Welcome a user property by writing:</p>
+                  <code>
+                     < App>
+                     < Welcome user='Mark' />
+                     < /App>
+                  </code>
+                  <p>
+                    You use custom HTML attributes created by you and supported by
+                     React to be passed to the component. In this case, the created 
+                     property user is passed to the component Welcome. Since Welcome
+                      is a stateless
+                     functional component, it has access to this value like so:
+                  </p>
+                  <code>const Welcome = (props) =>< h1>Hello, {props.user}! < /h1></code>
+                  <p>It is standard to call this value props and when dealing with stateless functional components, you basically consider it as an argument to a function which returns JSX. You can access the value of the argument in the function body
+                    . With class components, you will see this is a little different.</p>
+                 <h2>To pass an array as a prop</h2>
+                 <p>To pass an array to a JSX element, 
+                   it must be treated as JavaScript and wrapped in curly braces</p>
+                   <code>
+                   < ParentComponent>
+                   < ChildComponent colors={["green", "blue", "red"]} />
+                    < /ParentComponent>
+                   </code>
+                   <p>The child component then has access to the array property colors. 
+                     Array methods such as join() can be used when accessing the property.</p>
+                     <code>
+                      const ChildComponent = (props) =>< p>{props.colors.join(', ')}< /p>
+                     </code>
+                     <h2>Use Default Props</h2>
+                     <p>React also has an option to set default props. You can assign default props to a component as a property on the component itself and React assigns the default prop if necessary. This allows you to specify what a prop 
+                       value should be if no value is explicitly provided. </p>
+                     <p> For example, if you declare</p>  
+                     <code>MyComponent.defaultProps = { location: 'San Francisco' }</code>
+                     <p> you have defined a location prop that's set to the string San Francisco, unless you specify otherwise. React assigns default props if props are undefined, but if you pass null as the value for a prop, it will remain null</p>
+                     <h2>Oerride Default Props</h2>
+                     <p>The way to override the default props is to explicitly set the prop values for a component.</p>
+                     <em>If the prop value is an integer, it won't go in quotes but it should be wrapped in curly braces. For example, {100}. This syntax tells JSX to 
+                       interpret the value within the braces directly as JavaScript.</em>
+                       <h2>PropTypes to Define the Props You Expect in child component</h2>
+                       <p>React provides useful type-checking features to verify that components receive props of the correct type. For example, your application makes an API call to retrieve data that you expect to be in an array, which is then passed to a component as a prop. You can set propTypes on your component to require the data to be of type array. This will throw a useful warning when the data is of any other type.</p>
+                       <p>It's considered a best practice to set propTypes when you know the type of a prop ahead of time. You can define a propTypes property for a component in the same way you defined defaultProps. Doing this will check that props of a given key are present with a given type. Here's an example to require the type function for a prop called handleClick:</p>
+                       <code>MyComponent.propTypes = { handleClick: PropTypes.func.isRequired }</code>
+                       <p>In the example above, the PropTypes.func part checks that handleClick is a function. Adding isRequired tells React that handleClick is a required property for that component. You will see a warning if that prop isn't provided.</p>
+                       <em>To use you will have to import propTypes</em>
+                       <code>import PropTypes from 'prop-types';</code>
+                     <h2>Accessing prop if child component is class component</h2>
+                     <p>Anytime you refer to a class component within itself, you use the <b>this</b> keyword. To access props within a class component, you preface the code that you use to access it with this. For example, 
+                       if an ES6 class component has a prop called data, you write <b>{this.props.data}</b> in JSX.</p>  
+              </article>
+            </section>
+            <section class="main-section" id="rstate">
+              <header>State In React</header>
+              <p>One of the most important topics in React is state. State consists of any data your application needs to know about, that can change over time. You want your apps to respond to state changes and present an updated UI when necessary. React offers a nice solution for the state management of modern web applications.</p>
+              <h2>Creating a stateful component</h2>
+              <p>You create state in a React component by declaring a state property on the component <b>class in its constructor</b>. This initializes the component with state when it is created. The state property must be set to a JavaScript object. Declaring it looks like this:</p>
+              <code>
+                this.state = {
+                  // describe your state here
+                }
+              </code>
+              <p>You have access to the state object throughout the life of your component. You can update it, render it in your UI, and pass it as props to child components. The state object can be as complex or as simple as you need it to be.</p>
+              <em> Note that you must create a class component by extending React.Component in order to create state like this.</em>
+              <h2>Render State in User Interface</h2>
+              <p>Once you define a component's initial state, you can display any part of it in the UI that is rendered. If a component is stateful, it will always have access to the data in state in its render() method.
+                 You can access the data with <b>this.state</b></p>
+                 <p>If you want to access a state value within the <b>return</b> of the render method, you have to enclose the value in curly braces.</p>
+                 <p>React uses what is called a virtual DOM, to keep track of changes behind the scenes. When state data updates, it triggers a re-render of the components using that data - including child components that received the data as a prop. React updates the actual DOM, but only where necessary. This means you don't have to worry about changing the DOM.</p>
+                <h2> Render State in the User Interface Another Way</h2>
+               <p> In the render() method, before the return statement, you can write JavaScript directly. For example, you could declare functions, access data from state or props, perform computations on this data, and so on. Then, you can assign any data to variables, which you have access to in the return statement.</p>
+               <p>For eg</p>
+               <code>
+                class MyComponent extends React.Component {
+                  constructor(props) {
+                    super(props);
+                    this.state = {
+                      name: 'freeCodeCamp'
+                    }
+                  }
+                  render() {
+                    // Change code below this line
+                     const name = this.state.name;
+                    // Change code above this line
+                    return (
+                      < div>
+                        { /* Change code below this line */ }
+                            < h1>{name}< /h1>
+                        { /* Change code above this line */ }
+                      < /div>
+                    );
+                  }
+                };
+               </code>
+               <h2>Set state with this.setState</h2>
+               <p> There is also a way to change the component's state.
+                  React provides a method for updating component state called
+                   setState. You call the setState method within your component 
+                   class like so: this.setState(), passing in an object with key-value pairs. The keys are your state properties and the values are the updated state data. For instance, if we were storing a 
+                 username in state and wanted to update it, it would look like this:</p>
+                 <code>
+                  this.setState({
+                    username: 'Lewis'
+                  });
+                 </code>
+                 <h2>
+                  Bind 'this' to a Class Method
+                 </h2>
+                 <p>Class Methods are the functions which we define inside our class component</p>
+                 <p>A class method typically needs to use the this keyword so it can access properties on the class (such as state and props) inside the scope of the method</p>
+                 <p>One common way is to explicitly bind this in the constructor so this becomes bound to the class methods when the component is initialized. </p>
+                 <p>Add below code inside the constructor of component</p>
+                 <code>this.handleClick = this.handleClick.bind(this)</code>
+                 <p>Then, when you call a function like this.setState() within your class method, this refers to the class and will not be undefined.</p>
+                 <h2> Use State to Toggle an Element</h2>
+                 <p>Sometimes you might need to know the previous state when updating the state. However, state updates may be<b> asynchronous - this means React may batch multiple setState() calls into a single update.</b> This means you can't rely on the previous value of this.state or this.props when calculating the next value. So, you should not use code like this:</p>
+                 <code>this.setState({
+                  counter: this.state.counter + this.props.increment
+                });</code>
+                <p>nstead, you should pass setState a function that allows you to access state and props. Using a function with setState guarantees you are working with the most current values of state and props.
+                   This means that the above should be rewritten as:</p>
+                   <code>this.setState((state, props) => ({
+                    counter: state.counter + props.increment
+                  }));</code>
+                  <em>If you dont need props there is no need to pass them</em>
+                  <h2>Implementing Counter using State</h2>
+                  <code>
+                    class Counter extends React.Component {
+                      constructor(props) {
+                        super(props);
+                        this.state = {
+                          count: 0
+                        };
+                        // Change code below this line
+                        this.increment = this.increment.bind(this);
+                        this.decrement = this.decrement.bind(this);
+                         this.reset = this.reset.bind(this);
+                        // Change code above this line
+                      }
+                      // Change code below this line
+                       increment(){
+                         this.setState(state=>({
+                           count : state.count + 1
+                         }))
+                       }
+                         decrement(){
+                         this.setState(state=>({
+                           count : state.count - 1
+                         }))
+                       }
+                        reset(){
+                          this.setState(state=>({
+                            count : 0
+                          }))
+                        }
+                      // Change code above this line
+                      render() {
+                        return (
+                          < div>
+                            < button className='inc' onClick={this.increment}>Increment!< /button>
+                            < button className='dec' onClick={this.decrement}>Decrement!< /button>
+                            < button className='reset' onClick={this.reset}>Reset< /button>
+                            < h1>Current Count: {this.state.count}< /h1>
+                          </ div>
+                        );
+                      }
+                    };
+                  </code>
+                  <h2>Creating Controlled Form Using State</h2>
+                  <code>
+                    class MyForm extends React.Component {
+                      constructor(props) {
+                        super(props);
+                        this.state = {
+                          input: '',
+                          submit: ''
+                        };
+                        this.handleChange = this.handleChange.bind(this);
+                        this.handleSubmit = this.handleSubmit.bind(this);
+                      }
+                      handleChange(event) {
+                        this.setState({
+                          input: event.target.value
+                        });
+                      }
+                      handleSubmit(event) {
+                        // Change code below this line
+                           event.preventDefault()
+                           this.setState({
+                             submit:this.state.input
+                           })
+                        // Change code above this line
+                      }
+                      render() {
+                        return (
+                          < div>
+                            < form onSubmit={this.handleSubmit}>
+                              {/* Change code below this line */}
+                                 < input value={this.state.input} onChange={this.handleChange}/>
+                              {/* Change code above this line */}
+                               < button type='submit'>Submit!< /button>
+                            < /form>
+                            {/* Change code below this line */}
+                    
+                            {/* Change code above this line */}
+                          < /div>
+                        );
+                      }
+                    }
+                  </code>
+                  <em>: You also must call event.preventDefault() in the submit handler, to prevent the default form submit behavior which will refresh the web page.</em>
+               <h2>Pass State as Props to Child Components</h2>
+               <p> A common pattern is to have a stateful component containing the state important to your app, that then renders child components. You want these components to have access to some pieces of that state, which are passed in as props.</p>
+               <code>
+                class MyApp extends React.Component {
+                  constructor(props) {
+                    super(props);
+                    this.state = {
+                      name: 'CamperBot'
+                    }
+                  }
+                  render() {
+                    return (
+                       < div>
+                         {/* Change code below this line */}
+                         < Navbar name = {this.state.name}/>
+                         {/* Change code above this line */}
+                       </ div>
+                    );
+                  }
+                };
+                
+                class Navbar extends React.Component {
+                  constructor(props) {
+                    super(props);
+                  }
+                  render() {
+                    return (
+                    < div>
+                      {/* Change code below this line */}
+                      < h1>Hello, my name is: {this.props.name} < /h1>
+                      {/* Change code above this line */}
+                    < /div>
+                    );
+                  }
+                };
+               </code>
+               <p>This pattern illustrates some important paradigms in React.</p>
+               <ul>
+                 <li>
+                  The first is unidirectional data flow. State flows in one direction down the tree of your application's components, from the stateful parent component to child components. The child components only receive the state data they need.
+                 </li>
+                 <li>
+                  The second is that complex stateful apps can be broken down into just a few, or maybe a single, stateful component. The rest of your components simply receive state from the parent as props, and render a UI from that state. It begins to create a separation where state management is handled in one part of code and UI rendering in another. This principle of separating state logic from UI logic is one of React's key principles. When it's used correctly, it makes the design of complex, stateful applications much easier to manage.
+                 </li>
+               </ul>
+               <h2> Pass a Callback as Props</h2>
+               <p>Passing a function defined in parent as a prop enables the child component to call the function 
+                 which is defined in parent.
+               </p>
+               <p>You can pass state as props to child components, but you're not limited to passing data. You can also pass handler functions or any method that's defined on a React component to a child component. This is how you allow child components to interact with their parent components. You pass methods to a child just like a regular prop. It's assigned a name and you have access to that method name under this.props in the child component.</p>
+               <p>For eg this is parent where we have done all state management</p>
+               <code>
+                class MyApp extends React.Component {
+                  constructor(props) {
+                    super(props);
+                    this.state = {
+                      inputValue: ''
+                    }
+                    this.handleChange = this.handleChange.bind(this);
+                  }
+                  handleChange(event) {
+                    this.setState({
+                      inputValue: event.target.value
+                    });
+                  }
+                  render() {
+                    return (
+                       < div>
+                        { /* Change code below this line */ }
+                          < GetInput handleChange={this.handleChange} input={this.state.inputValue}/>
+                          < RenderInput input={this.state.inputValue} />
+                        { /* Change code above this line */ }
+                       < /div>
+                    );
+                  }
+                };
+                
+               </code>
+               <p>These are thye child comp which are receiving some state and rendering it</p>
+               <code>
+                class GetInput extends React.Component {
+                  constructor(props) {
+                    super(props);
+                  }
+                  render() {
+                    return (
+                      < div>
+                        < h3>Get Input:< /h3>
+                         < input
+                          value={this.props.input}
+                          onChange={this.props.handleChange}/>
+                      < /div>
+                    );
+                  }
+                };
+                
+                class RenderInput extends React.Component {
+                  constructor(props) {
+                    super(props);
+                  }
+                  render() {
+                    return (
+                      < div>
+                        < h3>Input Render:</h3>
+                        < p>{this.props.input}</p>
+                      < /div>
+                    );
+                  }
+                };
+               </code>
+            </section>
+            <section class="main-section" id="lmethods">
+              <article>
+                <header>
+                   Lifecycle Methods?
+                </header>
+                <h2>What are Lifecycle methods?</h2>
+                <p>Special methods that provide opportunities to perform actions at specific points in the lifecycle of a component. These are called lifecycle methods, or lifecycle hooks, and allow you to catch components at certain points in time. This can be before they are rendered, before they update, before they receive props, before they unmount, and so on. Here is a list of some of the main lifecycle methods</p>
+                <h3>Here are some of the lifecycle methods</h3>
+                <ol>
+                  <li>
+                    <h2>Component Will Mount</h2>
+                    <h5>When?</h5>
+                    <p>The componentWillMount() method is called<b> before the render()</b> method when a component is being mounted to the DOM</p>
+                  </li>
+                  <li>
+                    <h2>Component Did Mount</h2>
+                    <h5>Why?</h5>
+                    <p>To place API calls or any calls to your server in the lifecycle method componentDidMount()</p>
+                    <p>The componentDidMount() method is also the best place to attach any event listeners you need to add for specific functionality. </p>
+                    <p>You can use<b> document.addEventListener()</b> which takes the event (in quotes) as the first argument and the callback as the second argument.</p>
+                    <code>  componentDidMount() {
+                      document.addEventListener("keydown",this.handleKeyPress);
+                      }</code>
+                    <h5>When?</h5>
+                    <p>. This method is called after a component is mounted to the DOM. </p>
+                    <em>Any calls to setState() here will trigger a re-rendering of your component. When you call an API in this method, and set your state with the data that the API returns, it will automatically trigger an update once you receive the data.</em>
+                  </li>
+                  <li>
+                    <h2>Component Will Unmount</h2>
+                    <h5>Why?</h5>
+                    <p>To perform any kind of cleanup like removing the event listeners etc</p>
+                    <h5>When?</h5>
+                    <p> It's good practice to use this lifecycle method to do any clean up on React components before they are unmounted and destroyed. </p>
+                    <code>componentWillUnmount() {
+                      document.removeEventListener("keydown",this.handleKeyPress);
+                     }</code>
+                  </li>
+                  <li><h2>Component Should Update?</h2>
+                  <h5>why?</h5>
+                  <p>This method is a useful way to optimize performance. For example, the default behavior is that your component re-renders when it receives new props, even if the props haven't changed. You can use shouldComponentUpdate() to prevent this by comparing the props. The method must return a boolean value that tells React whether or not to update the component. You can compare the current props (this.props) to the next props (nextProps) to determine if you need to update or not, and return true or false accordingly.
+
+                  </p>
+                  <h5>When?</h5>
+                  <p> lifecycle method you can call when child components receive new state or props, and declare specifically if the components should update or not. The method is shouldComponentUpdate(), and it takes nextProps and nextState as parameters.</p>
+                  <p>For eg rerender the child component only if the prop value is even</p>
+                  <code>  shouldComponentUpdate(nextProps, nextState) {
+                    console.log('Should I update?');
+                    // Change code below this line
+                    if((nextProps.value)%2==0){
+                    return true;
+                    }
+                    return false;
+                    // Change code above this line
+                  }</code>
+                </li>
+                <li>
+                  <h2>Component Did Update</h2>
+                  <h5>When?</h5>
+                  <p>After the component is rerendered</p>
+                </li>
+                </ol>
+              </article>
+            </section>
+            <section class="main-section" id="rifelse">
+              <article>
+                <header>REndering based on state values using conditions</header>
+                <h2>Using If Else</h2>
+                <p>For eg in below code if state display value is true display the h1 else do not display it</p>
+                <code>
+                  class MyComponent extends React.Component {
+                    constructor(props) {
+                      super(props);
+                      this.state = {
+                        display: true
+                      }
+                      this.toggleDisplay = this.toggleDisplay.bind(this);
+                    }
+                    toggleDisplay() {
+                      this.setState((state) => ({
+                        display: !state.display
+                      }));
+                    }
+                    render() {
+                      // Change code below this line
+                      if(this.state.display)
+                      {
+                      return (
+                         < div>
+                           < button onClick={this.toggleDisplay}>Toggle Display< /button>
+                           < h1>Displayed!< /h1>
+                         < /div>
+                      );
+                      }
+                      else{
+                         return (
+                         < div>
+                           < button onClick={this.toggleDisplay}>Toggle Display< /button>
+                         < /div>
+                      );
+                      }
+                    }
+                  };
+                </code>
+                <h2> Use && for a More Concise Conditional</h2>
+                <code>{condition && < p>markup< /p>}</code>
+                <p>If the condition is true, the markup will be returned. If the condition is false, the operation will immediately return false after evaluating the condition and return nothing. You can include these statements directly in your JSX and string multiple conditions together by writing && after each one. This allows you to handle more complex conditional logic in your render() method without repeating a lot of code.</p>
+                <code>
+                  class MyComponent extends React.Component {
+                    constructor(props) {
+                      super(props);
+                      this.state = {
+                        display: true
+                      }
+                      this.toggleDisplay = this.toggleDisplay.bind(this);
+                    }
+                    toggleDisplay() {
+                      this.setState(state => ({
+                        display: !state.display
+                      }));
+                    }
+                    render() {
+                      // Change code below this line
+                      return (
+                         < div>
+                           < button onClick={this.toggleDisplay}>Toggle Display< /button>
+                           {this.state.display &&
+                           < h1>Displayed!< /h1>}
+                         < /div>
+                      );
+                    }
+                  };
+                </code>
+                <h2>Use a Ternary Expression</h2>
+                <code>condition ? expressionIfTrue : expressionIfFalse;</code>
+                <p> set up a ternary expression that implements the following logic: when the page first loads, render the submit button, buttonOne, to the page. Then, when a user enters their age and clicks the button, render a different button based on the age. If a user enters a number less than 18, render buttonThree. If a user enters a number greater than or equal to 18, render buttonTwo.</p>
+                <code> { this.state.userAge === ''
+                  ? buttonOne
+                  : this.state.userAge >= 18
+                    ? buttonTwo
+                    : buttonThree}</code>
+                    <h2>Render Conditionally From Props</h2>
+                    <p>use the value of a given prop to automatically make decisions about what to render.</p>
+                    <code>class Results extends React.Component {
+                      constructor(props) {
+                        super(props);
+                      }
+                      render() {
+                        {/* Change code below this line */}
+                        return this.props.fiftyFifty >= .5 ? < h1>"You Win!"< /h1>:< h1>"You Lose!"< /h1>;
+                        {/* Change code above this line */}
+                      }
+                    }
+                    </code>
+              </article>
+            </section>
+            <section class="main-section" id="tdlist">
+             <article>
+               <header>To Do List</header>
+               <h2>Here we have used array.map() to render list of elements from an array</h2>
+               <code>
+                const textAreaStyles = {
+                  width: 235,
+                  margin: 5
+                };
+                
+                class MyToDoList extends React.Component {
+                  constructor(props) {
+                    super(props);
+                    // Change code below this line
+                      this.state = {
+                        userInput:'',
+                        toDoList:[]
+                      }
+                    // Change code above this line
+                    this.handleSubmit = this.handleSubmit.bind(this);
+                    this.handleChange = this.handleChange.bind(this);
+                  }
+                  handleSubmit() {
+                    const itemsArray = this.state.userInput.split(',');
+                    this.setState({
+                      toDoList: itemsArray
+                    });
+                  }
+                  handleChange(e) {
+                    this.setState({
+                      userInput: e.target.value
+                    });
+                  }
+                  render() {
+                    const items = this.state.toDoList.map(i => < li key={i+1}>{i}< /li>);
+                    return (
+                      < div>
+                         < textarea
+                          onChange={this.handleChange}
+                          value={this.state.userInput}
+                          style={textAreaStyles}
+                          placeholder='Separate Items With Commas'
+                        />
+                        < br />
+                        < button onClick={this.handleSubmit}>Create List</button>
+                        < h1>My "To Do" List:< /h1>
+                        < ul>{items}< /ul>
+                      </ div>
+                    );
+                  }
+                }
+               </code>
+               <em>Each and every li element i.e item must have a unique key among its siblings</em>
+               <h2>Array.filter()</h2>
+               <p> filters the contents of an array based on a condition, then returns a new array. For example, if you have an array of users that all have a property online which can be set to true or false, you can filter only those users that are online by writing:</p>
+               <code>let onlineUsers = users.filter(user => user.online);</code>
+             </article>
+            </section>
+            <section class="main-section" id="redux">
+            <article>
+            <header>Redux</header>
+            <h2>Introduction</h2>
+            <p>Redux is a state management framework that can be used with a number of different web technologies, including React.</p>
+            <p>In Redux, there is a single state object that's responsible for the entire state of your application. This means if you had a React app with ten components, and each component had its own local state, the entire state of your app would be defined by a single state object housed in the <b>Redux store</b></p>
+            <h2>REdux Store</h2>
+            <p>The Redux store is the single source of truth when it comes to application state.
+              This also means that any time any piece of your app wants to update state, it must do so through the Redux store. The unidirectional data flow makes it easier to track state management in your app.</p>
+              <p>The Redux store is an object which holds and manages application state. There is a method called <b>createStore() on the Redux object</b>, which you use to create the Redux store. 
+                This method takes a<b> reducer function</b> as a required argument.</p>
+              <p>Reducer is a function which takes state as an argument and returns state</p>
+              <code>
+                const reducer = (state = 5) => {
+                  return state;
+                }
+                
+                // Redux methods are available from a Redux object
+                // For example: Redux.createStore()
+                // Define the store here:
+                var store = Redux.createStore(reducer);
+              </code>
+              <h2>Get state from redux store</h2>
+              <p>The Redux store object provides several methods that allow you to interact with it. For example, you can retrieve the current state held in the Redux store object with the <b>getState()</b> method</p>
+              <code>
+                const store = Redux.createStore(
+                   (state = 5) => state
+                  );
+                var currentState = store.getState()</code>
+                <h2>Different methods we have access to on react store</h2>
+                <h5>store.getState()</h5>
+                <p>To get the current state of redux store</p>
+                <h5>store.dispatch(action creator())</h5>
+                <p>To pass the action to the store</p>
+                <h5>store.subscribe()</h5>
+                <p> This allows you to subscribe listener functions to the store, which are called whenever an action is dispatched against the store. One simple use for this method is to subscribe a function to your store that simply logs a message every time an action is received and the store is updated.</p>
+                <code>store.subscribe(() =>{
+                  count++;
+               })</code>
+               <p>So in the above code count will be increamented as many timmes as we dispatch action to the redux store</p>
+            </article>
+          </section>
+            <section class="main-section" id="raction">
+              <article>
+                <header>Redux Action</header>
+                <p>Since Redux is a state management framework, updating state is one of its core tasks. In Redux, all state updates are triggered by dispatching actions.</p>
+                <p> An action is simply a JavaScript object that contains information about an action event that has occurred. The Redux store receives these action objects, then updates its state accordingly.</p>
+                <p>Sometimes a Redux action also carries some data. For example, the action carries a username after a user logs in. While the data is optional, actions must carry a type property that specifies the <b>'type' of action</b> that occurred.</p>
+                <p>Think of Redux actions as messengers that deliver information about events happening in your app to the Redux store. The store then conducts the business of updating state based on the action that occurred.</p>
+                <P>Writing a Redux action is as simple as declaring an object with a type property.For eg here is the action for login</P>
+                <code>
+                  // Define an action here:
+                  // Define an action here:
+                  var action = {
+                      type:'LOGIN'
+                  }
+                </code>
+                <h2>Action Creater</h2>
+                <p>After creating an action, the next step is sending the action to the Redux store so it can update its state.</p>
+                <p>Action creaters are the javascript function which are used to send action (js object with type & payload property) to redux store so that it can update the state</p>
+                <p>Action create create action i.e they return action(js objects that represent action events)</p>
+                <code>// Define an action creator here:
+                  function actionCreator(){
+                      return action;
+                  }</code>
+                  <h2>Dispatch an Action Event</h2>
+                  <p>dispatch method is what you use to dispatch actions to the Redux store. Calling store.dispatch() and passing the value returned from an action creator sends an action back to the store.</p>
+                  <b>store.dispatch(action object)</b>
+                  <code>store.dispatch(actionCreator());</code>
+                              OR
+                  <code>store.dispatch({type:'LOGIN'})</code>
+              </article>
+            </section>
+            <section class="main-section" id="reducer">
+              <article>
+                <Header>Reducers</Header>
+                <h2>Handle Action In The Store</h2>
+                <p>After an action is created and dispatched, the Redux store needs to know how to respond to that action. This is the job of a reducer function. Reducers in Redux are responsible for the state modifications that take place in response to actions.</p>
+                <p>A reducer takes <b>state and action as arguments, and it always returns a new state</b>. It is important to see that this is the only role of the reducer. It has no side effects — it never calls an API endpoint and it never has any hidden surprises. The 
+                  reducer is simply a pure function that takes state and action, then returns new state</p>
+                  <em>Another key principle in Redux is that state is read-only. In other words, the reducer function must always return a new copy of state and never modify state directly. </em>
+                  <p>Here is a complete login logout example implementing switch case for updating state based on action</p>
+                  <code>
+                    const defaultState = {
+                      authenticated: false
+                    };
+                    
+                    const authReducer = (state = defaultState, action) => {
+                      // Change code below this line
+                       switch(action.type){
+                         case 'LOGIN':
+                           return{
+                             authenticated:true
+                           };
+                          case 'LOGOUT':
+                          return {
+                            authenticated:false
+                          };
+                          default:
+                           return defaultState
+                       }
+                      // Change code above this line
+                    };
+                    
+                    const store = Redux.createStore(authReducer);
+                    
+                    const loginUser = () => {
+                      return {
+                        type: 'LOGIN'
+                      }
+                    };
+                    
+                    const logoutUser = () => {
+                      return {
+                        type: 'LOGOUT'
+                      }
+                    };
+                  </code>
+                  <em>A common practice when working with Redux is to assign action types as read-only constants, then reference these constants wherever they are used. </em>
+                 <h2>Combining Multiple Reducers</h2>
+                 <p>You define multiple reducers to handle different pieces of your application's state, then compose these reducers together into one root reducer. The root reducer is then passed into the Redux createStore() method.</p>
+                 <p>Redux provides the <b>combineReducers() method. This method accepts an object as an argument</b> in which you define properties which associate keys to specific reducer functions. The name you give to the keys will be used by Redux as the name for the associated piece of state.</p>
+                 <code>const rootReducer = Redux.combineReducers({
+                  auth: authenticationReducer,
+                  notes: notesReducer
+                });</code>
+              </article>
+            </section>
+            <section class="main-section" id="thunk">
+              <article>
+                <header>Middleware</header>
+                <p>These are js function which are used to deal with asynchronous action creator</p>
+                <p>So with middleware redux thunk the action creators can return action or function , when it will return function 
+                  redux thunk will automatically call that function with get state and dispatch as arguments so that at any time we can get the state of redux store and can update it
+                </p>
+                <h2>How to use Redux Thunk?</h2>
+                <p>
+                  <ol>
+                    <li>To include Redux Thunk middleware, you pass it as an argument to <b>Redux.applyMiddleware()</b></li>
+                    <li>This statement is then provided as a second optional parameter to the <b>createStore()</b> function</li>
+                    <code>
+                      const store = Redux.createStore(
+                          asyncDataReducer,
+                          Redux.applyMiddleware(ReduxThunk.default)
+                           );
+                    </code>
+                    <li>Here since the action creator maybe returning a function so we will pass dispatch as a parameter to that function</li>
+                    <li>Then we will manually dispatch the action creater one before the api call and one after the api call ,the latter one will be having the data</li>
+                    <code>
+                      const handleAsync = () => {
+                        return function(dispatch) {
+                          // Dispatch request action here
+                             store.dispatch(requestingData())
+                          setTimeout(function() {
+                            let data = {
+                              users: ['Jeff', 'William', 'Alice']
+                            }
+                            // Dispatch received data action here
+                          store.dispatch(receivedData(data))
+                          }, 2500);
+                        }
+                      };
+                    </code>
+                  </ol>
+                </p>
+              </article>
+            </section>
+            <section class="main-section" id="counter">
+              <article>
+                <header>Counter Using Redux</header>
+                <code>
+                  const INCREMENT = 'INCREMENT';
+const DECREMENT ='DECREMENT'; // Define a constant for decrement action types
+
+const counterReducer = (state = 0,action) => {
+    switch(action.type){
+        case INCREMENT:
+              return state = state+1;
+        case DECREMENT:
+               return state = state-1;
+        default:
+               return state;
+          
+    }
+
+}; // Define the counter reducer which will increment or decrement the state based on the action it receives
+
+const incAction = ()=>{
+    return {
+        type:INCREMENT
+    }
+}; // Define an action creator for incrementing
+
+const decAction = ()=>{
+    return {
+        type : DECREMENT
+    }
+} // Define an action creator for decrementing
+
+const store = Redux.createStore(counterReducer); // Define the Redux store here, passing in your reducers
+                </code>
+              </article>
+            </section>
+            <section class="main-section" id="simmut">
+              <article>
+                <header>State Immutability</header>
+                <p>
+                  Immutable state means that you never modify state directly, instead, you return a new copy of state.
+                </p>
+                <p>If you took a snapshot of the state of a Redux app over time, you would see something like state 1, state 2, state 3,state 4, ... and so on where each state may be similar to the last, but each is a distinct piece of data. This immutability, in fact, is what provides such features as time-travel debugging that you may have heard about.</p>
+                <p>Redux does not actively enforce state immutability in its store or reducers, that responsibility falls on the programmer. Fortunately, JavaScript (especially ES6) provides several useful tools you can use to enforce the immutability of your state, whether it is a string, number, array, or object. Note that strings and numbers are primitive values and are immutable by nature. In other words, 3 is always 3. You cannot change the value of the number 3. An array or object, however, is mutable. In practice, your state will probably consist of an array or object, as these are useful data structures for representing many types of information.</p>
+                <p>To add an item to an array</p>
+                <p>.concat() doesn’t modify array but just returns a new array</p>
+                <p>spread operator […array] doesn’t modify array but just returns a new array</p>
+                <code>      return state.concat(action.todo);
+                  // or return [...state, action.todo]</code>
+                  <p>To remove an item at index from array</p>
+                  <p>Using spread operator</p>
+                  <code>        ...state.slice(0, action.index),
+                    ...state.slice(action.index + 1, state.length)</code>
+                    <p>Using concat</p>
+                    <code>
+                      return state.slice(0, action.index).concat(state.slice(action.index + 1, state.length));
+                    </code>
+                    <p>Copy an Object to state</p>
+                    <p> there are ways to help enforce state immutability when state is an object, too. A useful tool for handling objects is the <b>Object.assign()</b> utility.</p>
+                    <p>Use the method Object.assign({}, obj1, obj2) in return. Pass state as obj1.</p>
+                    |<p>The obj2 should be the updated {key: value} pair of your state.</p>
+                    <p>The code  return a new state object for actions with type ONLINE, which set the status property to the string online</p>
+                    <code>
+                      const defaultState = {
+                        user: 'CamperBot',
+                        status: 'offline',
+                        friends: '732,982',
+                        community: 'freeCodeCamp'
+                      };
+                      
+                      const immutableReducer = (state = defaultState, action) => {
+                        switch(action.type) {
+                          case 'ONLINE':
+                            // Don't mutate state here or the tests will fail
+                            return Object.assign({},state,{status:'online'})
+                          default:
+                            return state;
+                        }
+                      };
+                      
+                      const wakeUp = () => {
+                        return {
+                          type: 'ONLINE'
+                        }
+                      };
+                      
+                      const store = Redux.createStore(immutableReducer);
+                    </code>
+              </article>
+            </section>
+            <section class="main-section" id="rr">
+              <article>
+                <header>React Redux</header>
+                <p>React is a view library that you provide with data, then it renders the view in an efficient, predictable way. Redux is a state management framework that you can use to simplify the management of your application's state. Typically, in a React Redux app, you create a single Redux store that manages the state of your entire app. Your React components subscribe to only the pieces of data in the store that are relevant to their role. Then, you dispatch actions directly from React components, which then trigger store updates.</p>
+                <p>Although React components can manage their own state locally, when you have a complex app, it's generally better to keep the app state in a single location with Redux. There are exceptions when individual components may have local state specific only to them. Finally, because Redux is not designed to work with React out of the box, you need to use the <b>react-redux</b> package. It provides a way for you to pass Redux state and dispatch to your React components as props.</p>
+                <ol>
+                  <li>
+                    <h2>Managing state locally</h2>
+                    <code>
+                      class DisplayMessages extends React.Component {
+                        constructor(props) {
+                          super(props);
+                          this.state = {
+                            input: '',
+                            messages: []
+                          }
+                          this.handleChange = this.handleChange.bind(this);
+                          this.submitMessage = this.submitMessage.bind(this);
+                        }
+                        // Add handleChange() and submitMessage() methods here
+                       handleChange(e){
+                           this.setState({
+                             input : e.target.value,
+                             messages : this.state.messages
+                           })
+                        };
+                        submitMessage(){
+                          this.setState({
+                            messages : this.state.messages.concat(this.state.input),
+                            input : ''
+                          })
+                        };
+                        render() {
+                          return (
+                            < div>
+                              < h2>Type in a new Message:< /h2>
+                              { /* Render an input, button , and ul below this line */ }
+                               < input type="text" value={this.state.input} onChange = {this.handleChange}/>
+                               < button onClick = {this.submitMessage}>Add Message < /button>
+                               < ul>
+                               {this.state.messages.map(i => < li key={i+1}>{i}< /li>)}
+                               < /ul>
+                              { /* Change code above this line */ }
+                            < /div>
+                          );
+                        }
+                      };
+                    </code>
+                  </li>
+                  <li>Managing Above Logic using redux</li>
+                  <code>
+                    // Define ADD, addMessage(), messageReducer(), and store here:
+//Step 1
+//action (js object)
+const ADD = 'ADD';
+
+//Step 2
+//action creator (js function)
+function addMessage(message){
+    return {
+        type : ADD,
+        message : message
+    }
+};
+
+//Step 3
+//reducer (js function)
+function messageReducer(state = [],action){
+    switch(action.type){
+        case ADD:
+           return [...state,action.message]
+        default:
+           return state
+    }
+}
+
+//Step 4
+//Redux Store
+const store = Redux.createStore(messageReducer)
+                  </code>
+           <li>
+             <h2>Connect Redux to React</h2>
+             <p>React access to the Redux store and the actions it needs to dispatch updates. React Redux provides its <b>react-redux package</b> to help accomplish these tasks.</p>
+             <p>React Redux provides a small API with two key features: Provider and connect</p>
+             <h5>Provider</h5>
+             <p>The Provider is a wrapper component from React Redux that wraps your React app. This wrapper then allows you to access the Redux store and dispatch functions throughout your component tree. Provider takes two props, the Redux store and the child components of your app. Defining the Provider for an App component might look like this:</p>
+             <code>
+              const Provider = ReactRedux.Provider;
+
+              class AppWrapper extends React.Component {
+                // Render the Provider below this line
+                render(){
+                  return(
+                 < Provider store={store}>
+                  < DisplayMessages/>
+                  < /Provider>
+                  );
+                }
+                // Change code above this line
+              };
+             </code>
+             <h5>MapStateToProp</h5>
+             <p>The Provider component allows you to provide state and dispatch to your React components, but you must specify exactly what state and actions you want. This way, you make sure that each component only has access to the state it needs. You accomplish this by creating two functions: mapStateToProps() and mapDispatchToProps().</p>
+             <p> Behind the scenes, React Redux uses the store.subscribe() method to implement mapStateToProps().</p>
+             <p>This function should take state as an argument, then return an object which maps that state to specific property names. These properties will become accessible to your component via props</p>
+             <p>For eg if your state is having only one array and you will to use it in your component just map it to a property name and use it</p>
+             <code>
+              const state = [];
+
+              // Change code below this line
+              function mapStateToProps(state){
+                  return {
+                      messages : state
+                  }
+              }
+             </code>
+             <h5>Map Dispatch to Props</h5>
+             <p>The mapDispatchToProps() function is used to provide specific action creators to your React components so they can dispatch actions against the Redux store. It's similar in structure to the mapStateToProps() function you wrote in the last challenge. It returns an object that maps dispatch actions to property names, which become component props. However, instead of returning a piece of state, each property returns a function that calls dispatch with an action creator and any relevant action data. You have access to this dispatch because it's passed in to mapDispatchToProps() as a parameter when you define the function, just like you passed state to mapStateToProps(). Behind the scenes, React Redux is using Redux's store.dispatch() to conduct these dispatches with mapDispatchToProps(). This is similar to how it uses store.subscribe() for components that are mapped to state.</p>
+             <p>For example, you have a loginUser() action creator that takes a username as an action payload. The object returned from mapDispatchToProps() for this action creator would look something like:</p>
+             <code>{
+              submitLoginUser: function(username) {
+                dispatch(loginUser(username));
+              }
+            }</code>
+             <h5>Connect</h5>
+             <p>Now that you've written both the mapStateToProps() and the mapDispatchToProps() functions, you can use them to map state and dispatch to the props of one of your React components. The connect method from React Redux can handle this task. This method takes two optional arguments, mapStateToProps() and mapDispatchToProps(). They are optional because you may have a component that only needs access to state but doesn't need to dispatch any actions, or vice versa.</p>
+             <p>To use this method, pass in the functions as arguments, and immediately call the result with your component. This syntax is a little unusual and looks like:</p>
+             <code>
+              connect(mapStateToProps, mapDispatchToProps)(MyComponent)
+             </code>
+             <em> If you want to omit one of the arguments to the connect method, you pass null in its place</em>
+
+           </li>
+                </ol>
+                <h3>Connecting in messages app</h3>
+                <code>
+                  // React-Redux:
+const mapStateToProps = (state) => {
+  return { messages: state }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitNewMessage: (newMessage) => {
+       dispatch(addMessage(newMessage))
+    }
+  }
+};
+
+const Provider = ReactRedux.Provider;
+const connect = ReactRedux.connect;
+
+// Define the Container component here:
+const Container = connect(mapStateToProps,mapDispatchToProps)(Presentational)
+
+class AppWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    // Complete the return statement:
+    return (
+      < Provider store={store}>
+         < Container/>
+      < /Provider>
+    );
+  }
+};
+                </code>
+                <h2>ToDo List Using React+Redux</h2>
+                <code>
+                  // React-Redux:
+const mapStateToProps = (state) => {
+  return { messages: state }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    submitNewMessage: (newMessage) => {
+       dispatch(addMessage(newMessage))
+    }
+  }
+};
+
+const Provider = ReactRedux.Provider;
+const connect = ReactRedux.connect;
+
+// Define the Container component here:
+const Container = connect(mapStateToProps,mapDispatchToProps)(Presentational)
+
+class AppWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    // Complete the return statement:
+    return (
+      < Provider store={store}>
+         < Container/>
+      < /Provider>
+    );
+  }
+};
+
+                </code>
+              </article>
+            </section>
+            <section class="main-section" id="dep">
+              <article>
+                <h2>Dependencies to import</h2>
+                <code>
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider, connect } from 'react-redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+
+import rootReducer from './redux/reducers'
+import App from './components/App'
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk)
+);
+
+ReactDOM.render(
+  < Provider store={store}>
+    < App/>
+  < /Provider>,
+  document.getElementById('root')
+);
+
+                </code>
+              </article>
+            </section>
+            <section class="main-section" id="gatsby">
+              <article>
+                <header>
+                  Gatsby
+                </header>
+                <h2>What is Gatsby?</h2>
+                <p>It's a <b>static site generator</b> i.e. once we are done with our project it will compile our project into a single directory with a single html file and static assets </p>
+                <p>It uses powerful preconfiguration so it provides:</p>
+                <ul>
+                  <li>Fast code splitting</li>
+                  <li>Server Side Rendering</li>
+                  <li>Fast Page Loads</li>
+                  <li>Source assets optimization</li>
+                  <li>Service Workers</li>
+                  <li>Data Prefetching</li>
+                </ul>
+                <p>Its built on top of react</p>
+                <h2>Getting Started</h2>
+                <ol>
+                  <li>Open cmd as administrator and run <code>
+                    npm install -g gatsby-cli
+                  </code></li>
+                  <li>cd directory where you wish to create the project</li>
+                  <li>Then do <b>gatsby new < project name > < starter > -default< /starter></b>
+                   if you do not specify starter github repo url it will take on by default or we can select one
+                   from the available starter templates available at gatsby website
+                  </li>
+                  <li>To start the local server cd into project and type <b>gatsby develop</b></li>
+                  <li>After the project is ready run <b>gatsby build</b> to deploy it</li>
+                </ol>
+              </article>
+            </section>
+            <hr>
+            <hr>
+            <section class="main-section" id="reference">
+              <header>
+                Provided By- 
+              </header>
+              <h3>SugamKaistha</h3><br>
+              <p>
+                Sugam Kaistha is a talented and versatile professional and business man with expertise in multiple fields, including coding, web development, game design, and editing. With a passion for technology and creativity, Sugam Kaistha has established Kaistha Groups and SugamCreations Coding Companies.<br>
+                For more - visit - <a href="https://sugamkaistha1.carrd.co/">AboutMe</a>
+                <br>
+               <h4>OR</h4>
+               <br>
+               <a href="https://sciencehub.w3spaces.com/Sciencehubsc.html">Web Of Science</a>
+              </p>
+            </section>
+            <hr><hr>
+            </main>
+    </body>
+</html>

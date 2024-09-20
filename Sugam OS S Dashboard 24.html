@@ -1,0 +1,2795 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css?family=Poppins:300,300i,500|Roboto:300,500');
+		@import url("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css");
+		@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #fff;
+  background: #343447;
+  font-weight: 300;
+  transition: all 250ms ease-in-out;
+  margin-left: calc(230px - (230px * 0.75));
+  margin-bottom: 3rem;
+  position: relative;
+}
+body.side_menu_open {
+  margin-left: 230px;
+}
+body.side_menu_open .navbar-fixed nav {
+  width: calc(100vw - 230px);
+}
+body.side_menu_open .navbar-fixed a#hide_side_nav {
+  opacity: 1;
+}
+body.side_menu_open .navbar-fixed a#show_hide_left_side_nav {
+  opacity: 0;
+  margin-right: -3rem;
+}
+body.side_menu_open .navbar-fixed .page-footer {
+  width: calc(100vw - 230px);
+}
+body.side_menu_open .sidenav-overlay {
+  height: 42px;
+  width: 270px;
+}
+body.side_menu_open .sidenav-overlay:hover {
+  opacity: 1 !important;
+  cursor: pointer;
+}
+body a#hide_side_nav {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+body a#show_hide_left_side_nav {
+  opacity: 1;
+  margin: 0;
+  transition: opacity 200ms ease-in-out;
+}
+body .sidenav-overlay {
+  background: rgba(103, 58, 183, 0.15);
+  opacity: 0 !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 42px;
+  width: 0;
+  transition: opacity 200ms ease-in-out;
+}
+body .sidenav-overlay:hover {
+  opacity: 1 !important;
+  cursor: pointer;
+}
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+}
+h2 {
+  font-size: 22.4px;
+}
+.btn, a.btn {
+  line-height: 2.5;
+  height: auto;
+  background-color: #673ab7;
+}
+.btn:hover, a.btn:hover {
+  background-color: rgba(30, 30, 42, 0.6);
+}
+.btn.link, a.btn.link {
+  background-color: transparent;
+  box-shadow: none;
+  color: #f5a623;
+}
+.btn.blue-button, a.btn.blue-button {
+  background-color: #673ab7;
+}
+.btn.blue-button:hover, a.btn.blue-button:hover {
+  background-color: #5c34a4;
+}
+.btn.green-button, a.btn.green-button {
+  background-color: #66c200;
+}
+.btn.green-button:hover, a.btn.green-button:hover {
+  background-color: #59a900;
+}
+.btn.grey-button, a.btn.grey-button {
+  background-color: #aaacb6;
+}
+.btn.grey-button:hover, a.btn.grey-button:hover {
+  background-color: #794e06;
+}
+nav {
+  transition: width 250ms ease-in-out;
+  width: calc(100vw - calc(230px - (230px * 0.75)));
+  padding-right: 14px;
+}
+nav ul a:hover {
+  background: rgba(30, 30, 42, 0.6);
+}
+.dropdown-content {
+  transform: translateY(2.7rem) !important;
+  top: 0 !important;
+}
+/*
+ ***** page header / nav bar ****
+ */
+header.page-header.navbar-fixed .nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+header.page-header.navbar-fixed nav {
+  background: #2e2e3e;
+  background: -webkit-linear-gradient(legacy-direction(90deg), #2e2e3e 10%, #36364a 80%, #2e2e3e 100%);
+  background: linear-gradient(90deg, #2e2e3e 10%, #36364a 80%, #2e2e3e 100%);
+  min-height: 0;
+  color: #fff;
+  height: 2.8rem;
+  line-height: 2.8;
+  box-shadow: none;
+  border-bottom: 1px solid #1e1e2a;
+}
+header.page-header.navbar-fixed nav a {
+  color: #fff;
+}
+header.page-header.navbar-fixed nav li {
+  position: relative;
+}
+header.page-header.navbar-fixed nav li.search-area + li {
+  border-left: 1px solid #4b4d57;
+}
+header.page-header.navbar-fixed nav #show_hide_left_side_nav, header.page-header.navbar-fixed nav #hide_side_nav, header.page-header.navbar-fixed nav #show_full_screen {
+  height: 2.8rem;
+  line-height: 2.8;
+  margin: 0;
+}
+header.page-header.navbar-fixed nav #show_hide_left_side_nav span, header.page-header.navbar-fixed nav #hide_side_nav span, header.page-header.navbar-fixed nav #show_full_screen span {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  display: block;
+}
+header.page-header.navbar-fixed .left {
+  border-right: 1px solid #1e1e2a;
+}
+header.page-header.navbar-fixed .right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  border-left: 1px solid #4b4d57;
+}
+header.page-header.navbar-fixed .right .small-icon {
+  width: 28px;
+  height: 28px;
+  margin: 6px 6px -8px 0;
+}
+header.page-header.navbar-fixed .search-area {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  border-right: 1px solid #1e1e2a;
+}
+header.page-header.navbar-fixed .search-area .search-closed {
+  opacity: 1;
+  transition: all 300ms ease-in-out;
+  width: 3rem;
+}
+header.page-header.navbar-fixed .search-area .search-closed.hidden {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+header.page-header.navbar-fixed .search-area .search-open {
+  width: 0px;
+  overflow: hidden;
+  transition: all 300ms ease-in-out;
+}
+header.page-header.navbar-fixed .search-area .search-open.visible {
+  width: auto;
+  flex: 1;
+  margin-left: 20px;
+  background: #2e2e3e;
+  padding: 0;
+  transition: all 300ms ease-in-out;
+}
+header.page-header.navbar-fixed .search-area .search-open.visible input {
+  background: transparent;
+  padding: 0 1rem;
+  width: 100%;
+}
+header.page-header.navbar-fixed .search-area .search-open.visible input:hover {
+  background: rgba(30, 30, 42, 0.6);
+}
+header.page-header.navbar-fixed .search-area .search-open.visible .input-field input[type="search"] ~ .mdi-navigation-close, header.page-header.navbar-fixed .search-area .search-open.visible .input-field input[type="search"] ~ .material-icons {
+  font-size: 1.3rem;
+  line-height: 1;
+  color: #4b4d57;
+  padding: 0.5em;
+  transition: all 200ms ease-in-out;
+}
+header.page-header.navbar-fixed .search-area .search-open.visible .input-field input[type="search"] ~ .mdi-navigation-close:hover, header.page-header.navbar-fixed .search-area .search-open.visible .input-field input[type="search"] ~ .material-icons:hover {
+  background: rgba(30, 30, 42, 0.6);
+}
+header.page-header.navbar-fixed .search-area .search-open input[type="search"] {
+  display: block;
+}
+/*
+ ***** left side nav bar ****
+ */
+#left-side-nav {
+  width: 230px;
+  background: #343447;
+  color: #fff;
+  overflow: inherit;
+}
+#left-side-nav.sidenav > ul > li > a {
+  padding: 1rem;
+  height: auto;
+  text-transform: uppercase;
+}
+#left-side-nav a {
+  color: #fff;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+#left-side-nav a svg {
+  transform: scale(1.8);
+  margin: 0 7px 0 0;
+  width: 2rem;
+}
+#left-side-nav a span {
+  display: block;
+  flex: 1;
+}
+#left-side-nav a .children_indicator {
+  display: block;
+  position: absolute;
+  right: 6px;
+  top: 11px;
+  transition: all 200ms ease-in-out;
+}
+#left-side-nav a .children_indicator svg {
+  width: auto;
+}
+#left-side-nav li {
+  position: relative;
+  display: block;
+}
+body:not(.side_menu_open) #left-side-nav .branding-container #johnson, body:not(.side_menu_open) #left-side-nav .branding-container #controls, body:not(.side_menu_open) #left-side-nav .branding-container .dv_text {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+body:not(.side_menu_open) #left-side-nav .branding-container svg {
+  margin: 27px -122px 17px 126px;
+  transform: scale(1.1);
+  transition: opacity 200ms ease-in-out;
+}
+body:not(.side_menu_open) #left-side-nav > ul > li > a, body:not(.side_menu_open) #left-side-nav > ul > li .collapsible-header a {
+  margin-left: calc(230px - calc(230px - (230px * 0.75)) - 5px);
+  width: calc(230px - (230px * 0.75));
+  transition: all 200ms ease-in-out;
+  padding: 0 1rem;
+}
+body:not(.side_menu_open) #left-side-nav > ul > li > a span:first-of-type, body:not(.side_menu_open) #left-side-nav > ul > li .collapsible-header a span:first-of-type {
+  opacity: 0;
+  width: 0;
+  height: 3rem;
+  overflow: hidden;
+  transition: opacity 200ms ease-in-out;
+}
+body:not(.side_menu_open) #left-side-nav > ul > li > a .children_indicator, body:not(.side_menu_open) #left-side-nav > ul > li .collapsible-header a .children_indicator {
+  display: none;
+}
+body:not(.side_menu_open) #left-side-nav > ul .has_children {
+  position: relative;
+}
+body:not(.side_menu_open) #left-side-nav > ul .has_children .collapsible-body.child-pages {
+  position: absolute;
+  right: calc(- 230px * 0.8);
+  top: 0;
+  width: calc(230px * 0.8);
+  background: #343447;
+  padding-left: 0;
+}
+body:not(.side_menu_open) #left-side-nav li.active {
+  background: #225564;
+  background: -webkit-linear-gradient(legacy-direction(to right), #225564 0%, #225564 78%, transparent 78%);
+  background: linear-gradient(to right, #225564 0%, #225564 78%, transparent 78%);
+  min-height: 0;
+}
+body:not(.side_menu_open) #left-side-nav li.active.color_dashboard {
+  background: #673ab7;
+  background: -webkit-linear-gradient(legacy-direction(to right), #673ab7 0%, #673ab7 78%, transparent 78%);
+  background: linear-gradient(to right, #673ab7 0%, #673ab7 78%, transparent 78%);
+  min-height: 0;
+}
+body:not(.side_menu_open) #left-side-nav li.active.color_configuration {
+  background: #66c200;
+  background: -webkit-linear-gradient(legacy-direction(to right), #66c200 0%, #66c200 78%, transparent 78%);
+  background: linear-gradient(to right, #66c200 0%, #66c200 78%, transparent 78%);
+  min-height: 0;
+}
+body:not(.side_menu_open) #left-side-nav li.active.color_tools {
+  background: #00bfa7;
+  background: -webkit-linear-gradient(legacy-direction(to right), #00bfa7 0%, #00bfa7 78%, transparent 78%);
+  background: linear-gradient(to right, #00bfa7 0%, #00bfa7 78%, transparent 78%);
+  min-height: 0;
+}
+body:not(.side_menu_open) #left-side-nav li.active.color_help_and_support {
+  background: #00c2f5;
+  background: -webkit-linear-gradient(legacy-direction(to right), #00c2f5 0%, #00c2f5 78%, transparent 78%);
+  background: linear-gradient(to right, #00c2f5 0%, #00c2f5 78%, transparent 78%);
+  min-height: 0;
+}
+body:not(.side_menu_open) #left-side-nav li.active.color_service_health {
+  background: #8d1394;
+  background: -webkit-linear-gradient(legacy-direction(to right), #8d1394 0%, #8d1394 78%, transparent 78%);
+  background: linear-gradient(to right, #8d1394 0%, #8d1394 78%, transparent 78%);
+  min-height: 0;
+}
+body:not(.side_menu_open) #left-side-nav li.active.color_applications {
+  background: #f5a623;
+  background: -webkit-linear-gradient(legacy-direction(to right), #f5a623 0%, #f5a623 78%, transparent 78%);
+  background: linear-gradient(to right, #f5a623 0%, #f5a623 78%, transparent 78%);
+  min-height: 0;
+}
+#left-side-nav li.active {
+  background: #225564;
+  background: -webkit-linear-gradient(legacy-direction(to right), #225564 0%, #225564 3%, transparent 3%);
+  background: linear-gradient(to right, #225564 0%, #225564 3%, transparent 3%);
+  min-height: 0;
+}
+#left-side-nav li.active.color_dashboard {
+  background: #673ab7;
+  background: -webkit-linear-gradient(legacy-direction(to right), #673ab7 0%, #673ab7 3%, transparent 3%);
+  background: linear-gradient(to right, #673ab7 0%, #673ab7 3%, transparent 3%);
+  min-height: 0;
+}
+#left-side-nav li.active.color_configuration {
+  background: #66c200;
+  background: -webkit-linear-gradient(legacy-direction(to right), #66c200 0%, #66c200 3%, transparent 3%);
+  background: linear-gradient(to right, #66c200 0%, #66c200 3%, transparent 3%);
+  min-height: 0;
+}
+#left-side-nav li.active.color_tools {
+  background: #00bfa7;
+  background: -webkit-linear-gradient(legacy-direction(to right), #00bfa7 0%, #00bfa7 3%, transparent 3%);
+  background: linear-gradient(to right, #00bfa7 0%, #00bfa7 3%, transparent 3%);
+  min-height: 0;
+}
+#left-side-nav li.active.color_help_and_support {
+  background: #00c2f5;
+  background: -webkit-linear-gradient(legacy-direction(to right), #00c2f5 0%, #00c2f5 3%, transparent 3%);
+  background: linear-gradient(to right, #00c2f5 0%, #00c2f5 3%, transparent 3%);
+  min-height: 0;
+}
+#left-side-nav li.active.color_service_health {
+  background: #8d1394;
+  background: -webkit-linear-gradient(legacy-direction(to right), #8d1394 0%, #8d1394 3%, transparent 3%);
+  background: linear-gradient(to right, #8d1394 0%, #8d1394 3%, transparent 3%);
+  min-height: 0;
+}
+#left-side-nav li.active.color_applications {
+  background: #f5a623;
+  background: -webkit-linear-gradient(legacy-direction(to right), #f5a623 0%, #f5a623 3%, transparent 3%);
+  background: linear-gradient(to right, #f5a623 0%, #f5a623 3%, transparent 3%);
+  min-height: 0;
+}
+#left-side-nav li.active .children_indicator {
+  transform: rotate(90deg);
+  transform-origin: center;
+  right: 10px;
+  top: 13px;
+}
+#left-side-nav .branding-container {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto 0.75rem auto;
+}
+#left-side-nav .branding-container .logo {
+  border-right: 1px solid #fff;
+  width: 44%;
+  margin: 0.5rem 0;
+}
+#left-side-nav .branding-container .logo svg {
+  width: 80%;
+  height: auto;
+  margin: -2px auto 0 auto;
+  display: block;
+}
+#left-side-nav .branding-container .dv_text {
+  text-align: center;
+  width: 56%;
+  padding: 1rem 0.75rem;
+}
+#left-side-nav .collapsible {
+  font-size: 0.7rem;
+  font-weight: 500;
+  position: relative;
+}
+#left-side-nav .collapsible-header {
+  padding: 0;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  position: relative;
+}
+#left-side-nav .collapsible-body {
+  background: transparent;
+  padding: 0 0.5rem 0 1rem;
+}
+#left-side-nav .collapsible-body li {
+  line-height: 1;
+}
+#left-side-nav .collapsible-body a {
+  padding: 0.7rem 1.1rem;
+  height: auto;
+}
+#left-side-nav .collapsible-body a[href="#"] {
+  color: #818492;
+}
+#left-side-nav .collapsible-body a svg {
+  transform: scale(1.1);
+}
+/*
+ ***** section header / page title & breadcrumb area  ****
+ */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  height: 5rem;
+}
+.section-header .page-title {
+  padding: 0.25rem 1rem;
+  margin-bottom: 2rem;
+}
+.section-header .page-title h1 {
+  font-size: 1.3rem;
+  margin: 0;
+  padding: 0;
+}
+.section-header .page-title h1 svg {
+  color: #673ab7;
+  transform: scale(1.9);
+  transform-origin: bottom right;
+  margin: 0 10px 0 25px;
+}
+.color_configuration .section-header .page-title h1 svg {
+  color: #66c200;
+}
+.color_tools .section-header .page-title h1 svg {
+  color: #00bfa7;
+}
+.color_help_and_support .section-header .page-title h1 svg {
+  color: #00c2f5;
+}
+.color_service_health .section-header .page-title h1 svg {
+  color: #8d1394;
+}
+.color_applications .section-header .page-title h1 svg {
+  color: #f5a623;
+}
+.section-header .page-breadcrumbs {
+  padding-left: 4rem;
+  color: #9c9faa;
+}
+.section-header .page-breadcrumbs a {
+  color: #5c5e6b;
+}
+/*
+ ***** main grid ****
+ */
+.main-container {
+  display: flex;
+  align-items: stretch;
+}
+.main-container main {
+  flex: 1;
+}
+.main-container aside {
+  width: 320px;
+}
+header.grid-header {
+  padding: 1.25rem 1rem 0.5rem 1rem;
+  background: #2e2e3e;
+  background: -webkit-linear-gradient(legacy-direction(90deg), #2e2e3e 10%, #36364a 80%, #2e2e3e 100%);
+  background: linear-gradient(90deg, #2e2e3e 10%, #36364a 80%, #2e2e3e 100%);
+  min-height: 0;
+  border-top: 1px solid #4b4d57;
+}
+header.grid-header .tile-filter {
+  display: flex;
+  align-items: flex-start;
+}
+header.grid-header .tile-filter > div {
+  flex: 1;
+  padding-bottom: 1rem;
+}
+header.grid-header .tile-filter label {
+  margin-left: 15px;
+  white-space: nowrap;
+}
+header.grid-header .tile-filter label span:before, header.grid-header .tile-filter label span:after {
+  margin-left: 6px;
+  margin-top: 2px;
+}
+header.grid-header .tile-filter label span:before {
+  margin-top: 4px;
+}
+header.grid-header .tile-filter [type="checkbox"].filled-in:checked + span:not(.lever):after {
+  background-color: #343447;
+  border-color: #343447;
+}
+header.grid-header .tile-filter [type="checkbox"].filled-in:checked.color_configuration + span:not(.lever):after {
+  background-color: #66c200;
+  border-color: #66c200;
+}
+header.grid-header .tile-filter [type="checkbox"].filled-in:checked.color_tools + span:not(.lever):after {
+  background-color: #00bfa7;
+  border-color: #00bfa7;
+}
+header.grid-header .tile-filter [type="checkbox"].filled-in:checked.color_help_and_support + span:not(.lever):after {
+  background-color: #00c2f5;
+  border-color: #00c2f5;
+}
+header.grid-header .tile-filter [type="checkbox"].filled-in:checked.color_service_health + span:not(.lever):after {
+  background-color: #8d1394;
+  border-color: #8d1394;
+}
+header.grid-header .tile-filter [type="checkbox"].filled-in:checked.color_applications + span:not(.lever):after {
+  background-color: #f5a623;
+  border-color: #f5a623;
+}
+.grid-container {
+  position: relative;
+  overflow: hidden;
+  background: #2e2e3e;
+  background: -webkit-linear-gradient(legacy-direction(90deg), #2e2e3e 10%, #36364a 80%, #2e2e3e 100%);
+  background: linear-gradient(90deg, #2e2e3e 10%, #36364a 80%, #2e2e3e 100%);
+  min-height: 0;
+  border-right: 1px solid #1e1e2a;
+}
+.grid-container .grid {
+  overflow-y: auto;
+  position: relative;
+}
+.grid-container .grid .grid-body {
+  position: relative;
+}
+.latest-activity {
+  background: #2e2e3e;
+  border-top: 1px solid #4b4d57;
+  border-left: 1px solid #4b4d57;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.latest-activity h2 {
+  margin: 0;
+  padding: 1.5rem 0;
+  font-size: 1.4rem;
+}
+.latest-activity ul.timeline {
+  flex: 1;
+  overflow-x: hidden;
+  padding: 7px 2px 17px 4px;
+  margin-top: -5px;
+}
+.latest-activity ul.timeline > li {
+  margin: 10px 4px -10px 3px;
+  border-left: 1px solid #818492;
+  padding: 2px 0 35px 0;
+}
+.latest-activity ul.timeline > li:before {
+  content: "";
+  background-image: url("data:image/svg+xml;utf8,<svg  xmlns='http://www.w3.org/2000/svg'  xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 12 12' xml:space='preserve'><circle r='3.6' cx='5.5' cy='5' fill='#fff' stroke='#818492'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 20px;
+  height: 20px;
+  float: left;
+  display: block;
+  background-size: contain;
+  margin: -4px 8px 0 -10px;
+  background-position: center;
+}
+.latest-activity ul.timeline > li.color_configuration {
+  border-left: 1px solid #66c200;
+}
+.latest-activity ul.timeline > li.color_configuration:before {
+  background-image: url("data:image/svg+xml;utf8,<svg  xmlns='http://www.w3.org/2000/svg'  xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 12 12' xml:space='preserve'><circle r='3.6' cx='5.5' cy='5' fill='#fff' stroke='#66c200'/></svg>");
+}
+.latest-activity ul.timeline > li.color_tools {
+  border-left: 1px solid #00bfa7;
+}
+.latest-activity ul.timeline > li.color_tools:before {
+  background-image: url("data:image/svg+xml;utf8,<svg  xmlns='http://www.w3.org/2000/svg'  xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 12 12' xml:space='preserve'><circle r='3.6' cx='5.5' cy='5' fill='#fff' stroke='#00bfa7'/></svg>");
+}
+.latest-activity ul.timeline > li.color_help_and_support {
+  border-left: 1px solid #00c2f5;
+}
+.latest-activity ul.timeline > li.color_help_and_support:before {
+  background-image: url("data:image/svg+xml;utf8,<svg  xmlns='http://www.w3.org/2000/svg'  xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 12 12' xml:space='preserve'><circle r='3.6' cx='5.5' cy='5' fill='#fff' stroke='#00c2f5'/></svg>");
+}
+.latest-activity ul.timeline > li.color_service_health {
+  border-left: 1px solid #8d1394;
+}
+.latest-activity ul.timeline > li.color_service_health:before {
+  background-image: url("data:image/svg+xml;utf8,<svg  xmlns='http://www.w3.org/2000/svg'  xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 12 12' xml:space='preserve'><circle r='3.6' cx='5.5' cy='5' fill='#fff' stroke='#8d1394'/></svg>");
+}
+.latest-activity ul.timeline > li.color_applications {
+  border-left: 1px solid #f5a623;
+}
+.latest-activity ul.timeline > li.color_applications:before {
+  background-image: url("data:image/svg+xml;utf8,<svg  xmlns='http://www.w3.org/2000/svg'  xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 12 12' xml:space='preserve'><circle r='3.6' cx='5.5' cy='5' fill='#fff' stroke='#f5a623'/></svg>");
+}
+.latest-activity ul.timeline > li:last-child:after {
+  content: "";
+  background-image: url("data:image/svg+xml;utf8,<svg  xmlns='http://www.w3.org/2000/svg'  xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 12 12' xml:space='preserve'><circle r='3.6' cx='5.5' cy='5' fill='#fff' stroke='#818492'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 20px;
+  height: 20px;
+  float: left;
+  display: block;
+  background-size: contain;
+  margin: 21px 8px -10px -10px;
+  background-position: center;
+}
+.latest-activity ul.timeline > li .activity-content-container {
+  margin-top: -4px;
+  display: flex;
+  max-width: 100%;
+}
+.latest-activity ul.timeline > li .icon-col {
+  margin-top: -10px;
+}
+.latest-activity ul.timeline > li .icon-col img {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+}
+.latest-activity ul.timeline > li .info-col {
+  line-height: 1.3;
+  margin-top: -18px;
+  padding: 0 15px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.latest-activity ul.timeline > li .info-col .timestamp {
+  color: #d3d4d9;
+  font-size: 80%;
+  font-family: "Roboto", sans-serif;
+}
+.latest-activity ul.timeline > li .info-col .action {
+  font-weight: 400;
+}
+.latest-activity ul.timeline > li .info-col .action-detail {
+  font-size: 90%;
+  font-family: "Roboto", sans-serif;
+}
+.latest-activity > a.btn {
+  text-align: right;
+  display: block;
+}
+/*
+ ***** grid items ****
+ */
+.item {
+  display: block;
+  position: absolute;
+  width: 190px;
+  min-height: 200px;
+  height: auto;
+  margin: 5px;
+  z-index: 1;
+  background: #343447;
+  color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(30, 30, 42, 0.45);
+  transition: box-shadow 200ms ease-in-out;
+}
+.item:hover {
+  box-shadow: 0 2px 7px rgba(30, 30, 42, 0.9);
+  cursor: pointer;
+}
+.item:hover .item-main .icon svg {
+  width: 60%;
+  height: 60%;
+  margin: 20% auto;
+}
+.item.current {
+  z-index: 2;
+}
+.item.color_configuration {
+  background: #66c200;
+  background: -webkit-linear-gradient(legacy-direction(132deg), #66c200 0%, #59a900 100%);
+  background: linear-gradient(132deg, #66c200 0%, #59a900 100%);
+  min-height: 0;
+}
+.item.color_tools {
+  background: #00bfa7;
+  background: -webkit-linear-gradient(legacy-direction(132deg), #00bfa7 0%, #00a691 100%);
+  background: linear-gradient(132deg, #00bfa7 0%, #00a691 100%);
+  min-height: 0;
+}
+.item.color_help_and_support {
+  background: #00c2f5;
+  background: -webkit-linear-gradient(legacy-direction(132deg), #00c2f5 0%, #00aedc 100%);
+  background: linear-gradient(132deg, #00c2f5 0%, #00aedc 100%);
+  min-height: 0;
+}
+.item.color_service_health {
+  background: #8d1394;
+  background: -webkit-linear-gradient(legacy-direction(132deg), #8d1394 0%, #77107d 100%);
+  background: linear-gradient(132deg, #8d1394 0%, #77107d 100%);
+  min-height: 0;
+}
+.item.color_applications {
+  background: #f5a623;
+  background: -webkit-linear-gradient(legacy-direction(132deg), #f5a623 0%, #f39c0b 100%);
+  background: linear-gradient(132deg, #f5a623 0%, #f39c0b 100%);
+  min-height: 0;
+}
+.item.disabled {
+  background-image: none;
+  background: #aaacb6 !important;
+}
+.item.disabled .text {
+  font-style: italic;
+}
+.item.disabled:hover {
+  box-shadow: 0 1px 0 rgba(52, 52, 71, 0.4);
+}
+.item.disabled .item-main .icon {
+  background: #818492;
+}
+.item .item-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.item .item-header .menu {
+  float: right;
+}
+.item .item-header .menu a {
+  font-size: 1.5rem;
+  padding: 0 15px;
+  margin-top: 5px;
+  margin-bottom: -30px;
+  display: block;
+  cursor: pointer;
+  color: #fff;
+}
+.item .item-header .menu a span {
+  visibility: hidden;
+  width: 0;
+  overflow: hidden;
+  height: 0;
+  float: right;
+}
+.item .item-header .menu .dropdown-content {
+  min-width: 110px;
+  z-index: 1300;
+}
+.item .item-header .menu .dropdown-content li > a, .item .item-header .menu .dropdown-content li > span {
+  color: #343447;
+  font-size: 1rem;
+  margin: 0;
+  padding: 14px 16px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.item .item-main {
+  text-align: center;
+}
+.item .item-main .icon {
+  width: 100px;
+  height: 100px;
+  margin: 1.5rem auto 0.5rem auto;
+  background: #225564;
+  border-radius: 100%;
+  box-shadow: 0 0 1px 4px rgba(255, 255, 255, 0.2);
+}
+.item .item-main .icon svg {
+  width: 50%;
+  height: 50%;
+  margin: 25% auto;
+  transition: all 250ms ease-in-out;
+}
+.item .item-main .text {
+  padding: 0.75rem 1rem;
+  transition: all 200ms ease-in-out;
+  min-height: 4.2rem;
+  text-shadow: 1px 1px 1px rgba(52, 52, 71, 0.4);
+  line-height: 1.3;
+}
+.item.muuri-item-dragging {
+  z-index: 3;
+  box-shadow: 2px 2px 4px rgba(52, 52, 71, 0.6);
+  cursor: grabbing;
+  opacity: 0.9;
+}
+.item.muuri-item-releasing {
+  z-index: 2;
+}
+.item.muuri-item-hidden {
+  z-index: 0;
+}
+.item-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.dropdown-content {
+  border-radius: 4px;
+  background: #2e2e3e;
+}
+.dropdown-content li {
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+.dropdown-content li:hover {
+  background: rgba(30, 30, 42, 0.6) !important;
+  border-bottom: 1px solid #1e1e2a;
+  border-top: 1px solid #4b4d57;
+}
+.dropdown-content li.divider {
+  background: transparent;
+  height: 1px;
+  border-top: 1px solid #1e1e2a;
+  border-bottom: 1px solid #4b4d57;
+}
+.dropdown-content li a:hover {
+  background: none !important;
+}
+@media screen and (max-width: 900px) {
+  main.grid .item {
+    width: 100%;
+    min-height: 0;
+  }
+  main.grid .item .item-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  main.grid .item .item-main .icon {
+    width: 45px;
+    height: 45px;
+    margin: 15px 10px;
+  }
+  main.grid .item .item-main .text {
+    min-height: 0;
+  }
+}
+/*
+ ***** page footer & footer nav ****
+ */
+.page-footer {
+  background: #343447;
+  color: #818492;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1.6;
+  height: 3rem;
+  box-shadow: none;
+  border-top: 1px solid rgba(129, 132, 146, 0.25);
+  margin-top: 2px;
+  padding-top: 0;
+  font-size: 90%;
+  width: calc(100vw - calc(230px - (230px * 0.75)));
+  padding-right: 14px;
+  position: fixed;
+  bottom: 0;
+  z-index: 999999;
+}
+.page-footer > * {
+  padding: 0.75rem 1rem;
+}
+.page-footer .footer-nav {
+  width: auto;
+  background: #343447;
+  color: #818492;
+  box-shadow: none;
+  line-height: 1.6;
+  height: auto;
+}
+.page-footer .footer-nav a {
+  color: #818492;
+  line-height: 1;
+  font-size: 98%;
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/poppins/v21/pxiDyp8kv8JHgFVrJJLm21lVGdeOcEg.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/poppins/v21/pxiDyp8kv8JHgFVrJJLm21lVF9eO.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/poppins/v21/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fCRc4EsA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fABc4EsA.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fCBc4EsA.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fBxc4EsA.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fCxc4EsA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fChc4EsA.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5fBBc4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fCRc4EsA.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fABc4EsA.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fCBc4EsA.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBxc4EsA.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fCxc4EsA.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fChc4EsA.woff2) format('woff2');
+  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9fBBc4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+
+
+
+
+
+
+
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v142/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+	</style>
+</head>
+<body>
+<header class="page-header navbar-fixed" role="menubar">
+
+	<nav>
+		<div class="nav-wrapper">
+			<ul class="left">
+				<li>
+					<!--<a href="#!" data-target="left-side-nav" class="sidenav-trigger show-on-large" id="show_hide_left_side_nav"><i class="far fa-list-ul"></i> <span>Open Side Nav</span></a>
+					<a href="#!" data-target="left-side-nav" class="sidenav-close show-on-large" id="hide_side_nav"><i class="far fa-arrow-to-left"></i> <span>Minimize Side Nav</span></a>-->
+				</li>
+				<!--<li><a href="#!" id="show_full_screen"><i class="far fa-expand"></i> <span>Full Screen</span></a></li>-->
+			</ul>
+
+			<ul class="right">
+				<li class="search-area">
+
+					<div class="search-closed">
+						<a class="open-search-button"><i class="far fa-search"></i></a>
+					</div>
+					<div class="search-open">
+						<form>
+							<div class="input-field">
+								<input id="search" type="search" placeholder="What would you like to do today?" required>
+								<i class="material-icons close-search-button">close</i>
+							</div>
+						</form>
+					</div>
+				</li>
+				<li><a class="dropdown-trigger" href="#!" data-target="user_dropdown"> <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/grumpycat-cutout.jpg" class="circle icon small-icon" /> Hello, <strong>My User</strong> <i class="fas fa-caret-down"></i></a>
+					<ul id="user_dropdown" class="dropdown-content">
+						<li><a href="https://chetanswarupkaisthaimages.w3spaces.com/SPACE-S.html">SPACE - S</a></li>
+						<li><a href="https://chetanswarupkaisthaimages.w3spaces.com/SEA-S.html">SEA - S </a></li>
+						<li class="divider"></li>
+						<li><a href="https://chetanswarupkaisthaimages.w3spaces.com/KGS.html">KGS</a></li>
+						<li><a href="https://sugamkaistha1.carrd.co/">SUGAM K.</a></li>
+					</ul>
+				</li>
+				<!--<li><a href="#"><i class="fal fa-question"></i></a></li>
+				<li><a href="#"><i class="fal fa-cog"></i></a></li>
+				<li><a href="#"><i class="fal fa-bell"></i></a></li>
+			</ul>-->
+		</div>
+	</nav>
+
+</header>
+<nav class="sidenav" id="left-side-nav" style="transform: translateX(-115%);">
+	<div class="branding-container">
+		<div class="logo">
+			<?xml version="1.0" encoding="utf-8"?>
+			<svg version="1.1" id="KGSlogo" xmlns="https://kaisthagroup.carrd.co/assets/images/image03.jpg?v=441cd247" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 370.4 162.3" style="enable-background:new 0 0 370.4 162.3;" xml:space="preserve">
+				<style type="text/css">
+					.st0 {
+						fill: #FFFFFF;
+					}
+				</style>
+				<g id="controls">
+					<path class="st0" d="M62.5,161.8c-13,0-21.9-9-21.9-22c0-12.6,7.9-22.1,20.9-22.1c4,0,8.7,1.3,12.3,2.9l-2.6,6.4
+							c-3.1-1.4-6.4-2.4-9.9-2.4c-8.2,0-12.4,6.9-12.4,14.5c0,9.1,4.9,15.9,14.5,15.9c2.9,0,5.8-0.8,8.4-2l2,6
+							C70.4,160.7,66.5,161.8,62.5,161.8z" />
+					<path class="st0" d="M90.8,161.9c-9.6,0-15.7-7-15.7-16.3c0-9.3,6.1-16.3,15.7-16.3c9.6,0,15.7,6.9,15.7,16.3
+							C106.5,154.9,100.4,161.9,90.8,161.9z M90.8,135.7c-5.6,0-7.4,5.1-7.4,9.9c0,4.8,1.8,9.8,7.4,9.8c5.6,0,7.4-5.1,7.4-9.8
+							C98.2,140.9,96.3,135.7,90.8,135.7z" />
+					<path class="st0" d="M131,161.2v-19.6c0-3.8-2.5-5.8-6.2-5.8c-2.1,0-4.3,0.6-6.3,1.4c0,0,0.1,0.9,0.1,1.3l0,22.7h-7.5v-24.5
+							c0-1.5-0.4-4.4-0.4-4.4c4.4-1.6,9.6-3.1,14.2-3.1c7.6,0,13.6,2.5,13.6,11.1v20.8H131z" />
+					<path class="st0" d="M155.8,162.3c-5.7,0-9.6-2.6-9.6-8.7v-17.3l-3.6-0.2v-5.9l3.6-0.2v-8.7h7.5v8.6h8.8v6.5h-8.8v16.6
+							c0,1.9,1,2.7,2.9,2.7c1.9,0,3.8-0.6,5.6-1.3l2.1,6.1C161.4,161.5,158.7,162.3,155.8,162.3z" />
+					<path class="st0" d="M184.8,136.3c-1-0.3-2.8-0.6-4.1-0.6c-1.9,0-3.8,0.3-5.6,0.8c0,0,0.1,0.4,0.1,0.6v24h-7.5v-23.8
+							c0-1.6-0.6-4.7-0.6-4.7c4.5-1.9,9.3-3.5,14.3-3.5c1.9,0,4.1,0.3,5.7,0.7L184.8,136.3z" />
+					<path class="st0" d="M202.4,161.9c-9.6,0-15.7-7-15.7-16.3c0-9.3,6.1-16.3,15.7-16.3c9.6,0,15.7,6.9,15.7,16.3
+							C218.1,154.9,212,161.9,202.4,161.9z M202.4,135.7c-5.6,0-7.4,5.1-7.4,9.9c0,4.8,1.8,9.8,7.4,9.8c5.6,0,7.4-5.1,7.4-9.8
+							C209.8,140.9,208,135.7,202.4,135.7z" />
+					<polygon class="st0" points="230.2,115.3 222.7,115.3 222.7,148.1 222.7,161.2 230.2,161.2 	" />
+					<path class="st0" d="M244.8,161.9c-3.6,0-7.2-0.9-10.3-2.1l2.2-5.9c2.2,0.9,5.1,1.9,7.5,1.9c2.3,0,4.7-0.7,4.7-3.4
+							c0-5.6-13.6-3.9-13.6-14.1c0-6.4,6.6-9,11.6-9c3.3,0,6.6,0.8,9,1.9l-2.1,5.8c-2-0.8-4.8-1.4-6.9-1.4c-1.9,0-3.9,0.6-3.9,2.8
+							c0,5.3,14.3,2.9,14.3,14.2C257.2,159.4,250.5,161.9,244.8,161.9z" />
+				</g>
+				<g id="johnson">
+					<g>
+						<path class="st0" d="M8.2,108.8c-1.8,0.6-4.5,1.4-6.8,2L0,104c1.5-0.3,3.4-0.7,4.7-1.1c4.3-1.5,4.7-4.6,4.7-9.7V61.3h7.8V92
+								C17.1,100.4,15.9,106,8.2,108.8z" />
+					</g>
+					<path class="st0" d="M37.5,104.4c-9.6,0-15.7-7-15.7-16.3c0-9.3,6.1-16.3,15.7-16.3c9.6,0,15.7,6.9,15.7,16.3
+							C53.2,97.5,47.1,104.4,37.5,104.4z M37.5,78.3c-5.6,0-7.4,5.1-7.4,9.9c0,4.8,1.8,9.8,7.4,9.8c5.6,0,7.4-5.1,7.4-9.8
+							C44.9,83.5,43.1,78.3,37.5,78.3z" />
+					<path class="st0" d="M78.1,103.7V84c0-3.4-2.1-5.7-5.2-5.7c-2.5,0-5.1,1.1-7.2,2.3v23.1h-7.5l0-45.9h7.5v16
+							c2.9-1.2,6.1-2.1,9.3-2.1c7,0,10.7,4.1,10.7,11.1v20.9H78.1z" />
+					<path class="st0" d="M111.8,103.7V84.1c0-3.8-2.5-5.8-6.2-5.8c-2.1,0-4.3,0.6-6.3,1.4c0,0,0.1,0.9,0.1,1.3v22.7H92V79.3
+							c0-1.5-0.4-4.4-0.4-4.4c4.4-1.6,9.6-3.1,14.2-3.1c7.6,0,13.6,2.5,13.6,11.1v20.8H111.8z" />
+					<path class="st0" d="M134,104.4c-3.6,0-7.2-0.9-10.3-2.1l2.2-5.9c2.2,0.9,5.1,1.9,7.5,1.9c2.3,0,4.8-0.7,4.8-3.4
+							c0-5.6-13.6-3.9-13.6-14.2c0-6.4,6.6-9,11.6-9c3.3,0,6.6,0.8,9,1.9l-2.1,5.8c-2-0.8-4.8-1.5-6.9-1.5c-1.9,0-3.9,0.6-3.9,2.8
+							c0,5.3,14.3,2.9,14.3,14.2C146.5,102,139.7,104.4,134,104.4z" />
+					<path class="st0" d="M165.5,104.4c-9.6,0-15.7-7-15.7-16.3c0-9.3,6.1-16.3,15.7-16.3c9.6,0,15.7,6.9,15.7,16.3
+							C181.2,97.5,175.1,104.4,165.5,104.4z M165.5,78.3c-5.6,0-7.4,5.1-7.4,9.9c0,4.8,1.8,9.8,7.4,9.8c5.6,0,7.4-5.1,7.4-9.8
+							C172.9,83.5,171.1,78.3,165.5,78.3z" />
+					<path class="st0" d="M206,103.7V84.1c0-3.8-2.5-5.8-6.2-5.8c-2.1,0-4.3,0.6-6.3,1.4c0,0,0.1,0.9,0.1,1.3v22.7h-7.5V79.3
+							c0-1.5-0.4-4.4-0.4-4.4c4.4-1.6,9.5-3.1,14.2-3.1c7.6,0,13.6,2.5,13.6,11.1v20.8H206z" />
+				</g>
+				<g id="globe">
+					<path class="st0" d="M253.9,52.9c8.2-8.3,14.9-24.6,16.7-35.8C261.2,26.4,255.1,39,253.9,52.9z" />
+					<path class="st0" d="M282.4,7.8c-0.5,0.3-0.9,0.6-1.4,0.8c-6.1,28.7-11.7,41.3-26.6,58.8c0.3,2.1,0.8,4.2,1.3,6.2
+						C278.5,59.5,284.1,26.7,282.4,7.8z" />
+					<path class="st0" d="M329.4,46.5c-0.7-17-3.9-32.4-9.3-45.8L320,0.3c-0.7-0.1-1.4-0.2-2.1-0.2c4.8,41,3.7,83.5-25.6,113
+						c4.1,1.5,8.4,2.5,12.8,3C321.8,101.4,330.7,76.4,329.4,46.5z" />
+					<path class="st0" d="M307.1,0c-0.7,0.1-1.4,0.1-2.1,0.2l0,0c1,26.6-0.5,74.4-32.1,101.3c2.2,1.9,4.5,3.7,6.9,5.3l0,0
+						C313.2,84.1,317.9,37.7,307.1,0z" />
+					<path class="st0" d="M294.2,2.5c-0.6,0.2-1.2,0.4-1.7,0.6c-1.9,33.7-8.1,60.9-32,82.6c1.2,2.2,2.5,4.3,3.9,6.3
+						C294.8,73.5,300.1,28.6,294.2,2.5z" />
+					<path class="st0" d="M369,45.6c-8.6,7.9-13,29.3-6.1,41.1c4.8-8.5,7.5-18.2,7.5-28.6C370.4,53.9,369.9,49.7,369,45.6z" />
+					<path class="st0" d="M363.7,30.9c-0.4-0.7-0.8-1.5-1.2-2.2c-13.3,7.5-21.7,20.1-23,34.8c-1.2,13.3,4,26.7,13.8,36
+						c1.1-1.1,2.2-2.3,3.3-3.6C344.7,73,347.2,50.5,363.7,30.9z" />
+					<path class="st0" d="M327.9,95.4c3.5,4.8,8,9.3,13.5,13.2c1.3-0.8,2.6-1.6,3.9-2.5c-5.9-8-9.8-16.8-11.9-26.5
+						C332.1,85.2,330.2,90.5,327.9,95.4z" />
+					<path class="st0" d="M335.9,44c3.9-10.6,10.6-20.4,18.1-26.3c-0.6-0.6-1.2-1.2-1.8-1.8c-6.9,3.4-13.1,7.7-18.4,12.8
+						C334.9,33.9,335.6,39,335.9,44z" />
+					<path class="st0" d="M331,17.1c3.7-4.3,6.7-7.5,9.4-10c-0.6-0.4-1.3-0.7-1.9-1c-2.8,1.2-6.5,3-9.4,4.7
+						C329.8,12.9,330.4,15,331,17.1z" />
+					<path class="st0" d="M318.8,109.7c1.8,1.6,4.6,3.8,6.7,5.3c1.8-0.4,3.5-0.9,5.2-1.5c-2.6-2.9-5.1-6.5-7.4-9.8
+						C321.9,105.8,320.4,107.8,318.8,109.7z" />
+				</g>
+			</svg>
+
+		</div>
+		<div class="dv_text">Digital Vault</div>
+	</div>
+	<ul class="collapsible">
+		<li class="has_children color_dashboard">
+			<div class="collapsible-header nav_group"><a href="#"><i class="fal fa-tachometer"></i>
+					<span>Dashboard</span>
+					<span class="children_indicator"><i class="fal fa-angle-right"></i></span></a>
+			</div>
+			<ul class="collapsible-body child-pages">
+				<li><a href="https://chetanswarupkaisthaimages.w3spaces.com/KGS.html"><i class="fal fa-list-alt"></i> View All</a></li>
+				<li><a href="https://chetanswarupkaisthaimages.w3spaces.com/SPACE-S.html"><i class="fal fa-th"></i> My SAPCE -S </a></li>
+			</ul>
+		</li>
+		<li class="has_children color_configuration">
+			<div class="collapsible-header nav_group"><a href="#"><i class="fal fa-cog"></i>
+					<span>Configuration</span>
+					<span class="children_indicator"><i class="fal fa-angle-right"></i></span></a>
+			</div>
+			<ul class="collapsible-body child-pages">
+				<li><a href="#"><i class="fal fa-fingerprint"></i> Identity Management</a></li>
+				<li><a href="https://sugam2004.w3spaces.com/AI_Joke_gen.html"><i class="fal fa-users"></i> Group Management</a></li>
+				<li><a href="#"><i class="fal fa-key"></i> Security &amp; Access Management</a></li>
+			</ul>
+		</li>
+		<li class="has_children color_tools">
+			<div class="collapsible-header"><a href="#"><i class="fal fa-wrench"></i> <span>Tools </span><span class="children_indicator"><i class="fal fa-angle-right"></i></span></a></div>
+			<ul class="collapsible-body child-pages">
+				<li><a href="#" target="_top"><i class="fal fa-tablet-android-alt"></i> Tools</a></li>
+				<li><a href="#"><i class="fal fa-cubes"></i> Space Management</a></li>
+				<li><a href="#"><i class="fal fa-file-chart-line"></i> Professional Services</a></li>
+				<li><a href="https://codepen.io/tapps/live/wYgagm"><i class="fal fa-sitemap"></i> Schema Management</a></li>
+				<li><a href="#"><i class="fal fa-map-marked"></i> Space Explorer</a></li>
+				<li><a href="#"><i class="fal fa-stopwatch"></i> Timeseries Management</a></li>
+			</ul>
+		</li>
+		<li class="has_children color_help_and_support">
+			<div class="collapsible-header"><a href="#"><i class="fal fa-question-circle"></i> <span>AI &amp; KGS </span><span class="children_indicator"><i class="fal fa-angle-right"></i></span></a></div>
+			<ul class="collapsible-body child-pages">
+				<li><a href="#"><i class="fal fa-info-square"></i> Support Plans</a></li>
+				<li><a href="#"><i class="fal fa-money-bill"></i> Billing</a></li>
+				<li><a href="#"><i class="fal fa-book"></i> Documentation</a></li>
+			</ul>
+		</li>
+		<li class="has_children color_service_health">
+			<div class="collapsible-header"><a href="#"><i class="fal fa-ambulance"></i> <span>Service </span><span class="children_indicator"><i class="fal fa-angle-right"></i></span></a></div>
+			<ul class="collapsible-body child-pages">
+				<li><a href="#"><i class="fal fa-file-code"></i> Nginx Log</a></li>
+				<li><a href="#"><i class="fal fa-file-invoice"></i> Audit Log</a></li>
+				<li><a href="#"><i class="fal fa-file-minus"></i> Execption Log</a></li>
+				<li><a href="#"><i class="fal fa-traffic-light-go"></i> API Status</a></li>
+				<li><a href="#"><i class="fal fa-sun"></i> Weather Status</a></li>
+			</ul>
+		</li>
+		<li class="has_children color_applications">
+			<div class="collapsible-header"><a href="#"><i class="fal fa-rocket"></i> <span>Applications</span> <span class="children_indicator"><i class="fal fa-angle-right"></i></span></a></div>
+			<ul class="collapsible-body child-pages">
+				<li><a href="#"><i class="fab fa-app-store-ios"></i> Assurance Services</a></li>
+				<li><a href="https://codepen.io/tapps/live/bmBxeg"><i class="fal fa-smile"></i> Another Testing page</a></li>
+			</ul>
+		</li>
+	</ul>
+</nav>
+<div class="top-section section-header light-grey">
+	<div class="page-title">
+		<div class="page-breadcrumbs welcome-back">
+			Welcome back!
+		</div>
+		<h1><i class="fas fa-th"></i> SUGAM OS 24</h1>
+	</div>
+
+</div>
+
+<div class="main-container">
+	<main class="grid-container">
+		<header class="grid-header">
+			<div class="tile-filter" role="group">
+				<span>Show:</span>
+				<div class="filter-options-container">
+					<label for="filter_configuration">
+						<input type="checkbox" checked="checked" id="filter_configuration" name="color_configuration" class="color_configuration filled-in control-field filter-field form-control" aria-checked="true" />
+						<span>Configuration</span>
+					</label>
+					<label for="filter_tools">
+						<input type="checkbox" checked="checked" id="filter_tools" name="color_tools" class="color_tools filled-in control-field filter-field form-control" aria-checked="true" />
+						<span>Tools</span>
+					</label>
+					<label for="filter_help_and_support">
+						<input type="checkbox" checked="checked" id="filter_help_and_support" name="color_help_and_support" class="color_help_and_support filled-in control-field filter-field form-control" aria-checked="true" />
+						<span>A1 &amp; KGS
+            </span>
+					</label>
+					<label for="filter_service_health">
+						<input type="checkbox" checked="checked" id="filter_service_health" name="color_service_health" class="color_service_health filled-in control-field filter-field form-control" aria-checked="true" />
+						<span>Service</span>
+					</label>
+					<label for="filter_applications">
+						<input type="checkbox" checked="checked" id="filter_applications" name="color_applications" class="color_applications filled-in control-field filter-field form-control" aria-checked="true" />
+						<span>Photoshop</span>
+					</label>
+
+				</div>
+
+			</div>
+		</header>
+		<div class="grid" role="grid">
+			<div class="grid-body">
+
+				<section class="item color_configuration category_configuration" data-color="color_configuration" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-user_management"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-user_management' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+						<a href="https://sugam2004.w3spaces.com/comingsoon.html"><i class="fal fa-fingerprint"></i>
+							</div></a>
+							<div class="text">
+								Identity Management
+							</div>
+						</main>
+					</div>
+				</section>
+
+
+				<section class="item color_configuration category_configuration" data-color="color_configuration" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-access_management"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-access_management' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+							<a href="https://sugamsuraksha.w3spaces.com/suraksha.html">	<i class="fal fa-key"></i>
+							</div></a>
+							<div class="text">
+								Suraksha Hub
+							</div>
+						</main>
+					</div>
+				</section>
+
+				<section class="item color_tools category_tools item_asset_management" data-color="color_tools" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-asset_management"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-asset_management' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+							<a href="https://sugam2004.w3spaces.com/Whiteboard_S.html">	<i class="fal fa-tablet-android-alt"></i>
+							</div></a>
+							<div class="text">
+								WhiteBoard Digital
+							</div>
+						</main>
+					</div>
+				</section>
+
+				<section class="item color_tools category_tools" data-color="color_tools" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-space_management"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-space_management' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+							<a href="https://sugamkaistha24.w3spaces.com/sugamhub.html">	<i class="fal fa-cubes"></i>
+							</div></a>
+							<div class="text">
+								Sugam Hub
+							</div>
+						</main>
+					</div>
+				</section>
+
+				<section class="item color_tools category_tools" data-color="color_tools" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-professional_services"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-professional_services' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+								<a href="https://sugamcreations.w3spaces.com/stickynotes.html"><i class="fal fa-file-chart-line"></i>
+							</div></a>
+							<div class="text">
+								Sticky Notes
+							</div>
+						</main>
+					</div>
+				</section>
+
+				<section class="item color_tools category_tools" data-color="color_tools" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-schema_management"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-schema_management' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+							<a href="https://peos.w3spaces.com/SUGAMDATABSE.html">	<i class="fal fa-sitemap"></i>
+							</div></a>
+							<div class="text">
+								Live Server Management
+							</div>
+						</main>
+					</div>
+				</section>
+
+				<section class="item color_tools category_tools" data-color="color_tools" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-space_explorer"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-space_explorer' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+								<a href="https://astroguide.w3spaces.com/welcometoaustoguide.html"><i class="fal fa-map-marked"></i>
+							</div></a>
+							<div class="text">
+								Space Explorer
+							</div>
+						</main>
+					</div>
+				</section>
+
+				<section class="item color_tools category_tools" data-color="color_tools" role="gridcell" aria-disabled="true">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-timeseries_management"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-timeseries_management' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+								<a href="https://sugam2004.w3spaces.com/Calender_S.html"><i class="fal fa-stopwatch"></i>
+							</div></a>
+							<div class="text">
+							Calender
+							</div>
+						</main>
+					</div>
+				</section>
+        <section class="item color_tools category_tools" data-color="color_tools" role="gridcell" aria-disabled="true">
+          <div class="item-content">
+            <header class="item-header">
+              <div class="menu">
+                <a class="dropdown-trigger" href="#" data-target="dropdown-timeseries_management"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+                <ul id='dropdown-timeseries_management' class='dropdown-content'>
+                  <li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+                  <li class="divider" tabindex="-1"></li>
+                  <li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+                </ul>
+              </div>
+            </header>
+<main class="item-main">
+              <div class="icon">
+                <a href="https://peos.w3spaces.com/daynightsatelitelive.html"><i class="fal fa-traffic-light-go"></i>
+              </div></a>
+              <div class="text">
+                Satelite Live Status
+              </div>
+            </main>
+          </div>
+        </section>
+        <section class="item color_tools category_tools" data-color="color_tools" role="gridcell" aria-disabled="true">
+          <div class="item-content">
+            <header class="item-header">
+              <div class="menu">
+                <a class="dropdown-trigger" href="#" data-target="dropdown-timeseries_management"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+                <ul id='dropdown-timeseries_management' class='dropdown-content'>
+                  <li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+                  <li class="divider" tabindex="-1"></li>
+                  <li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+                </ul>
+              </div>
+            </header>
+  <main class="item-main">
+              <div class="icon">
+                <a href="https://peos.w3spaces.com/weather.html"><i class="fal fa-sun"></i>
+              </div></a>
+              <div class="text">
+                Weather Status
+              </div>
+            </main>
+          </div>
+        </section>
+			<section class="item color_tools category_tools disabled" data-color="color_tools" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-entity_relationship_importer"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-entity_relationship_importer' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+                 <a href="https://sugam2004.w3spaces.com/Music-Visualizer.html">
+								<i class="fal fa-upload"></i>
+							</div></a>
+							<div class="text">
+								Music Import Visualizer
+							</div>
+						</main>
+					</div>
+				</section>
+
+				<section class="item color_help_and_support category_help_and_support" data-color="color_help_and_support" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-learn_about_billing"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-learn_about_billing' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+							<a href="https://sugam2004.w3spaces.com/AI_Image_search.html">	<i class="fal fa-money-bill"></i>
+							</div></a>
+							<div class="text">
+								AI Image Search
+							</div>
+						</main>
+					</div>
+				</section>
+
+
+        <section class="item color_help_and_support category_help_and_support" data-color="color_help_and_support" role="gridcell" aria-disabled="false">
+          <div class="item-content">
+            <header class="item-header">
+              <div class="menu">
+                <a class="dropdown-trigger" href="#" data-target="dropdown-learn_about_billing"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+                <ul id='dropdown-learn_about_billing' class='dropdown-content'>
+                  <li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+                  <li class="divider" tabindex="-1"></li>
+                  <li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+                </ul>
+              </div>
+            </header>
+            <main class="item-main">
+              <div class="icon">
+              <a href="https://sugam2004.w3spaces.com/AI_Joke_gen.html">  <i class="fal fa-users"></i>
+              </div></a>
+              <div class="text">
+                AI Joke Gen.
+              </div>
+            </main>
+          </div>
+        </section>
+				<section class="item color_help_and_support category_help_and_support" data-color="color_help_and_support" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-documentation"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-documentation' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+								<a href="https://sugam2004.w3spaces.com/AI_Image_Generator.html"><i class="fal fa-book"></i>
+							</div></a>
+							<div class="text">
+								AI Image Gen
+							</div>
+						</main>
+					</div>
+				</section>
+
+				<section class="item color_service_health category_service_health" data-color="color_service_health" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-nginx_log"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-nginx_log' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+								<a href="https://sugam2004.w3spaces.com/Python_ide_s.html"><i class="fal fa-file-code"></i>
+							</div></a>
+							<div class="text">
+								Python IDE
+							</div>
+						</main>
+					</div>
+				</section>
+
+				<section class="item color_service_health category_service_health" data-color="color_service_health" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-audit_log"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-audit_log' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+								<a href="https://sugam2004.w3spaces.com/To_do-list.html"><i class="fal fa-file-invoice"></i>
+							</div></a>
+							<div class="text">
+								To Do List
+							</div>
+						</main>
+					</div>
+				</section>
+
+				<section class="item color_service_health category_service_health" data-color="color_service_health" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-exception_log"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-exception_log' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+								<a href="https://sugam2004.w3spaces.com/Dictionary_S.html"><i class="fal fa-file-minus"></i>
+							</div></a>
+							<div class="text">
+							 Dictinory S
+							</div>
+						</main>
+					</div>
+				</section>
+        <section class="item color_service_health category_service_health" data-color="color_service_health" role="gridcell" aria-disabled="false">
+          <div class="item-content">
+            <header class="item-header">
+              <div class="menu">
+                <a class="dropdown-trigger" href="#" data-target="dropdown-exception_log"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+                <ul id='dropdown-exception_log' class='dropdown-content'>
+                  <li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+                  <li class="divider" tabindex="-1"></li>
+                  <li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+                </ul>
+              </div>
+            </header>
+  <main class="item-main">
+              <div class="icon">
+              <a href="https://chetanswarupkaisthaimages.w3spaces.com/SPACE-S.html">  <i class="fal fa-info-square"></i>
+              </div></a>
+              <div class="text">
+                KGS SPACES-S
+              </div>
+            </main>
+          </div>
+        </section>
+
+				<section class="item color_applications category_applications" data-color="color_applications" role="gridcell" aria-disabled="false">
+					<div class="item-content">
+						<header class="item-header">
+							<div class="menu">
+								<a class="dropdown-trigger" href="#" data-target="dropdown-weather_status"><i class="fal fa-ellipsis-v"></i> <span>Menu</span></a>
+								<ul id='dropdown-weather_status' class='dropdown-content'>
+									<li><a href="#!"><i class="fal fa-minus-circle"></i> Remove</a></li>
+									<li class="divider" tabindex="-1"></li>
+									<li><a href="#!"><i class="fal fa-tachometer-alt"></i> Move</a></li>
+								</ul>
+							</div>
+						</header>
+						<main class="item-main">
+							<div class="icon">
+								<a href="https://sugamwork.w3spaces.com/sugameditor.html"><i class="fab fa-app-store-ios"></i>
+							</div></a>
+							<div class="text">
+								Adope Photoshop
+							</div>
+						</main>
+					</div>
+				</section>
+			</div>
+		</div>
+	</main>
+	<!--<aside class="latest-activity">
+		<h2>Latest Activity</h2>
+		<ul class="timeline">
+			<li class="color_configuration">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/grumpycat-cutout.jpg" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_tools">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/this-is-fine.gif" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_applications">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/angry-unicorn.png" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_configuration">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/i.chzbgr.gif" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_applications">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/interesting-1.jpg" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_service_health">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/i.chzbgr.gif" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_tools">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/interesting-1.jpg" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_tools">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/this-is-fine.gif" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_help_and_support">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/i.chzbgr.gif" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_service_health">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/grumpycat-cutout.jpg" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_service_health">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/this-is-fine.gif" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_configuration">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/i.chzbgr.gif" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_tools">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/this-is-fine.gif" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_applications">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/i.chzbgr.gif" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_configuration">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/grumpycat-cutout.jpg" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_applications">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/this-is-fine.gif" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+			<li class="color_configuration">
+				<div class="activity-content-container">
+					<div class="icon-col">
+						<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/grumpycat-cutout.jpg" class="circle icon small-icon" />
+					</div>
+					<div class="info-col">
+						<span class="timestamp">Henrietta.Herrara | 5 minutes ago</span>
+						<span class="action">New file created</span>
+						<span class="action-detail">Some_Spreadsheet_name.xls</span>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<a href="#" class="btn link">Load More &raquo;</a>
+	</aside>
+</div>-->
+
+<footer class="page-footer">
+	<div class="site-info">
+		KaisthaGroupS | Digital OS 24
+	</div>
+	<div class="site-copyright">
+		&copy; 2024 SugamKaistha, All Rights Reserved
+	</div>
+	<nav class="footer-nav" role="navigation">
+		<ul>
+			<li><a href="https://chetanswarupkaisthaimages.w3spaces.com/KGS.html">Help</a></li>
+			<li><a href="https://sugam2004.w3spaces.com/comingsoon.html">Privacy</a></li>
+			<li><a href="https://sugam2004.w3spaces.com/comingsoon.html">Terms</a></li>
+	</nav>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/muuri/0.5.4/muuri.min.js"></script>
+<script src="https://pro.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/83206/materialize_sidenav_modified.js"></script>
+<script type="text/javascript">
+	(function () {
+	//grid using "muuri": https://haltu.github.io/muuri/
+	var grid = new Muuri(".grid-body", {
+		dragEnabled: true,
+		fillGaps: true,
+		layoutOnResize: true
+	});
+	function setHeights() {
+		var topBarHeight = $(".navbar-fixed").height();
+		var titleBarHeight = $(".top-section.section-header").height();
+		var gridHeaderHeight = $(".grid-header").height();
+		var footerHeight = $(".page-footer").height();
+
+		var sumOfHeights = topBarHeight + titleBarHeight + footerHeight;
+		var gridBodyScrollHeight =
+			topBarHeight + titleBarHeight + gridHeaderHeight + footerHeight;
+
+		$(".grid-container").css("height", "calc( 100vh - " + sumOfHeights + "px )");
+		$(".latest-activity").css("height", "calc( 100vh - " + sumOfHeights + "px )");
+		$(".grid").css("height", "calc( 100vh - " + gridBodyScrollHeight + "px )");
+	}
+
+	setHeights();
+
+	$(window).resize(function () {
+		setHeights();
+	});
+
+	$(".open-search-button").click(function () {
+		$(".search-open").addClass("visible");
+		$(".search-closed").addClass("hidden");
+	});
+	$(".close-search-button").click(function () {
+		$(".search-open").removeClass("visible");
+		$(".search-closed").removeClass("hidden");
+	});
+
+	// using framework "Materialize" https://materializecss.com
+	$(".dropdown-trigger").dropdown();
+	$(".collapsible").collapsible();
+	$(".sidenav").modifiedsidenav();
+	$(".tabs").tabs({ swipeable: true });
+
+	$(".dropdown-trigger").click(function () {
+		$(".item").removeClass("current");
+		$(this).closest(".item").addClass("current");
+	});
+
+	$(".filter-options-container :checkbox").click(function (event) {
+		// Check the target id for the filter to determine
+		// the category to show or hide
+		if (event.target.id == "filter_configuration") {
+			// Hide all elements with the admin category
+			var adminElements = [];
+			// Add all admin elements, denoted by the
+			// class category-administration to an array because the
+			// grid.show and grid.hide take an argument type
+			// of an array of elements.
+			$(".category_configuration").each(function (i, element) {
+				adminElements.push(element);
+			});
+			// Determine whether to show or hide elements based on
+			// if the checkbox is currently checked or not.
+			if (event.target.checked) {
+				grid.show(adminElements);
+				setAsideHeight();
+			} else {
+				grid.hide(adminElements);
+				setAsideHeight();
+			}
+		}
+
+		if (event.target.id == "filter_tools") {
+			// Hide all elements with the admin category
+			var dataManagementElements = [];
+			// Add all admin elements, denoted by the
+			// class category-administration to an array because the
+			// grid.show and grid.hide take an argument type
+			// of an array of elements.
+			$(".category_tools").each(function (i, element) {
+				dataManagementElements.push(element);
+			});
+			// Determine whether to show or hide elements based on
+			// if the checkbox is currently checked or not.
+			if (event.target.checked) {
+				grid.show(dataManagementElements);
+				setAsideHeight();
+			} else {
+				grid.hide(dataManagementElements);
+				setAsideHeight();
+			}
+		}
+
+		if (event.target.id == "filter_help_and_support") {
+			// Hide all elements with the admin category
+			var monitoringElements = [];
+			// Add all admin elements, denoted by the
+			// class category-administration to an array because the
+			// grid.show and grid.hide take an argument type
+			// of an array of elements.
+			$(".category_help_and_support").each(function (i, element) {
+				monitoringElements.push(element);
+			});
+			// Determine whether to show or hide elements based on
+			// if the checkbox is currently checked or not.
+			if (event.target.checked) {
+				grid.show(monitoringElements);
+				setAsideHeight();
+			} else {
+				grid.hide(monitoringElements);
+				setAsideHeight();
+			}
+		}
+
+		if (event.target.id == "filter_service_health") {
+			// Hide all elements with the admin category
+			var operationsElements = [];
+			// Add all admin elements, denoted by the
+			// class category-administration to an array because the
+			// grid.show and grid.hide take an argument type
+			// of an array of elements.
+			$(".category_service_health").each(function (i, element) {
+				operationsElements.push(element);
+			});
+			// Determine whether to show or hide elements based on
+			// if the checkbox is currently checked or not.
+			if (event.target.checked) {
+				grid.show(operationsElements);
+				setAsideHeight();
+			} else {
+				grid.hide(operationsElements);
+				setAsideHeight();
+			}
+		}
+
+		if (event.target.id == "filter_applications") {
+			// Hide all elements with the admin category
+			var helpAndSupportElements = [];
+			// Add all admin elements, denoted by the
+			// class category-administration to an array because the
+			// grid.show and grid.hide take an argument type
+			// of an array of elements.
+			$(".category_applications").each(function (i, element) {
+				helpAndSupportElements.push(element);
+			});
+			// Determine whether to show or hide elements based on
+			// if the checkbox is currently checked or not.
+			if (event.target.checked) {
+				grid.show(helpAndSupportElements);
+				setAsideHeight();
+			} else {
+				grid.hide(helpAndSupportElements);
+				setAsideHeight();
+			}
+		}
+	});
+
+	$("#show_hide_left_side_nav").click(function () {
+		$("html.dv body").toggleClass("side_menu_open");
+	});
+
+	$(".sidenav-overlay").click(function () {
+		$("html.dv body").removeClass("side_menu_open");
+	});
+})(jQuery);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(function($, anim) {
+  'use strict';
+
+  let _defaults = {
+    edge: 'left',
+    draggable: true,
+    inDuration: 250,
+    outDuration: 250,
+    onOpenStart: null,
+    onOpenEnd: null,
+    onCloseStart: null,
+    onCloseEnd: null,
+    preventScrolling: true
+  };
+
+  /**
+   * @class
+   */
+  class Sidenav extends Component {
+    /**
+     * Construct Sidenav instance and set up overlay
+     * @constructor
+     * @param {Element} el
+     * @param {Object} options
+     */
+    constructor(el, options) {
+      super(Sidenav, el, options);
+
+      this.el.M_Sidenav = this;
+      this.id = this.$el.attr('id');
+
+      /**
+       * Options for the Sidenav
+       * @member Sidenav#options
+       * @prop {String} [edge='left'] - Side of screen on which Sidenav appears
+       * @prop {Boolean} [draggable=true] - Allow swipe gestures to open/close Sidenav
+       * @prop {Number} [inDuration=250] - Length in ms of enter transition
+       * @prop {Number} [outDuration=200] - Length in ms of exit transition
+       * @prop {Function} onOpenStart - Function called when sidenav starts entering
+       * @prop {Function} onOpenEnd - Function called when sidenav finishes entering
+       * @prop {Function} onCloseStart - Function called when sidenav starts exiting
+       * @prop {Function} onCloseEnd - Function called when sidenav finishes exiting
+       */
+      this.options = $.extend({}, Sidenav.defaults, options);
+
+      /**
+       * Describes open/close state of Sidenav
+       * @type {Boolean}
+       */
+      this.isOpen = false;
+
+      /**
+       * Describes if Sidenav is fixed
+       * @type {Boolean}
+       */
+      this.isFixed = this.el.classList.contains('sidenav-fixed');
+
+      /**
+       * Describes if Sidenav is being draggeed
+       * @type {Boolean}
+       */
+      this.isDragged = false;
+
+      // Window size variables for window resize checks
+      this.lastWindowWidth = window.innerWidth;
+      this.lastWindowHeight = window.innerHeight;
+
+      this._createOverlay();
+      this._createDragTarget();
+      this._setupEventHandlers();
+      this._setupClasses();
+      this._setupFixed();
+
+      Sidenav._sidenavs.push(this);
+    }
+
+    static get defaults() {
+      return _defaults;
+    }
+
+    static init(els, options) {
+      return super.init(this, els, options);
+    }
+
+    /**
+     * Get Instance
+     */
+    static getInstance(el) {
+      let domElem = !!el.jquery ? el[0] : el;
+      return domElem.M_Sidenav;
+    }
+
+    /**
+     * Teardown component
+     */
+    destroy() {
+      this._removeEventHandlers();
+      this._enableBodyScrolling();
+      this._overlay.parentNode.removeChild(this._overlay);
+      this.dragTarget.parentNode.removeChild(this.dragTarget);
+      this.el.M_Sidenav = undefined;
+      this.el.style.transform = '';
+
+      let index = Sidenav._sidenavs.indexOf(this);
+      if (index >= 0) {
+        Sidenav._sidenavs.splice(index, 1);
+      }
+    }
+
+    _createOverlay() {
+      let overlay = document.createElement('div');
+      this._closeBound = this.close.bind(this);
+      overlay.classList.add('sidenav-overlay');
+
+      overlay.addEventListener('click', this._closeBound);
+
+      document.body.appendChild(overlay);
+      this._overlay = overlay;
+    }
+
+    _setupEventHandlers() {
+      if (Sidenav._sidenavs.length === 0) {
+        document.body.addEventListener('click', this._handleTriggerClick);
+      }
+
+      this._handleDragTargetDragBound = this._handleDragTargetDrag.bind(this);
+      this._handleDragTargetReleaseBound = this._handleDragTargetRelease.bind(this);
+      this._handleCloseDragBound = this._handleCloseDrag.bind(this);
+      this._handleCloseReleaseBound = this._handleCloseRelease.bind(this);
+      this._handleCloseTriggerClickBound = this._handleCloseTriggerClick.bind(this);
+
+      this.dragTarget.addEventListener('touchmove', this._handleDragTargetDragBound);
+      this.dragTarget.addEventListener('touchend', this._handleDragTargetReleaseBound);
+      this._overlay.addEventListener('touchmove', this._handleCloseDragBound);
+      this._overlay.addEventListener('touchend', this._handleCloseReleaseBound);
+      this.el.addEventListener('touchmove', this._handleCloseDragBound);
+      this.el.addEventListener('touchend', this._handleCloseReleaseBound);
+      this.el.addEventListener('click', this._handleCloseTriggerClickBound);
+
+      // Add resize for side nav fixed
+      if (this.isFixed) {
+        this._handleWindowResizeBound = this._handleWindowResize.bind(this);
+        window.addEventListener('resize', this._handleWindowResizeBound);
+      }
+    }
+
+    _removeEventHandlers() {
+      if (Sidenav._sidenavs.length === 1) {
+        document.body.removeEventListener('click', this._handleTriggerClick);
+      }
+
+      this.dragTarget.removeEventListener('touchmove', this._handleDragTargetDragBound);
+      this.dragTarget.removeEventListener('touchend', this._handleDragTargetReleaseBound);
+      this._overlay.removeEventListener('touchmove', this._handleCloseDragBound);
+      this._overlay.removeEventListener('touchend', this._handleCloseReleaseBound);
+      this.el.removeEventListener('touchmove', this._handleCloseDragBound);
+      this.el.removeEventListener('touchend', this._handleCloseReleaseBound);
+      this.el.removeEventListener('click', this._handleCloseTriggerClickBound);
+
+      // Remove resize for side nav fixed
+      if (this.isFixed) {
+        window.removeEventListener('resize', this._handleWindowResizeBound);
+      }
+    }
+
+    /**
+     * Handle Trigger Click
+     * @param {Event} e
+     */
+    _handleTriggerClick(e) {
+      let $trigger = $(e.target).closest('.sidenav-trigger');
+      if (e.target && $trigger.length) {
+        let sidenavId = M.getIdFromTrigger($trigger[0]);
+
+        let sidenavInstance = document.getElementById(sidenavId).M_Sidenav;
+        if (sidenavInstance) {
+          sidenavInstance.open($trigger);
+        }
+        e.preventDefault();
+      }
+    }
+
+    /**
+     * Set variables needed at the beggining of drag
+     * and stop any current transition.
+     * @param {Event} e
+     */
+    _startDrag(e) {
+      let clientX = e.targetTouches[0].clientX;
+      this.isDragged = true;
+      this._startingXpos = clientX;
+      this._xPos = this._startingXpos;
+      this._time = Date.now();
+      this._width = this.el.getBoundingClientRect().width;
+      this._overlay.style.display = 'block';
+      this._initialScrollTop = this.isOpen ? this.el.scrollTop : M.getDocumentScrollTop();
+      this._verticallyScrolling = false;
+      anim.remove(this.el);
+      anim.remove(this._overlay);
+    }
+
+    /**
+     * Set variables needed at each drag move update tick
+     * @param {Event} e
+     */
+    _dragMoveUpdate(e) {
+      let clientX = e.targetTouches[0].clientX;
+      let currentScrollTop = this.isOpen ? this.el.scrollTop : M.getDocumentScrollTop();
+      this.deltaX = Math.abs(this._xPos - clientX);
+      this._xPos = clientX;
+      this.velocityX = this.deltaX / (Date.now() - this._time);
+      this._time = Date.now();
+      if (this._initialScrollTop !== currentScrollTop) {
+        this._verticallyScrolling = true;
+      }
+    }
+
+    /**
+     * Handles Dragging of Sidenav
+     * @param {Event} e
+     */
+    _handleDragTargetDrag(e) {
+      // Check if draggable
+      if (!this.options.draggable || this._isCurrentlyFixed() || this._verticallyScrolling) {
+        return;
+      }
+
+      // If not being dragged, set initial drag start variables
+      if (!this.isDragged) {
+        this._startDrag(e);
+      }
+
+      // Run touchmove updates
+      this._dragMoveUpdate(e);
+
+      // Calculate raw deltaX
+      let totalDeltaX = this._xPos - this._startingXpos;
+
+      // dragDirection is the attempted user drag direction
+      let dragDirection = totalDeltaX > 0 ? 'right' : 'left';
+
+      // Don't allow totalDeltaX to exceed Sidenav width or be dragged in the opposite direction
+      totalDeltaX = Math.min(this._width, Math.abs(totalDeltaX));
+      if (this.options.edge === dragDirection) {
+        totalDeltaX = 0;
+      }
+
+      /**
+       * transformX is the drag displacement
+       * transformPrefix is the initial transform placement
+       * Invert values if Sidenav is right edge
+       */
+      let transformX = totalDeltaX;
+      let transformPrefix = 'translateX(-70%)';
+      if (this.options.edge === 'right') {
+        transformPrefix = 'translateX(100%)';
+        transformX = -transformX;
+      }
+
+      // Calculate open/close percentage of sidenav, with open = 1 and close = 0
+      this.percentOpen = Math.min(1, totalDeltaX / this._width);
+
+      // Set transform and opacity styles
+      this.el.style.transform = `${transformPrefix} translateX(${transformX}px)`;
+      this._overlay.style.opacity = this.percentOpen;
+    }
+
+    /**
+     * Handle Drag Target Release
+     */
+    _handleDragTargetRelease() {
+      if (this.isDragged) {
+        if (this.percentOpen > 0.2) {
+          this.open();
+        } else {
+          this._animateOut();
+        }
+
+        this.isDragged = false;
+        this._verticallyScrolling = false;
+      }
+    }
+
+    /**
+     * Handle Close Drag
+     * @param {Event} e
+     */
+    _handleCloseDrag(e) {
+      if (this.isOpen) {
+        // Check if draggable
+        if (!this.options.draggable || this._isCurrentlyFixed() || this._verticallyScrolling) {
+          return;
+        }
+
+        // If not being dragged, set initial drag start variables
+        if (!this.isDragged) {
+          this._startDrag(e);
+        }
+
+        // Run touchmove updates
+        this._dragMoveUpdate(e);
+
+        // Calculate raw deltaX
+        let totalDeltaX = this._xPos - this._startingXpos;
+
+        // dragDirection is the attempted user drag direction
+        let dragDirection = totalDeltaX > 0 ? 'right' : 'left';
+
+        // Don't allow totalDeltaX to exceed Sidenav width or be dragged in the opposite direction
+        totalDeltaX = Math.min(this._width, Math.abs(totalDeltaX));
+        if (this.options.edge !== dragDirection) {
+          totalDeltaX = 0;
+        }
+
+        let transformX = -totalDeltaX;
+        if (this.options.edge === 'right') {
+          transformX = -transformX;
+        }
+
+        // Calculate open/close percentage of sidenav, with open = 1 and close = 0
+        this.percentOpen = Math.min(1, 1 - totalDeltaX / this._width);
+
+        // Set transform and opacity styles
+        this.el.style.transform = `translateX(${transformX}px)`;
+        this._overlay.style.opacity = this.percentOpen;
+      }
+    }
+
+    /**
+     * Handle Close Release
+     */
+    _handleCloseRelease() {
+      if (this.isOpen && this.isDragged) {
+        if (this.percentOpen > 0.8) {
+          this._animateIn();
+        } else {
+          this.close();
+        }
+
+        this.isDragged = false;
+        this._verticallyScrolling = false;
+      }
+    }
+
+    /**
+     * Handles closing of Sidenav when element with class .sidenav-close
+     */
+    _handleCloseTriggerClick(e) {
+      let $closeTrigger = $(e.target).closest('.sidenav-close');
+      if ($closeTrigger.length && !this._isCurrentlyFixed()) {
+        this.close();
+      }
+    }
+
+    /**
+     * Handle Window Resize
+     */
+    _handleWindowResize() {
+      // Only handle horizontal resizes
+      if (this.lastWindowWidth !== window.innerWidth) {
+        if (window.innerWidth > 992) {
+          this.open();
+        } else {
+          this.close();
+        }
+      }
+
+      this.lastWindowWidth = window.innerWidth;
+      this.lastWindowHeight = window.innerHeight;
+    }
+
+    _setupClasses() {
+      if (this.options.edge === 'right') {
+        this.el.classList.add('right-aligned');
+        this.dragTarget.classList.add('right-aligned');
+      }
+    }
+
+    _removeClasses() {
+      this.el.classList.remove('right-aligned');
+      this.dragTarget.classList.remove('right-aligned');
+    }
+
+    _setupFixed() {
+      if (this._isCurrentlyFixed()) {
+        this.open();
+      }
+    }
+
+    _isCurrentlyFixed() {
+      return this.isFixed && window.innerWidth > 992;
+    }
+
+    _createDragTarget() {
+      let dragTarget = document.createElement('div');
+      dragTarget.classList.add('drag-target');
+      document.body.appendChild(dragTarget);
+      this.dragTarget = dragTarget;
+    }
+
+    _preventBodyScrolling() {
+      let body = document.body;
+      body.style.overflow = 'hidden';
+    }
+
+    _enableBodyScrolling() {
+      let body = document.body;
+      body.style.overflow = '';
+    }
+
+    open() {
+      if (this.isOpen === true) {
+        return;
+      }
+
+      this.isOpen = true;
+
+      // Run onOpenStart callback
+      if (typeof this.options.onOpenStart === 'function') {
+        this.options.onOpenStart.call(this, this.el);
+      }
+
+      // Handle fixed Sidenav
+      if (this._isCurrentlyFixed()) {
+        anim.remove(this.el);
+        anim({
+          targets: this.el,
+          translateX: 0,
+          duration: 0,
+          easing: 'easeOutQuad'
+        });
+        this._enableBodyScrolling();
+        this._overlay.style.display = 'none';
+
+        // Handle non-fixed Sidenav
+      } else {
+        if (this.options.preventScrolling) {
+          this._preventBodyScrolling();
+        }
+
+        if (!this.isDragged || this.percentOpen != 1) {
+          this._animateIn();
+        }
+      }
+    }
+
+    close() {
+      if (this.isOpen === false) {
+        return;
+      }
+
+      this.isOpen = false;
+
+      // Run onCloseStart callback
+      if (typeof this.options.onCloseStart === 'function') {
+        this.options.onCloseStart.call(this, this.el);
+      }
+
+      // Handle fixed Sidenav
+      if (this._isCurrentlyFixed()) {
+        let transformX = this.options.edge === 'left' ? '-75%' : '105%';
+        this.el.style.transform = `translateX(${transformX})`;
+
+        // Handle non-fixed Sidenav
+      } else {
+        this._enableBodyScrolling();
+
+        if (!this.isDragged || this.percentOpen != 0) {
+          this._animateOut();
+        } else {
+          this._overlay.style.display = 'none';
+        }
+      }
+    }
+
+    _animateIn() {
+      this._animateSidenavIn();
+      this._animateOverlayIn();
+    }
+
+    _animateSidenavIn() {
+      let slideOutPercent = this.options.edge === 'left' ? -1 : 1;
+      if (this.isDragged) {
+        slideOutPercent =
+          this.options.edge === 'left'
+            ? slideOutPercent + this.percentOpen
+            : slideOutPercent - this.percentOpen;
+      }
+
+      anim.remove(this.el);
+      anim({
+        targets: this.el,
+        translateX: [`${slideOutPercent * 100}%`, 0],
+        duration: this.options.inDuration,
+        easing: 'easeOutQuad',
+        complete: () => {
+          // Run onOpenEnd callback
+          if (typeof this.options.onOpenEnd === 'function') {
+            this.options.onOpenEnd.call(this, this.el);
+          }
+        }
+      });
+    }
+
+    _animateOverlayIn() {
+      let start = 0;
+      if (this.isDragged) {
+        start = this.percentOpen;
+      } else {
+        $(this._overlay).css({
+          display: 'block'
+        });
+      }
+
+      anim.remove(this._overlay);
+      anim({
+        targets: this._overlay,
+        opacity: [start, 1],
+        duration: this.options.inDuration,
+        easing: 'easeOutQuad'
+      });
+    }
+
+    _animateOut() {
+      this._animateSidenavOut();
+      this._animateOverlayOut();
+    }
+
+    _animateSidenavOut() {
+      let endPercent = this.options.edge === 'left' ? -1 : 1;
+      let slideOutPercent = 0;
+      if (this.isDragged) {
+        slideOutPercent =
+          this.options.edge === 'left'
+            ? endPercent + this.percentOpen
+            : endPercent - this.percentOpen;
+      }
+
+      anim.remove(this.el);
+      anim({
+        targets: this.el,
+        translateX: [`${slideOutPercent * 100}%`, `${endPercent * 75}%`],
+        duration: this.options.outDuration,
+        easing: 'easeOutQuad',
+        complete: () => {
+          // Run onOpenEnd callback
+          if (typeof this.options.onCloseEnd === 'function') {
+            this.options.onCloseEnd.call(this, this.el);
+          }
+        }
+      });
+    }
+
+    _animateOverlayOut() {
+      anim.remove(this._overlay);
+      anim({
+        targets: this._overlay,
+        opacity: 0,
+        duration: this.options.outDuration,
+        easing: 'easeOutQuad',
+        complete: () => {
+          $(this._overlay).css('display', 'none');
+        }
+      });
+    }
+  }
+
+  /**
+   * @static
+   * @memberof Sidenav
+   * @type {Array.<Sidenav>}
+   */
+  Sidenav._sidenavs = [];
+
+  M.Sidenav = Sidenav;
+
+  if (M.jQueryLoaded) {
+    M.initializeJqueryWrapper(Sidenav, 'modifiedsidenav', 'M_Sidenav');
+  }
+})(cash, M.anime);
+</script>
+</body>
+</html>

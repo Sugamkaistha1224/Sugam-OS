@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+    @import url('https://unpkg.com/bootstrap@4.1.3/dist/css/bootstrap.min.css');
+    @import url('https://unpkg.com/bootstrap-vue@2.0.0-rc.11/dist/bootstrap-vue.css');
+    body {
+   background-image: URL("http://wallpapercave.com/wp/XXn6DrQ.jpg");
+   background-repeat: no-repeat;
+   background-size: auto;
+}
+ .app__draggable {
+   text-align: center;
+   display: inline-block;
+   float: left;
+   margin-top: 40px;
+}
+ .app__block {
+   text-align: center;
+   width: 100px;
+   margin: auto;
+}
+ .app__icon {
+   width: 80px;
+   height: 80px;
+}
+ .app__label {
+   font-weight: bold;
+   color: #fffafa;
+   text-shadow: 0px 0px 2px black;
+}
+ .planet--animate {
+   transform-origin: 300px center;
+   animation-duration: 60s;
+   position: absolute;
+   animation-name: orbit;
+   animation-iteration-count: infinite;
+   justify-content: center;
+   animation-timing-function: linear;
+   z-index: -1;
+}
+ .planet1 {
+   height: 75px;
+   width: 75px;
+   border-radius: 50%;
+   left: 30%;
+}
+ .planet2 {
+   height: 50px;
+   width: 50px;
+   border-radius: 50%;
+   left: 20%;
+   animation-delay: -40s;
+}
+ .ringed-planet1 {
+   width: 200px;
+   height: 200px;
+   position: absolute;
+   left: 40%;
+   transform-origin: 300px center;
+   animation-duration: 60s;
+   animation-delay: -45s;
+}
+ .ringed-planet2 {
+   width: 200px;
+   height: 200px;
+   transform-origin: 400px center;
+   animation-duration: 45s;
+   animation-delay: -42s;
+   left: 20%;
+}
+ .ringed-planet__body {
+   height: 40%;
+   width: 40%;
+   border-radius: 50%;
+   position: absolute;
+   left: 29%;
+   top: 28%;
+}
+ .ringed-planet__top {
+   clip-path: inset(0 0 50% 0);
+}
+ .ringed-planet__ring {
+   position: absolute;
+   width: inherit;
+   height: inherit;
+   border-radius: 50%;
+   transform: rotateX(75deg);
+}
+ @keyframes orbit {
+   from {
+     transform: rotate(0deg);
+  }
+   to {
+     transform: rotate(360deg);
+  }
+}
+ .planet--brown {
+   background: #23130a;
+   background: -moz-linear-gradient(0deg, rgba(35, 19, 10, 1) 17%, rgba(125, 63, 32, 1) 31%, rgba(74, 58, 27, 1) 36%, rgba(135, 36, 141, 1) 43%, rgba(128, 85, 16, 1) 46%, rgba(180, 126, 76, 1) 55%, rgba(156, 80, 42, 1) 64%, rgba(184, 104, 189, 1) 71%, rgba(194, 163, 104, 1) 85%, rgba(213, 203, 184, 1) 98%);
+   background: -webkit-linear-gradient(0deg, rgba(35, 19, 10, 1) 17%, rgba(125, 63, 32, 1) 31%, rgba(74, 58, 27, 1) 36%, rgba(135, 36, 141, 1) 43%, rgba(128, 85, 16, 1) 46%, rgba(180, 126, 76, 1) 55%, rgba(156, 80, 42, 1) 64%, rgba(184, 104, 189, 1) 71%, rgba(194, 163, 104, 1) 85%, rgba(213, 203, 184, 1) 98%);
+   background: linear-gradient(0deg, rgba(35, 19, 10, 1) 17%, rgba(125, 63, 32, 1) 31%, rgba(74, 58, 27, 1) 36%, rgba(135, 36, 141, 1) 43%, rgba(128, 85, 16, 1) 46%, rgba(180, 126, 76, 1) 55%, rgba(156, 80, 42, 1) 64%, rgba(184, 104, 189, 1) 71%, rgba(194, 163, 104, 1) 85%, rgba(213, 203, 184, 1) 98%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#23130a",endColorstr="#d5cbb8",GradientType=1);
+}
+ .planet__rings--brown {
+   background: #fff;
+   background: -moz-radial-gradient(circle, rgba(255, 255, 255, 0) 41%, rgba(156, 80, 42, 1) 49%, rgba(194, 163, 104, 1) 59%, rgba(255, 255, 255, 0) 61%, rgba(194, 163, 104, 1) 69%, rgba(128, 85, 16, 1) 77%, rgba(255, 255, 255, 0) 84%, rgba(156, 80, 42, 1) 86%, rgba(194, 163, 104, 1) 98%);
+   background: -webkit-radial-gradient(circle, rgba(255, 255, 255, 0) 41%, rgba(156, 80, 42, 1) 49%, rgba(194, 163, 104, 1) 59%, rgba(255, 255, 255, 0) 61%, rgba(194, 163, 104, 1) 69%, rgba(128, 85, 16, 1) 77%, rgba(255, 255, 255, 0) 84%, rgba(156, 80, 42, 1) 86%, rgba(194, 163, 104, 1) 98%);
+   background: radial-gradient(circle, rgba(255, 255, 255, 0) 41%, rgba(156, 80, 42, 1) 49%, rgba(194, 163, 104, 1) 59%, rgba(255, 255, 255, 0) 61%, rgba(194, 163, 104, 1) 69%, rgba(128, 85, 16, 1) 77%, rgba(255, 255, 255, 0) 84%, rgba(156, 80, 42, 1) 86%, rgba(194, 163, 104, 1) 98%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#c2a368",GradientType=1);
+}
+ .planet--white {
+   background: #fff;
+   background: -moz-linear-gradient(228deg, rgba(255, 255, 255, 1) 31%, rgba(9, 6, 0, 1) 93%);
+   background: -webkit-linear-gradient(228deg, rgba(255, 255, 255, 1) 31%, rgba(9, 6, 0, 1) 93%);
+   background: linear-gradient(228deg, rgba(255, 255, 255, 1) 31%, rgba(9, 6, 0, 1) 93%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#090600",GradientType=1);
+}
+ .planet--blue {
+   background: -moz-linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+   background: -webkit-linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#00d4ff",GradientType=1);
+}
+ .planet__rings--blue {
+   background: #fff;
+   background: -moz-radial-gradient(circle, rgba(255, 255, 255, 0) 41%, rgba(136, 195, 236, 1) 49%, rgba(59, 116, 240, 1) 53%, rgba(255, 255, 255, 0) 61%, rgba(120, 251, 255, 1) 85%, rgba(28, 160, 225, 1) 93%, rgba(55, 224, 226, 1) 98%);
+   background: -webkit-radial-gradient(circle, rgba(255, 255, 255, 0) 41%, rgba(136, 195, 236, 1) 49%, rgba(59, 116, 240, 1) 53%, rgba(255, 255, 255, 0) 61%, rgba(120, 251, 255, 1) 85%, rgba(28, 160, 225, 1) 93%, rgba(55, 224, 226, 1) 98%);
+   background: radial-gradient(circle, rgba(255, 255, 255, 0) 41%, rgba(136, 195, 236, 1) 49%, rgba(59, 116, 240, 1) 53%, rgba(255, 255, 255, 0) 61%, rgba(120, 251, 255, 1) 85%, rgba(28, 160, 225, 1) 93%, rgba(55, 224, 226, 1) 98%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#37e0e2",GradientType=1);
+}
+ .planet--blue-white {
+   background: #121437;
+   background: -moz-linear-gradient(30deg, rgba(18, 20, 55, 1) 23%, rgba(66, 136, 194, 1) 49%, rgba(124, 139, 204, 1) 56%, rgba(122, 129, 217, 1) 62%, rgba(66, 136, 194, 1) 69%, rgba(122, 129, 211, 1) 89%, rgba(196, 199, 235, 1) 96%);
+   background: -webkit-linear-gradient(30deg, rgba(18, 20, 55, 1) 23%, rgba(66, 136, 194, 1) 49%, rgba(124, 139, 204, 1) 56%, rgba(122, 129, 217, 1) 62%, rgba(66, 136, 194, 1) 69%, rgba(122, 129, 211, 1) 89%, rgba(196, 199, 235, 1) 96%);
+   background: linear-gradient(30deg, rgba(18, 20, 55, 1) 23%, rgba(66, 136, 194, 1) 49%, rgba(124, 139, 204, 1) 56%, rgba(122, 129, 217, 1) 62%, rgba(66, 136, 194, 1) 69%, rgba(122, 129, 211, 1) 89%, rgba(196, 199, 235, 1) 96%);
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#121437",endColorstr="#c4c7eb",GradientType=1);
+}
+ @media (min-width: 0px) {
+   .app__draggable {
+     width: 50%;
+  }
+}
+ @media (min-width: 500px) {
+   .app__draggable {
+     width: 25%;
+  }
+}
+ @media (min-width: 1000px) {
+   .app__draggable {
+     width: 16.667%;
+  }
+}
+ 
+  </style>
+</head>
+<body>
+  <div id="phone-sim"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/EasePack.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/TweenLite.min.js"></script>
+  <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo.js"></script>
+  <script src="https://unpkg.com/vue-draggable@1.1.1/lib/vue-draggable.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-vue/2.17.1/bootstrap-vue.min.js"></script>
+  <script type="text/javascript">
+    Vue.component("phone-app", {
+  props: {
+    iconURL: {
+      default:
+        "https://www.freepnglogos.com/uploads/logo-gmail-png/logo-gmail-png-image-gmail-logo-gta-wiki-the-grand-theft-auto-4.png",
+      type: String
+    },
+    label: {
+      default: "Label",
+      type: String
+    }
+  },
+  template: `<div class="app__block">
+        <img class="app__icon" :src="iconURL" />
+        <div class="app__label"> {{label}} </div>
+     </div>`
+});
+
+Vue.component("planets", {
+  template: `
+<div>
+  <span class="planet--animate planet2 planet--white"></span>
+  <span class="planet--animate planet1 planet--blue-white"></span>
+  <span class="planet--animate ringed-planet1">
+      <span class="ringed-planet__body planet--blue"></span>
+      <span class="ringed-planet__ring planet__rings--blue"></span>
+      <span class="ringed-planet__body ringed-planet__top planet--blue"></span>
+   </span>
+   <span class="ringed-planet2 planet--animate">
+      <span class="ringed-planet__body planet--brown"></span>
+      <span class="ringed-planet__ring planet__rings--brown"></span>
+      <span class="ringed-planet__body ringed-planet__top planet--brown"></span>
+    </span>
+</div>
+`
+});
+
+Vue.use(VueDraggable.default);
+
+new Vue({
+  el: "#phone-sim",
+  data: {
+    options: {
+      dropzoneSelector: ".app__dropzone",
+      draggableSelector: ".app__draggable"
+    },
+    apps: [
+      {
+        id: 1,
+        label: "Gmail",
+        iconURL:
+          "https://www.freepnglogos.com/uploads/logo-gmail-png/logo-gmail-png-image-gmail-logo-gta-wiki-the-grand-theft-auto-4.png",
+        iconURL2:
+          "https://www.freepnglogos.com/uploads/logo-gmail-png/logo-gmail-png-gmail-icon-download-png-and-vector-1.png"
+      },
+      {
+        id: 2,
+        label: "linkedIn",
+        iconURL:
+          "https://www.freepnglogos.com/uploads/linkedin-logo-transparent-picture-31.png"
+      },
+      {
+        id: 3,
+        label: "Snap Chat",
+        iconURL:
+          "https://www.freepnglogos.com/uploads/snap-chat-logo-transparent-10.png"
+      },
+      {
+        id: 4,
+        label: "Discord",
+        iconURL:
+          "https://www.freepnglogos.com/uploads/discord-logo-png/anthrocon-twitter-quot-discord-user-wanna-21.png"
+      },
+      {
+        id: 5,
+        label: "Instagram",
+        iconURL:
+          "https://www.freepnglogos.com/uploads/instagram-logos-png-images-free-download-2.png"
+      },
+      {
+        id: 6,
+        label: "Spotify",
+        iconURL:
+          "https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-marilyn-scott-0.png"
+      },
+      {
+        id: 7,
+        label: "NetFlix",
+        iconURL:
+          "https://www.freepnglogos.com/uploads/netflix-logo-app-png-16.png"
+      },
+      {
+        id: 8,
+        label: "Play Store",
+        iconURL:
+          "https://www.freepnglogos.com/uploads/google-play-png-logo/google-play-store-app-logo-gets-a-slight-redesign-png-19.png"
+      }
+    ]
+  },
+  template: ` 
+<div>
+  <div v-drag-and-drop:options="options" class="drag-wrapper container">
+     <div class="app__dropzone">
+        <div class="app__draggable" v-for="app in apps">
+          <phone-app :iconURL="app.iconURL" :label="app.label" />
+          </div>
+         </div>
+      </div>
+  <planets></planets>
+</div>`
+});
+
+  </script>
+</body>
+</html>
